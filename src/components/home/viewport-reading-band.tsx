@@ -1,9 +1,10 @@
 /**
- * 固定在视口上的阅读带：屏幕垂直中线附近最「透」，向上、向下各约 2cm 过渡到与背景同色的渐暗（不随某一块内容移动）。
- * 使用 `pointer-events: none` 不阻挡点击。
+ * 固定在视口上的轻量暗角：中间绝大部分区域不遮罩（全亮），
+ * 仅最上缘、最下缘各约 2cm 用与背景同色的渐变压暗（不随内容滚动）。
+ * `pointer-events: none` 不阻挡点击。
  */
 export function ViewportReadingBand() {
-  const dim = "rgba(9, 9, 11, 0.92)";
+  const dim = "rgba(9, 9, 11, 0.88)";
   const clear = "rgba(9, 9, 11, 0)";
 
   return (
@@ -12,11 +13,9 @@ export function ViewportReadingBand() {
       style={{
         background: `linear-gradient(
           to bottom,
-          ${dim} 0%,
-          ${dim} calc(50% - 1cm - 2cm),
-          ${clear} calc(50% - 1cm),
-          ${clear} calc(50% + 1cm),
-          ${dim} calc(50% + 1cm + 2cm),
+          ${dim} 0,
+          ${clear} 2cm,
+          ${clear} calc(100% - 2cm),
           ${dim} 100%
         )`,
       }}
