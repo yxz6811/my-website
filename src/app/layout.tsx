@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "YangXizhe | Personal Site",
+  title: "杨曦哲 | 个人网站",
   description:
-    "Personal website powered by Next.js, deployed on a Hong Kong server with custom domain yangxizhe.com.",
+    "杨曦哲的个人网站：编程、人工智能、黑客松与自媒体。GitHub yxz6811，联系邮箱 3978401510@qq.com。",
 };
 
 export default function RootLayout({

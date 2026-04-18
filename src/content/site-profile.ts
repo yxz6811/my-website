@@ -1,78 +1,148 @@
 /**
  * 站点对外展示用的个人资料。
- * 你只需要改 `siteProfile` 里的文字与链接；无需改页面组件结构。
+ * 编辑 `siteProfile` 即可更新首页；类型见下方 `SiteProfile`。
  */
 
 /** 单条外部链接（社交、作品集等） */
 export type SiteLink = {
   /** 按钮或链接上显示的文字 */
   label: string;
-  /** 完整 URL，须含 https:// */
+  /** 完整 URL，须含 https://；邮箱使用 mailto: */
   href: string;
 };
 
-/** 单段职业 / 项目经历 */
+/** 单段职业 / 活动 / 项目经历（时间线） */
 export type ExperienceItem = {
-  /** 时间段，例如「2022.03 — 至今」 */
+  /** 时间段，例如「2025」或「2026.01 — 2026.03」 */
   period: string;
-  /** 职位或角色 */
+  /** 角色或身份 */
   role: string;
-  /** 公司、团队或独立项目名 */
+  /** 活动 / 机构 / 项目名称 */
   org: string;
-  /** 2～4 条要点，写你做了什么、用什么技术、带来什么结果 */
+  /** 要点列表 */
   bullets: string[];
 };
 
-/** 首页 hero 与列表区所需的全部文案 */
+/** 技能分栏 */
+export type SkillGroups = {
+  /** 已熟练掌握的方向 */
+  mastered: string[];
+  /** 正在加强的方向 */
+  learning: string[];
+};
+
+/** 首页所需的全部文案 */
 export type SiteProfile = {
-  /** 顶部小字，例如域名或一句 slogan */
+  /** 顶部小字 */
   eyebrow: string;
-  /** 主标题第一行（建议一行短句） */
+  /** 主标题第一行 */
   headlineLead: string;
-  /** 主标题第二行，会做成渐变强调 */
+  /** 主标题第二行（渐变强调） */
   headlineAccent: string;
-  /** 自我介绍段落，1～3 句 */
+  /** 身份与简介段落（可2～4 句） */
   intro: string;
-  /** 技能或兴趣标签，3～8 个为宜 */
+  /** 一句话概括自媒体账号（可选展示） */
+  mediaLine: string;
+  /** 能力概述（偏后端、路演、全栈等） */
+  abilities: string;
+  /** 技能标签（Hero 区 chips） */
   tags: string[];
-  /** 主按钮区链接，通常放 GitHub、邮箱、简历 PDF等 */
+  /** 主要外链 */
   primaryLinks: SiteLink[];
-  /** 经历列表，按时间倒序（最近的在最前） */
+  /** 时间线：建议时间倒序 */
   experience: ExperienceItem[];
+  /** 技能分栏 */
+  skills: SkillGroups;
 };
 
 /**
- * 默认占位内容：请全部换成你的真实信息。
- * 若某段经历暂时不想展示，可把 `experience` 里对应项删掉或注释掉（需保持数组语法合法）。
+ * 杨曦哲个人站点文案（事实来自作者草稿，表述已统一为书面语）。
  */
 export const siteProfile: SiteProfile = {
   eyebrow: "YANGXIZHE.COM",
   headlineLead: "你好，我是",
-  headlineAccent: "你的名字 / 一句定位",
+  headlineAccent: "杨曦哲",
   intro:
-    "用一两句话写清你是谁、目前专注什么、希望访客了解什么。例如：全栈开发，关注性能与可访问性；或设计背景转前端等。",
-  tags: ["Next.js", "TypeScript", "React", "待补充技能"],
+    "我来自浙江杭州，是一名热爱编程与人工智能的中学生，喜欢参加黑客松与线下活动。学习与实践兼顾，关注怎样用技术把想法快速做成可用的产品。",
+  mediaLine:
+    "自媒体账号「喜欢编程的杨同学」，全网粉丝40 万+；视频号、小红书、抖音单平台粉丝均在 10 万以上，内容侧重 AI 辅助学习、AI 编程与黑客松实录。",
+  abilities:
+    "技术栈相对全面，做过前端、后端、服务器部署与路演答辩，当前更侧重后端与现场表达。日常以 Cursor 为主进行 AI 辅助开发，也会使用 Codex 或网页端的 Claude 类工具。",
+  tags: [
+    "C++ / 信奥",
+    "后端开发",
+    "路演与表达",
+    "黑客松",
+    "AI 辅助编程",
+    "自媒体",
+  ],
   primaryLinks: [
-    { label: "GitHub", href: "https://github.com/你的用户名" },
-    { label: "邮箱", href: "mailto:you@example.com" },
-    { label: "Dynadot DNS", href: "https://www.dynadot.com" },
+    { label: "GitHub", href: "https://github.com/yxz6811" },
+    { label: "邮箱", href: "mailto:3978401510@qq.com" },
+    { label: "薯医项目", href: "https://yangtongxue.top/" },
+    { label: "抖音", href: "https://v.douyin.com/-3l3aJWSg1w/" },
+    { label: "小红书", href: "https://xhslink.com/m/8ktq1Ms53vg" },
   ],
   experience: [
     {
-      period: "20XX.XX — 至今",
-      role: "职位或角色",
-      org: "公司或项目名",
+      period: "2026",
+      role: "小红书黑客松巅峰赛",
+      org: "薯医 · Page One 小组",
       bullets: [
-        "用动词开头写成果，例如：负责 xxx，使用 xxx，使 xxx 提升/降低 xx%。",
-        "可写技术栈：Next.js、Node、PostgreSQL 等。",
-        "没有量化数据时，写清职责范围与用户规模也可。",
+        "全场年龄最小的参赛组之一，获 AI 原住民特别单元奖。",
+        "项目「薯医」：用多模态 AI 评估笔记质量、预估评论区并给出优化建议。",
+        "使用约 800 条真实笔记与 2400 条评论数据做微调，提升识别准确度、减轻模型幻觉。",
       ],
     },
     {
-      period: "20XX.XX — 20XX.XX",
-      role: "上一段职位",
-      org: "上一家公司或学校项目",
-      bullets: ["要点1", "要点 2"],
+      period: "2026",
+      role: "HackMIT China",
+      org: "医疗健康赛道",
+      bullets: [
+        "获最佳路演奖与赛道二等奖。",
+        "项目「智能餐盒」：软硬件结合，关注儿童不在家长身边时的进食与挑食问题。",
+      ],
+    },
+    {
+      period: "2026",
+      role: "Moonshot48 中学生黑客松",
+      org: "探月学校",
+      bullets: [
+        "小组第一名；主要负责技术实现。",
+        "项目利用 AI 视觉辅助视障群体完成化妆相关步骤。",
+      ],
+    },
+    {
+      period: "2025",
+      role: "信息学奥林匹克联赛",
+      org: "CSP-J / CSP-S",
+      bullets: ["普及组二等奖。", "提高组二等奖。"],
+    },
+    {
+      period: "2025",
+      role: "杭州路演区 KOL",
+      org: "AI Agent 大会",
+      bullets: ["担任现场 KOL，为参会者介绍与交流 Agent 相关实践。"],
+    },
+    {
+      period: "2025",
+      role: "主讲嘉宾",
+      org: "乌镇健康大会 · AI for Young 论坛",
+      bullets: ["分享 AI 编程与 AI 辅助学习主题内容。"],
     },
   ],
+  skills: {
+    mastered: [
+      "C++（信息学竞赛训练与实战）",
+      "路演与现场表达（多次大会与黑客松答辩）",
+      "内容制作与宣传（自媒体拍摄与运营）",
+    ],
+    learning: [
+      "AI 辅助编程（Vibe Coding，多工具切换）",
+      "云服务器与运维相关实践",
+      "前端与后端工程化",
+      "UI 与视觉设计",
+      "提示词工程与多轮协作",
+    ],
+  },
 };
