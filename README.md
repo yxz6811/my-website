@@ -1,6 +1,6 @@
-# YangXizhe Personal Site
+# 我的网站（yangxizhe.com）
 
-基于 Next.js 16 + TypeScript + Tailwind CSS 的个人网站。
+杨曦哲的个人站点源码仓库：基于 Next.js 16 + TypeScript + Tailwind CSS。
 
 ## 你需要准备的内容（你来写）
 
@@ -56,7 +56,7 @@ git push -u origin main
 **安全说明**：`curl | sudo bash` 会执行 NodeSource 的安装脚本；若你介意，可改用 [nvm](https://github.com/nvm-sh/nvm) 自行装 Node，再跳过前两行中的 NodeSource 部分。
 
 ```bash
-export GIT_REPO_URL="https://github.com/<你的用户名>/<仓库名>.git"
+export GIT_REPO_URL="https://github.com/yxz6811/my-website.git"
 
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg nginx git
