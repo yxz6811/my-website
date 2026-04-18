@@ -22,7 +22,7 @@ export function ScrollReveal({ children, className, delay = 0 }: ScrollRevealPro
   return (
     <motion.div
       className={className}
-      initial={reduce ? false : { opacity: 0.22, y: 40, filter: "blur(12px)" }}
+      initial={reduce ? false : { opacity: 0.22, y: 40, filter: "blur(6px)" }}
       whileInView={reduce ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ amount: 0.28, margin: "0px 0px -12% 0px", once: false }}
       transition={{

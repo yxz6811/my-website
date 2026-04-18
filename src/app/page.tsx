@@ -18,7 +18,7 @@ const NAV_ITEMS = [
 ] as const;
 
 /**
- * 首页：文案来自 `siteProfile`；`ViewportReadingBand` 仅在视口上下缘约 2cm 做渐暗。
+ * 首页：文案来自 `siteProfile`；`ViewportReadingBand` 仅在视口上下缘约 3cm 做渐暗。
  */
 export default function Home() {
   return (
@@ -60,7 +60,7 @@ export default function Home() {
                   GitHub、邮箱、薯医与社交平台；卡片可直接打开新标签页。
                 </p>
               </div>
-              <p className="text-xs text-zinc-600">仅视口上下缘约 2cm 渐暗</p>
+              <p className="text-xs text-zinc-600">仅视口上下缘约 3cm 渐暗</p>
             </div>
             <LinkBento links={siteProfile.primaryLinks} />
           </FocusScrollSection>

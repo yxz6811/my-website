@@ -34,7 +34,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
           variants={{
             hidden: reduce
               ? { opacity: 0.65 }
-              : { opacity: 0.18, y: 36, filter: "blur(10px)" },
+              : { opacity: 0.18, y: 36, filter: "blur(5px)" },
             show: reduce
               ? { opacity: 1 }
               : { opacity: 1, y: 0, filter: "blur(0px)" },
