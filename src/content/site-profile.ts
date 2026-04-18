@@ -56,7 +56,7 @@ export type SiteProfile = {
   tags: string[];
   /** 主要外链 */
   primaryLinks: SiteLink[];
-  /** 时间线：建议时间倒序 */
+  /** 时间线：建议时间正序（早 → 晚），页面自上而下 */
   experience: ExperienceItem[];
   /** 技能分栏 */
   skills: SkillGroups;
@@ -115,15 +115,33 @@ export const siteProfile: SiteProfile = {
       variant: "xiaohongshu",
     },
   ],
+  /** 经历按时间正序排列（早 → 晚，页面上自上而下） */
   experience: [
     {
+      period: "2025",
+      role: "主讲嘉宾",
+      org: "乌镇健康大会 · AI for Young 论坛",
+      bullets: ["分享 AI 编程与 AI 辅助学习主题内容。"],
+    },
+    {
+      period: "2025",
+      role: "杭州路演区 KOL",
+      org: "AI Agent 大会",
+      bullets: ["担任现场 KOL，为参会者介绍与交流 Agent 相关实践。"],
+    },
+    {
+      period: "2025",
+      role: "信息学奥林匹克联赛",
+      org: "CSP-J / CSP-S",
+      bullets: ["普及组二等奖。", "提高组二等奖。"],
+    },
+    {
       period: "2026",
-      role: "小红书黑客松巅峰赛",
-      org: "薯医 · Page One 小组",
+      role: "Moonshot48 中学生黑客松",
+      org: "探月学校",
       bullets: [
-        "全场年龄最小的参赛组之一，获 AI 原住民特别单元奖。",
-        "项目「薯医」：用多模态 AI 评估笔记质量、预估评论区并给出优化建议。",
-        "使用约 800 条真实笔记与 2400 条评论数据做微调，提升识别准确度、减轻模型幻觉。",
+        "小组第一名；主要负责技术实现。",
+        "项目利用 AI 视觉辅助视障群体完成化妆相关步骤。",
       ],
     },
     {
@@ -137,30 +155,13 @@ export const siteProfile: SiteProfile = {
     },
     {
       period: "2026",
-      role: "Moonshot48 中学生黑客松",
-      org: "探月学校",
+      role: "小红书黑客松巅峰赛",
+      org: "薯医 · Page One 小组",
       bullets: [
-        "小组第一名；主要负责技术实现。",
-        "项目利用 AI 视觉辅助视障群体完成化妆相关步骤。",
+        "全场年龄最小的参赛组之一，获 AI 原住民特别单元奖。",
+        "项目「薯医」：用多模态 AI 评估笔记质量、预估评论区并给出优化建议。",
+        "使用约 800 条真实笔记与 2400 条评论数据做微调，提升识别准确度、减轻模型幻觉。",
       ],
-    },
-    {
-      period: "2025",
-      role: "信息学奥林匹克联赛",
-      org: "CSP-J / CSP-S",
-      bullets: ["普及组二等奖。", "提高组二等奖。"],
-    },
-    {
-      period: "2025",
-      role: "杭州路演区 KOL",
-      org: "AI Agent 大会",
-      bullets: ["担任现场 KOL，为参会者介绍与交流 Agent 相关实践。"],
-    },
-    {
-      period: "2025",
-      role: "主讲嘉宾",
-      org: "乌镇健康大会 · AI for Young 论坛",
-      bullets: ["分享 AI 编程与 AI 辅助学习主题内容。"],
     },
   ],
   skills: {

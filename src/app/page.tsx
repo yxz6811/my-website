@@ -77,7 +77,7 @@ export default function Home() {
               <div>
                 <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">经历与活动</h2>
                 <p className="mt-2 max-w-2xl text-sm text-zinc-500">
-                  公开分享、竞赛与黑客松项目，按时间倒序排列。
+                  公开分享、竞赛与黑客松项目，按时间从早到晚排列。
                 </p>
               </div>
             </ScrollReveal>
