@@ -1,6 +1,7 @@
 import { siteProfile } from "@/content/site-profile";
 import { AmbientBackdrop } from "@/components/home/ambient-backdrop";
 import { FocusScrollSection } from "@/components/home/focus-scroll-section";
+import { ViewportReadingBand } from "@/components/home/viewport-reading-band";
 import { HeroLead } from "@/components/home/hero-lead";
 import { LinkBento } from "@/components/home/link-bento";
 import { SiteHeader } from "@/components/home/site-header";
@@ -15,12 +16,13 @@ const NAV_ITEMS = [
 ] as const;
 
 /**
- * 首页：文案来自 `siteProfile`；各区块由 `FocusScrollSection` 随滚动聚焦/淡出。
+ * 首页：文案来自 `siteProfile`；视口中间为阅读亮带，上下由 `ViewportReadingBand` 渐暗。
  */
 export default function Home() {
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-zinc-950 text-zinc-100">
       <AmbientBackdrop />
+      <ViewportReadingBand />
       <SiteHeader items={NAV_ITEMS} />
 
       <main className="relative z-10">
@@ -56,7 +58,7 @@ export default function Home() {
                   GitHub、邮箱、薯医与社交平台；卡片可直接打开新标签页。
                 </p>
               </div>
-              <p className="text-xs text-zinc-600">随滚动聚焦当前区块</p>
+              <p className="text-xs text-zinc-600">视口中线附近最清晰</p>
             </div>
             <LinkBento links={siteProfile.primaryLinks} />
           </FocusScrollSection>
