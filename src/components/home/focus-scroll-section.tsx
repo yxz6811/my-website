@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ScrollReveal } from "./scroll-reveal";
 
 type FocusScrollSectionProps = {
   /** 对应锚点与顶栏高亮 */
@@ -11,10 +12,12 @@ type FocusScrollSectionProps = {
   panel?: boolean;
   /** 面板内额外 class（如 `space-y-6`） */
   panelClassName?: string;
+  /** 是否套用滚动淡入（时间轴等可关闭，改用独立动画） */
+  scrollReveal?: boolean;
 };
 
 /**
- * 页面大区块：玻璃面板 + 锚点 id。亮度由 `ViewportReadingBand` 按视口位置统一控制。
+ * 页面大区块：玻璃面板 + 锚点 id；可选滚动淡入。亮度由 `ViewportReadingBand` 控制。
  */
 export function FocusScrollSection({
   id,
@@ -22,15 +25,18 @@ export function FocusScrollSection({
   className = "",
   panel = true,
   panelClassName = "",
+  scrollReveal = true,
 }: FocusScrollSectionProps) {
+  const content = scrollReveal ? <ScrollReveal>{children}</ScrollReveal> : children;
+
   const inner = panel ? (
     <div
       className={`rounded-3xl border border-white/[0.08] bg-zinc-900/30 p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] backdrop-blur-md md:p-9 ${panelClassName}`}
     >
-      {children}
+      {content}
     </div>
   ) : (
-    children
+    content
   );
 
   return (

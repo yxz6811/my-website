@@ -3,7 +3,9 @@ import { AmbientBackdrop } from "@/components/home/ambient-backdrop";
 import { FocusScrollSection } from "@/components/home/focus-scroll-section";
 import { ViewportReadingBand } from "@/components/home/viewport-reading-band";
 import { HeroLead } from "@/components/home/hero-lead";
+import { ExperienceTimeline } from "@/components/home/experience-timeline";
 import { LinkBento } from "@/components/home/link-bento";
+import { ScrollReveal } from "@/components/home/scroll-reveal";
 import { SiteHeader } from "@/components/home/site-header";
 import { TagStrip } from "@/components/home/tag-strip";
 
@@ -70,31 +72,16 @@ export default function Home() {
             </p>
           </FocusScrollSection>
 
-          <FocusScrollSection id="timeline" panelClassName="md:p-10">
-            <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">经历与活动</h2>
-            <p className="mt-2 max-w-2xl text-sm text-zinc-500">
-              公开分享、竞赛与黑客松项目，按时间倒序排列。
-            </p>
-            <ol className="relative mt-12 space-y-12 before:absolute before:left-[7px] before:top-2 before:h-[calc(100%-1rem)] before:w-px before:bg-gradient-to-b before:from-cyan-500/50 before:via-violet-500/30 before:to-emerald-500/40 md:before:left-[9px]">
-              {siteProfile.experience.map((item) => (
-                <li key={`${item.period}-${item.org}-${item.role}`} className="relative pl-8 md:pl-10">
-                  <span className="absolute left-0 top-2 flex h-4 w-4 items-center justify-center rounded-full bg-zinc-950 ring-2 ring-cyan-400/80 md:top-1.5" />
-                  <p className="text-sm font-medium text-cyan-300/90">{item.period}</p>
-                  <p className="mt-1 text-lg font-semibold text-white">
-                    {item.role}
-                    <span className="font-normal text-zinc-500"> · {item.org}</span>
-                  </p>
-                  <ul className="mt-4 space-y-2 text-sm leading-7 text-zinc-400 md:text-base md:leading-8">
-                    {item.bullets.map((b, j) => (
-                      <li key={`${item.period}-${j}`} className="flex gap-3">
-                        <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-zinc-600" />
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ol>
+          <FocusScrollSection id="timeline" panelClassName="md:p-10" scrollReveal={false}>
+            <ScrollReveal>
+              <div>
+                <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">经历与活动</h2>
+                <p className="mt-2 max-w-2xl text-sm text-zinc-500">
+                  公开分享、竞赛与黑客松项目，按时间倒序排列。
+                </p>
+              </div>
+            </ScrollReveal>
+            <ExperienceTimeline items={siteProfile.experience} />
           </FocusScrollSection>
 
           <FocusScrollSection id="skills" panelClassName="md:p-10">
