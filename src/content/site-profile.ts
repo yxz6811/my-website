@@ -3,12 +3,19 @@
  * 编辑 `siteProfile` 即可更新首页；类型见下方 `SiteProfile`。
  */
 
+/** 外链卡片样式与图标类型（与 `link-bento` 配色对应） */
+export type SiteLinkVariant = "github" | "email" | "product" | "douyin" | "xiaohongshu";
+
 /** 单条外部链接（社交、作品集等） */
 export type SiteLink = {
   /** 按钮或链接上显示的文字 */
   label: string;
   /** 完整 URL，须含 https://；邮箱使用 mailto: */
   href: string;
+  /** 卡片内一行说明，可写用途或更新频率 */
+  blurb: string;
+  /** 视觉分类，用于图标与强调色 */
+  variant: SiteLinkVariant;
 };
 
 /** 单段职业 / 活动 / 项目经历（时间线） */
@@ -65,7 +72,7 @@ export const siteProfile: SiteProfile = {
   intro:
     "我来自浙江杭州，13 岁，是一名热爱编程与人工智能的初中生，喜欢参加黑客松与线下活动。学习与实践兼顾，关注怎样用技术把想法快速做成可用的产品。",
   mediaLine:
-    "自媒体账号「喜欢编程的杨同学」，全网粉丝40 万+；视频号、小红书、抖音单平台粉丝均在 10 万以上，内容侧重 AI 辅助学习、AI 编程与黑客松实录。",
+    "自媒体账号「喜欢编程的杨同学」，全网粉丝 40 万+；视频号、小红书、抖音单平台粉丝均在 10 万以上，内容侧重 AI 辅助学习、AI 编程与黑客松实录。",
   abilities:
     "技术栈相对全面，做过前端、后端、服务器部署与路演答辩，当前更侧重后端与现场表达。日常以 Cursor 为主进行 AI 辅助开发，也会使用 Codex 或网页端的 Claude 类工具。",
   tags: [
@@ -77,11 +84,36 @@ export const siteProfile: SiteProfile = {
     "自媒体",
   ],
   primaryLinks: [
-    { label: "GitHub", href: "https://github.com/yxz6811" },
-    { label: "邮箱", href: "mailto:3978401510@qq.com" },
-    { label: "薯医项目", href: "https://yangtongxue.top/" },
-    { label: "抖音", href: "https://v.douyin.com/-3l3aJWSg1w/" },
-    { label: "小红书", href: "https://xhslink.com/m/8ktq1Ms53vg" },
+    {
+      label: "GitHub",
+      href: "https://github.com/yxz6811",
+      blurb: "开源仓库、小工具与黑客松相关代码。",
+      variant: "github",
+    },
+    {
+      label: "邮箱",
+      href: "mailto:3978401510@qq.com",
+      blurb: "合作、演讲或项目联系：3978401510@qq.com",
+      variant: "email",
+    },
+    {
+      label: "薯医项目",
+      href: "https://yangtongxue.top/",
+      blurb: "多模态笔记评估与评论区预估，线上可体验。",
+      variant: "product",
+    },
+    {
+      label: "抖音",
+      href: "https://v.douyin.com/-3l3aJWSg1w/",
+      blurb: "短视频：AI 编程、学习与黑客松记录。",
+      variant: "douyin",
+    },
+    {
+      label: "小红书",
+      href: "https://xhslink.com/m/8ktq1Ms53vg",
+      blurb: "图文与视频：AI 辅助学习与创作实践。",
+      variant: "xiaohongshu",
+    },
   ],
   experience: [
     {
