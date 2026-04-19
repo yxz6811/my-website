@@ -51,8 +51,11 @@ export default function Home() {
             <AboutMeSection profile={siteProfile} />
           </FocusScrollSection>
 
-          <FocusScrollSection id="links" panelClassName="space-y-8 md:p-10">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <FocusScrollSection
+            id="links"
+            panelClassName="space-y-10 md:space-y-12 !p-8 md:!p-12 lg:!p-14"
+          >
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">链接与作品</h2>
                 <p className="mt-2 max-w-xl text-sm text-zinc-400">

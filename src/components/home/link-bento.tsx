@@ -134,7 +134,7 @@ function InteractiveLinkCard({
         onPointerMove={handlePointerMove}
         onPointerLeave={resetPointer}
         style={reduce ? undefined : { rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className={`group relative col-span-1 flex min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl border border-white/12 bg-gradient-to-br ${variantAccent[link.variant]} p-6 text-left md:col-span-2 md:row-span-2 ${variantRing[link.variant]}`}
+        className={`group relative col-span-1 flex min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl border border-white/12 bg-gradient-to-br ${variantAccent[link.variant]} p-7 text-left md:col-span-2 md:row-span-2 md:p-8 ${variantRing[link.variant]}`}
         whileHover={reduce ? undefined : { y: -6, transition: { duration: 0.18 } }}
         whileTap={reduce ? undefined : { scale: 0.99 }}
       >
@@ -172,7 +172,7 @@ function InteractiveLinkCard({
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPointer}
       style={reduce ? undefined : { rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/12 bg-zinc-900/50 p-5 text-left backdrop-blur-sm transition-colors hover:bg-zinc-900/70 md:min-h-[140px] ${variantRing[link.variant]}`}
+      className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/12 bg-zinc-900/50 p-6 text-left backdrop-blur-sm transition-colors hover:bg-zinc-900/70 md:min-h-[140px] md:p-7 ${variantRing[link.variant]}`}
       whileHover={reduce ? undefined : { y: -4, transition: { duration: 0.18 } }}
       whileTap={reduce ? undefined : { scale: 0.99 }}
       transition={{ delay: index * 0.02 }}
@@ -214,7 +214,7 @@ export function LinkBento({ links }: LinkBentoProps) {
   const rest = links.filter((l) => l.variant !== "product");
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:grid-rows-2 md:gap-4">
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-4 md:grid-rows-2 md:gap-6">
       {product && (
         <InteractiveLinkCard link={product} featured />
       )}
