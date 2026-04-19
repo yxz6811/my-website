@@ -20,9 +20,9 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline }: Her
   const reduce = useReducedMotion();
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col">
       <motion.p
-        className="-mt-2 text-xs font-medium tracking-[0.35em] text-zinc-500 md:-mt-4 lg:-mt-5"
+        className="-mt-3 mb-6 text-xs font-medium tracking-[0.35em] text-zinc-500 md:-mt-6 md:mb-6 lg:-mt-8 lg:mb-6"
         initial={reduce ? false : { opacity: 0, y: 12 }}
         animate={reduce ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -30,7 +30,7 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline }: Her
         {eyebrow}
       </motion.p>
       <motion.h1
-        className="text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-6xl md:leading-[1.06]"
+        className="mb-10 text-4xl font-semibold leading-[1.08] tracking-tight text-white md:mb-12 md:text-6xl md:leading-[1.06] lg:mb-14"
         initial={reduce ? false : { opacity: 0, y: 20 }}
         animate={reduce ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.55, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
@@ -41,7 +41,7 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline }: Her
         </span>
       </motion.h1>
       <motion.div
-        className="flex flex-wrap gap-3 pt-2"
+        className="flex flex-wrap gap-3"
         initial={reduce ? false : { opacity: 0 }}
         animate={reduce ? undefined : { opacity: 1 }}
         transition={{ delay: 0.35, duration: 0.45 }}
