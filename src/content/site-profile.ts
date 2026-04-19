@@ -46,7 +46,13 @@ export type SiteProfile = {
   headlineLead: string;
   /** 主标题第二行（渐变强调） */
   headlineAccent: string;
-  /** 身份与简介段落（可2～4 句） */
+  /** 首屏主按钮下方标语 */
+  heroTagline: string;
+  /** 「关于我」头像下大号名称（如自媒体昵称） */
+  personaTitle: string;
+  /** 「关于我」昵称下居中说明 */
+  personaSubtitle: string;
+  /** 身份与简介段落（可2～4 句），展示在「关于我」区块 */
   intro: string;
   /** 一句话概括自媒体账号（可选展示） */
   mediaLine: string;
@@ -69,6 +75,9 @@ export const siteProfile: SiteProfile = {
   eyebrow: "YANGXIZHE.COM",
   headlineLead: "你好，我是",
   headlineAccent: "杨曦哲",
+  heroTagline: "年龄只是变量，热爱才是常量",
+  personaTitle: "喜欢编程的杨同学",
+  personaSubtitle: "我的账号",
   intro:
     "我来自浙江杭州，13 岁，是一名热爱编程与人工智能的初中生，喜欢参加黑客松与线下活动。学习与实践兼顾，关注怎样用技术把想法快速做成可用的产品。",
   mediaLine:

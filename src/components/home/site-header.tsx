@@ -15,7 +15,7 @@ type SiteHeaderProps = {
 export function SiteHeader({ items }: SiteHeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string>(
-    () => items[0]?.href.replace(/^#/, "") ?? "about",
+    () => items[0]?.href.replace(/^#/, "") ?? "top",
   );
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export function SiteHeader({ items }: SiteHeaderProps) {
       }`}
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-        <a href="#about" className="group flex items-baseline gap-2">
+        <a href="#top" className="group flex items-baseline gap-2">
           <span className="text-sm font-semibold tracking-tight text-white">杨曦哲</span>
           <span className="hidden text-xs text-zinc-500 transition group-hover:text-zinc-400 sm:inline">
             yangxizhe.com

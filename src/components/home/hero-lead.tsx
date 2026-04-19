@@ -9,12 +9,14 @@ type HeroLeadProps = {
   headlineLead: string;
   /** 主标题下行（渐变） */
   headlineAccent: string;
+  /** 主按钮下方标语 */
+  tagline: string;
 };
 
 /**
  * 首屏标题与主行动按钮（滚动至外链区）。
  */
-export function HeroLead({ eyebrow, headlineLead, headlineAccent }: HeroLeadProps) {
+export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline }: HeroLeadProps) {
   const reduce = useReducedMotion();
 
   return (
@@ -61,6 +63,14 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent }: HeroLeadProp
           查看经历
         </motion.a>
       </motion.div>
+      <motion.p
+        className="max-w-md pt-1 text-xs leading-relaxed text-zinc-500 md:text-sm"
+        initial={reduce ? false : { opacity: 0 }}
+        animate={reduce ? undefined : { opacity: 1 }}
+        transition={{ delay: 0.45, duration: 0.5 }}
+      >
+        {tagline}
+      </motion.p>
     </div>
   );
 }

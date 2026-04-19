@@ -1,4 +1,5 @@
 import { siteProfile } from "@/content/site-profile";
+import { AboutMeSection } from "@/components/home/about-me-section";
 import { AmbientBackdrop } from "@/components/home/ambient-backdrop";
 import { FocusScrollSection } from "@/components/home/focus-scroll-section";
 import { ViewportReadingBand } from "@/components/home/viewport-reading-band";
@@ -7,10 +8,9 @@ import { ExperienceTimeline } from "@/components/home/experience-timeline";
 import { LinkBento } from "@/components/home/link-bento";
 import { ScrollReveal } from "@/components/home/scroll-reveal";
 import { SiteHeader } from "@/components/home/site-header";
-import { TagStrip } from "@/components/home/tag-strip";
 
 const NAV_ITEMS = [
-  { href: "#about", label: "关于" },
+  { href: "#about-me", label: "关于" },
   { href: "#links", label: "链接" },
   { href: "#abilities", label: "能力" },
   { href: "#timeline", label: "经历" },
@@ -18,7 +18,7 @@ const NAV_ITEMS = [
 ] as const;
 
 /**
- * 首页：文案来自 `siteProfile`；`ViewportReadingBand` 仅在视口上下缘约 3cm 做渐暗。
+ * 首页：首屏仅标题与行动按钮；详情见「关于我」区块。
  */
 export default function Home() {
   return (
@@ -29,27 +29,17 @@ export default function Home() {
 
       <main className="relative z-10">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-14 px-5 pb-24 pt-10 sm:px-8 sm:pt-14 md:gap-20">
-          <FocusScrollSection id="about" panelClassName="md:p-10">
-            <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-14">
-              <HeroLead
-                eyebrow={siteProfile.eyebrow}
-                headlineLead={siteProfile.headlineLead}
-                headlineAccent={siteProfile.headlineAccent}
-              />
-              <div className="flex flex-col gap-6">
-                <p className="text-base leading-relaxed text-zinc-400 md:text-lg md:leading-8">
-                  {siteProfile.intro}
-                </p>
-                <div className="rounded-2xl border border-white/10 bg-black/25 p-6 leading-relaxed text-zinc-300 md:p-7">
-                  <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">自媒体</p>
-                  <p className="mt-3 text-sm md:text-base">{siteProfile.mediaLine}</p>
-                </div>
-                <div>
-                  <p className="mb-3 text-xs font-medium uppercase tracking-wider text-zinc-500">方向标签</p>
-                  <TagStrip tags={siteProfile.tags} />
-                </div>
-              </div>
-            </div>
+          <FocusScrollSection id="top" panelClassName="md:p-10">
+            <HeroLead
+              eyebrow={siteProfile.eyebrow}
+              headlineLead={siteProfile.headlineLead}
+              headlineAccent={siteProfile.headlineAccent}
+              tagline={siteProfile.heroTagline}
+            />
+          </FocusScrollSection>
+
+          <FocusScrollSection id="about-me" panelClassName="md:p-10">
+            <AboutMeSection profile={siteProfile} />
           </FocusScrollSection>
 
           <FocusScrollSection id="links" panelClassName="space-y-8 md:p-10">
