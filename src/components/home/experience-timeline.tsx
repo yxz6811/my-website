@@ -10,6 +10,7 @@ type ExperienceTimelineProps = {
 
 /**
  * 时间轴列表：子项依次淡入，带轻微模糊与位移；滚出视口时可回落。
+ * 视口判定偏宽，减轻长时间停留在模糊过渡带的感觉。
  */
 export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
   const reduce = useReducedMotion();
@@ -19,7 +20,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
       className="relative mt-12 list-none space-y-12 pl-0 before:absolute before:left-[7px] before:top-2 before:h-[calc(100%-1rem)] before:w-px before:bg-gradient-to-b before:from-cyan-500/50 before:via-violet-500/30 before:to-emerald-500/40 md:before:left-[9px]"
       initial="hidden"
       whileInView="show"
-      viewport={{ amount: 0.12, margin: "0px 0px -10% 0px", once: false }}
+      viewport={{ amount: 0.08, margin: "0px 0px -5% 0px", once: false }}
       variants={{
         hidden: {},
         show: {
@@ -34,7 +35,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
           variants={{
             hidden: reduce
               ? { opacity: 0.65 }
-              : { opacity: 0.18, y: 36, filter: "blur(5px)" },
+              : { opacity: 0.18, y: 24, filter: "blur(4px)" },
             show: reduce
               ? { opacity: 1 }
               : { opacity: 1, y: 0, filter: "blur(0px)" },
