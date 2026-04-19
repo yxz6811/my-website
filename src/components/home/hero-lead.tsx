@@ -22,7 +22,7 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline }: Her
   return (
     <div className="flex flex-col">
       <motion.p
-        className="-mt-3 mb-6 text-xs font-medium tracking-[0.35em] text-zinc-500 md:-mt-6 md:mb-6 lg:-mt-8 lg:mb-6"
+        className="-mt-3 mb-6 max-w-xl text-sm font-medium leading-relaxed tracking-wide text-zinc-500 md:-mt-6 md:mb-6 md:max-w-2xl lg:-mt-8 lg:mb-6"
         initial={reduce ? false : { opacity: 0, y: 12 }}
         animate={reduce ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}

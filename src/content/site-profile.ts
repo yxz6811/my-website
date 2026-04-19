@@ -72,7 +72,7 @@ export type SiteProfile = {
  * 杨曦哲个人站点文案（事实来自作者草稿，表述已统一为书面语）。
  */
 export const siteProfile: SiteProfile = {
-  eyebrow: "YANGXIZHE.COM",
+  eyebrow: "我们被称为 AI 原住民，是因为 AI 对我们来说，就像水和空气一样自然。",
   headlineLead: "你好，我是",
   headlineAccent: "杨曦哲",
   heroTagline: "年龄只是变量，热爱才是常量",
