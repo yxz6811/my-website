@@ -36,7 +36,7 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline }: Her
         transition={{ duration: 0.55, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
       >
         {headlineLead}
-        <span className="mt-3 block text-cyan-100 drop-shadow-[0_0_26px_rgba(207,250,254,0.38)] md:drop-shadow-[0_0_34px_rgba(207,250,254,0.35)]">
+        <span className="mt-3 block bg-gradient-to-r from-cyan-200 via-violet-200 to-emerald-200 bg-clip-text text-transparent">
           {headlineAccent}
         </span>
       </motion.h1>

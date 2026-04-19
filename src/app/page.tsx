@@ -5,6 +5,7 @@ import { FocusScrollSection } from "@/components/home/focus-scroll-section";
 import { ViewportReadingBand } from "@/components/home/viewport-reading-band";
 import { HeroLead } from "@/components/home/hero-lead";
 import { HeroPersonaColumn } from "@/components/home/hero-persona-column";
+import { MyAccountsSection } from "@/components/home/my-accounts-section";
 import { ExperienceTimeline } from "@/components/home/experience-timeline";
 import { LinkBento } from "@/components/home/link-bento";
 import { ScrollReveal } from "@/components/home/scroll-reveal";
@@ -12,8 +13,8 @@ import { SiteHeader } from "@/components/home/site-header";
 
 const NAV_ITEMS = [
   { href: "#about-me", label: "关于" },
+  { href: "#my-accounts", label: "账号" },
   { href: "#links", label: "链接" },
-  { href: "#abilities", label: "能力" },
   { href: "#timeline", label: "经历" },
   { href: "#skills", label: "技能" },
 ] as const;
@@ -54,6 +55,10 @@ export default function Home() {
             <AboutMeSection profile={siteProfile} />
           </FocusScrollSection>
 
+          <FocusScrollSection id="my-accounts" panelClassName="!p-8 md:!p-12 lg:!p-14">
+            <MyAccountsSection profile={siteProfile} />
+          </FocusScrollSection>
+
           <FocusScrollSection
             id="links"
             panelClassName="space-y-10 md:space-y-12 !p-8 md:!p-12 lg:!p-14"
@@ -68,13 +73,6 @@ export default function Home() {
               <p className="text-xs text-zinc-600">仅视口上下缘约 3cm 渐暗</p>
             </div>
             <LinkBento links={siteProfile.primaryLinks} />
-          </FocusScrollSection>
-
-          <FocusScrollSection id="abilities" panelClassName="md:p-10">
-            <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">能力与方向</h2>
-            <p className="mt-6 max-w-3xl text-base leading-8 text-zinc-400 md:text-lg md:leading-9">
-              {siteProfile.abilities}
-            </p>
           </FocusScrollSection>
 
           <FocusScrollSection id="timeline" panelClassName="md:p-10" scrollReveal={false}>
