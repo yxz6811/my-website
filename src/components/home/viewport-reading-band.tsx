@@ -9,7 +9,7 @@ export function ViewportReadingBand() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-20"
+      className="pointer-events-none fixed inset-0 z-[1]"
       style={{
         background: `linear-gradient(
           to bottom,

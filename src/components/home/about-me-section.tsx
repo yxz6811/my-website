@@ -18,7 +18,7 @@ export function AboutMeSection({ profile }: AboutMeSectionProps) {
     <div className="flex flex-col gap-10">
       <h2 className="text-center text-3xl font-semibold tracking-tight text-white md:text-4xl">关于我</h2>
 
-      <OrbitalPortrait src="/profile-presentation.png" alt="杨曦哲在活动上演讲与分享" />
+      <OrbitalPortrait src="/profile-presentation.jpg" alt="杨曦哲在活动上演讲与分享" />
 
       <div className="flex w-full flex-col items-center gap-2 text-center">
         <p className="text-2xl font-semibold tracking-tight text-white md:text-3xl">{profile.personaTitle}</p>
