@@ -22,8 +22,8 @@ export function AboutMeSection({ profile }: AboutMeSectionProps) {
   return (
     <div className="grid gap-14 md:grid-cols-2 md:gap-16 lg:gap-24">
       <section className="flex h-full flex-col justify-between gap-9 py-3 md:gap-10 md:py-4">
-        <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">关于我</h2>
-        <p className="max-w-[28ch] text-base leading-relaxed text-zinc-300 md:max-w-[30ch] md:text-lg md:leading-8">
+        <h2 className="mb-2 text-4xl font-semibold tracking-tight text-white md:mb-4 md:text-5xl lg:text-6xl">关于我</h2>
+        <p className="mt-5 max-w-[28ch] text-base leading-8 text-zinc-200/95 italic tracking-[0.012em] [text-shadow:0_2px_14px_rgba(34,211,238,0.12)] first-letter:mr-1 first-letter:text-cyan-100 first-letter:[text-shadow:0_0_14px_rgba(165,243,252,0.35)] md:mt-7 md:max-w-[30ch] md:text-lg md:leading-9">
           {profile.intro}
         </p>
         <div className="mt-auto rounded-2xl border border-white/8 bg-zinc-900/35 p-5 md:max-w-[30ch] md:p-6">
