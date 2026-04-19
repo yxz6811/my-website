@@ -4,6 +4,7 @@ import { AmbientBackdrop } from "@/components/home/ambient-backdrop";
 import { FocusScrollSection } from "@/components/home/focus-scroll-section";
 import { ViewportReadingBand } from "@/components/home/viewport-reading-band";
 import { HeroLead } from "@/components/home/hero-lead";
+import { HeroPersonaColumn } from "@/components/home/hero-persona-column";
 import { ExperienceTimeline } from "@/components/home/experience-timeline";
 import { LinkBento } from "@/components/home/link-bento";
 import { ScrollReveal } from "@/components/home/scroll-reveal";
@@ -18,7 +19,7 @@ const NAV_ITEMS = [
 ] as const;
 
 /**
- * 首页：首屏仅标题与行动按钮；详情见「关于我」区块。
+ * 首页：第一框为左右分栏（左问候与按钮，右头像与账号）；第二框为大字「关于我」与正文。
  */
 export default function Home() {
   return (
@@ -30,12 +31,20 @@ export default function Home() {
       <main className="relative z-10">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-14 px-5 pb-24 pt-10 sm:px-8 sm:pt-14 md:gap-20">
           <FocusScrollSection id="top" panelClassName="md:p-10">
-            <HeroLead
-              eyebrow={siteProfile.eyebrow}
-              headlineLead={siteProfile.headlineLead}
-              headlineAccent={siteProfile.headlineAccent}
-              tagline={siteProfile.heroTagline}
-            />
+            <div className="grid gap-12 md:grid-cols-2 md:items-center md:gap-14 lg:gap-16">
+              <HeroLead
+                eyebrow={siteProfile.eyebrow}
+                headlineLead={siteProfile.headlineLead}
+                headlineAccent={siteProfile.headlineAccent}
+                tagline={siteProfile.heroTagline}
+              />
+              <HeroPersonaColumn
+                personaTitle={siteProfile.personaTitle}
+                personaSubtitle={siteProfile.personaSubtitle}
+                portraitSrc="/profile-presentation.jpg"
+                portraitAlt="杨曦哲在活动上演讲与分享"
+              />
+            </div>
           </FocusScrollSection>
 
           <FocusScrollSection id="about-me" panelClassName="md:p-10">

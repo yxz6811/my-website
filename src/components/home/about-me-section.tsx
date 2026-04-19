@@ -1,31 +1,20 @@
 import type { SiteProfile } from "@/content/site-profile";
-import { OrbitalPortrait } from "@/components/home/orbital-portrait";
 import { TagStrip } from "@/components/home/tag-strip";
 
 type AboutMeSectionProps = {
-  /** 站点文案子集 */
-  profile: Pick<
-    SiteProfile,
-    "intro" | "mediaLine" | "tags" | "personaTitle" | "personaSubtitle"
-  >;
+  /** 站点文案：正文与标签（头像与账号名在首屏右侧） */
+  profile: Pick<SiteProfile, "intro" | "mediaLine" | "tags">;
 };
 
 /**
- * 「关于我」独立区块：环形头像、账号昵称与正文（原首屏右侧内容）。
+ * 第二页「框」：大字标题「关于我」+ 简介、自媒体说明与方向标签。
  */
 export function AboutMeSection({ profile }: AboutMeSectionProps) {
   return (
-    <div className="flex flex-col gap-10">
-      <h2 className="text-center text-3xl font-semibold tracking-tight text-white md:text-4xl">关于我</h2>
+    <div className="flex flex-col gap-8 md:gap-10">
+      <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">关于我</h2>
 
-      <OrbitalPortrait src="/profile-presentation.jpg" alt="杨曦哲在活动上演讲与分享" />
-
-      <div className="flex w-full flex-col items-center gap-2 text-center">
-        <p className="text-2xl font-semibold tracking-tight text-white md:text-3xl">{profile.personaTitle}</p>
-        <p className="text-sm tracking-wide text-zinc-500">{profile.personaSubtitle}</p>
-      </div>
-
-      <div className="flex flex-col gap-6 border-t border-white/10 pt-10">
+      <div className="flex flex-col gap-6">
         <p className="text-base leading-relaxed text-zinc-400 md:text-lg md:leading-8">{profile.intro}</p>
         <div className="rounded-2xl border border-white/10 bg-black/25 p-6 leading-relaxed text-zinc-300 md:p-7">
           <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">自媒体</p>
