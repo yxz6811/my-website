@@ -12,7 +12,9 @@ type AboutMeSectionProps = {
 export function AboutMeSection({ profile }: AboutMeSectionProps) {
   return (
     <div className="flex flex-col gap-8 md:gap-10">
-      <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">关于我</h2>
+      <h2 className="text-center text-4xl font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">
+        关于我
+      </h2>
 
       <div className="flex flex-col gap-6">
         <p className="text-base leading-relaxed text-zinc-400 md:text-lg md:leading-8">{profile.intro}</p>
