@@ -20,9 +20,9 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline }: Her
   const reduce = useReducedMotion();
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       <motion.p
-        className="text-xs font-medium tracking-[0.35em] text-zinc-500"
+        className="-mt-2 text-xs font-medium tracking-[0.35em] text-zinc-500 md:-mt-4 lg:-mt-5"
         initial={reduce ? false : { opacity: 0, y: 12 }}
         animate={reduce ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -64,7 +64,7 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline }: Her
         </motion.a>
       </motion.div>
       <motion.p
-        className="max-w-md pt-1 text-xs leading-relaxed text-zinc-500 md:text-sm"
+        className="mt-10 max-w-md pt-1 text-xs leading-relaxed text-zinc-500 md:mt-14 md:text-sm lg:mt-16"
         initial={reduce ? false : { opacity: 0 }}
         animate={reduce ? undefined : { opacity: 1 }}
         transition={{ delay: 0.45, duration: 0.5 }}

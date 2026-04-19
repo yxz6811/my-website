@@ -32,7 +32,7 @@ export default function Home() {
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-14 px-5 pb-24 pt-10 sm:px-8 sm:pt-14 md:gap-20">
           <FocusScrollSection
             id="top"
-            panelClassName="!px-5 !py-12 sm:!px-8 md:!px-10 md:!py-16 lg:!py-20"
+            panelClassName="!px-5 !py-16 sm:!px-8 md:!px-10 md:!py-20 lg:!py-24"
           >
             <div className="grid gap-12 md:grid-cols-2 md:items-center md:gap-14 lg:gap-16">
               <HeroLead
