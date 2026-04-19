@@ -47,7 +47,7 @@ export default function Home() {
             </div>
           </FocusScrollSection>
 
-          <FocusScrollSection id="about-me" panelClassName="md:p-10">
+          <FocusScrollSection id="about-me" panelClassName="!p-8 md:!p-12 lg:!p-14">
             <AboutMeSection profile={siteProfile} />
           </FocusScrollSection>
 
