@@ -51,7 +51,7 @@ export default function Home() {
             </div>
           </FocusScrollSection>
 
-          <FocusScrollSection id="about-me" panelClassName="!p-8 md:!p-12 lg:!p-14">
+          <FocusScrollSection id="about-me" panelClassName="!px-8 !py-10 md:!px-12 md:!py-14 lg:!px-14 lg:!py-16">
             <AboutMeSection profile={siteProfile} />
           </FocusScrollSection>
 

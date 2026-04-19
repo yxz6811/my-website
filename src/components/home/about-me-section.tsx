@@ -17,20 +17,20 @@ const WHAT_I_CAN_COPY =
  */
 export function AboutMeSection({ profile }: AboutMeSectionProps) {
   return (
-    <div className="grid gap-10 md:grid-cols-2 md:gap-10 lg:gap-14">
-      <section className="flex flex-col gap-6">
+    <div className="grid gap-12 md:grid-cols-2 md:gap-12 lg:gap-16">
+      <section className="flex flex-col gap-7 md:gap-8">
         <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">关于我</h2>
         <p className="text-base leading-relaxed text-zinc-300 md:text-lg md:leading-8">{profile.intro}</p>
-        <div>
+        <div className="rounded-2xl border border-white/8 bg-zinc-900/35 p-5 md:p-6">
           <p className="mb-3 text-xs font-medium uppercase tracking-wider text-zinc-500">方向标签</p>
           <TagStrip tags={profile.tags} />
         </div>
       </section>
 
-      <section className="flex flex-col gap-6">
+      <section className="flex flex-col gap-7 md:gap-8">
         <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">我会什么</h2>
-        <div className="rounded-2xl border border-white/10 bg-black/25 p-6 text-zinc-300 md:p-7">
-          <p className="text-base leading-relaxed md:text-lg md:leading-8">{WHAT_I_CAN_COPY}</p>
+        <div className="rounded-2xl border border-white/10 bg-black/25 p-7 text-zinc-300 md:p-9">
+          <p className="text-base leading-8 tracking-[0.01em] md:text-lg md:leading-9">{WHAT_I_CAN_COPY}</p>
         </div>
       </section>
     </div>
