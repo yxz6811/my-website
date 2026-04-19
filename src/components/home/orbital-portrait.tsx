@@ -8,19 +8,22 @@ type OrbitalPortraitProps = {
 };
 
 /**
- * 圆形头像（细白边），尺寸适配首屏右栏且不溢出面板。
+ * 圆形头像：外层不透明白底挡住玻璃面板后的彩色背景光斑，避免边缘看起来像「彩环」；
+ * 内圈细线仅为中性灰白描边，不使用 `ring`（易与 backdrop 叠出杂色）。
  */
 export function OrbitalPortrait({ src, alt }: OrbitalPortraitProps) {
   return (
-    <div className="relative mx-auto aspect-square w-[min(100%,240px)] max-w-[240px] shrink-0 overflow-hidden rounded-full bg-zinc-800 ring-2 ring-white/20">
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        priority
-        sizes="(max-width: 768px) min(240px, 85vw), 240px"
-        className="object-cover object-[center_22%]"
-      />
+    <div className="relative mx-auto aspect-square w-[min(100%,248px)] max-w-[248px] shrink-0 rounded-full bg-zinc-950 p-[3px]">
+      <div className="relative h-full w-full overflow-hidden rounded-full border border-white/15 bg-zinc-800">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority
+          sizes="(max-width: 768px) min(248px, 85vw), 248px"
+          className="object-cover object-[center_22%]"
+        />
+      </div>
     </div>
   );
 }
