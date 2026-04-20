@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   description:
     "杨曦哲的个人网站：编程、人工智能、黑客松与自媒体。GitHub yxz6811，联系邮箱 3978401510@qq.com。",
   icons: {
-    icon: "/profile-presentation.jpg?v=2",
-    shortcut: "/profile-presentation.jpg?v=2",
-    apple: "/profile-presentation.jpg?v=2",
+    icon: "/profile-presentation.jpg?v=3",
+    shortcut: "/profile-presentation.jpg?v=3",
+    apple: "/profile-presentation.jpg?v=3",
   },
 };
 
