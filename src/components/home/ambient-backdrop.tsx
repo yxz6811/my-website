@@ -7,19 +7,19 @@ export function AmbientBackdrop() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       <div
-        className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(125,211,252,0.12),transparent_0_24%),radial-gradient(circle_at_82%_16%,rgba(45,212,191,0.1),transparent_0_20%),radial-gradient(circle_at_50%_100%,rgba(251,191,36,0.08),transparent_0_30%)]"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(125,211,252,0.18),transparent_0_28%),radial-gradient(circle_at_82%_16%,rgba(45,212,191,0.14),transparent_0_24%),radial-gradient(circle_at_50%_100%,rgba(251,191,36,0.12),transparent_0_34%)]"
         aria-hidden
       />
       <div
-        className="animate-ambient-blob absolute -left-[16%] top-[-6%] h-[min(84vw,580px)] w-[min(84vw,580px)] rounded-full bg-sky-400/20 blur-[120px]"
+        className="animate-ambient-blob absolute -left-[16%] top-[-6%] h-[min(84vw,580px)] w-[min(84vw,580px)] rounded-full bg-sky-300/26 blur-[120px]"
         aria-hidden
       />
       <div
-        className="animate-ambient-blob-slow absolute -right-[14%] top-[18%] h-[min(74vw,520px)] w-[min(74vw,520px)] rounded-full bg-teal-400/16 blur-[120px]"
+        className="animate-ambient-blob-slow absolute -right-[14%] top-[18%] h-[min(74vw,520px)] w-[min(74vw,520px)] rounded-full bg-teal-300/20 blur-[120px]"
         aria-hidden
       />
       <div
-        className="animate-ambient-blob-reverse absolute bottom-[-8%] left-[26%] h-[min(66vw,460px)] w-[min(66vw,460px)] rounded-full bg-amber-300/12 blur-[110px]"
+        className="animate-ambient-blob-reverse absolute bottom-[-8%] left-[26%] h-[min(66vw,460px)] w-[min(66vw,460px)] rounded-full bg-amber-200/16 blur-[110px]"
         style={{ animationDelay: "-6s" }}
         aria-hidden
       />
@@ -28,11 +28,11 @@ export function AmbientBackdrop() {
         aria-hidden
       />
       <div
-        className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_34%,rgba(3,6,13,0.38)_76%,rgba(3,6,13,0.74)_100%)]"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_34%,rgba(5,11,22,0.3)_76%,rgba(4,8,15,0.6)_100%)]"
         aria-hidden
       />
       <div
-        className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,11,21,0.38)_0%,transparent_22%,transparent_76%,rgba(3,6,13,0.72)_100%)]"
+        className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(10,20,34,0.26)_0%,transparent_24%,transparent_78%,rgba(6,12,22,0.52)_100%)]"
         aria-hidden
       />
     </div>

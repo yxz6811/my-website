@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #050b15;
+  --background: #0b1524;
   --foreground: #edf3ff;
-  --surface: rgba(9, 16, 28, 0.78);
-  --surface-strong: rgba(10, 18, 32, 0.92);
-  --line: rgba(255, 255, 255, 0.1);
-  --line-strong: rgba(255, 255, 255, 0.18);
+  --surface: rgba(19, 30, 48, 0.72);
+  --surface-strong: rgba(18, 29, 46, 0.88);
+  --line: rgba(255, 255, 255, 0.14);
+  --line-strong: rgba(255, 255, 255, 0.24);
 }
 
 @theme inline {
@@ -18,7 +18,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #050b15;
+    --background: #0b1524;
     --foreground: #edf3ff;
   }
 }
@@ -33,10 +33,10 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   background-image:
-    radial-gradient(circle at 14% 18%, rgba(96, 165, 250, 0.14), transparent 0 24%),
-    radial-gradient(circle at 84% 16%, rgba(45, 212, 191, 0.12), transparent 0 22%),
-    radial-gradient(circle at 50% 115%, rgba(251, 191, 36, 0.12), transparent 0 36%),
-    linear-gradient(180deg, #07111f 0%, #060b15 46%, #03060d 100%);
+    radial-gradient(circle at 14% 18%, rgba(125, 211, 252, 0.2), transparent 0 26%),
+    radial-gradient(circle at 84% 16%, rgba(45, 212, 191, 0.16), transparent 0 24%),
+    radial-gradient(circle at 50% 115%, rgba(251, 191, 36, 0.14), transparent 0 38%),
+    linear-gradient(180deg, #101d31 0%, #0b1524 44%, #09111d 100%);
 }
 
 body::before,
@@ -49,11 +49,11 @@ body::after {
 
 body::before {
   background:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 0 24%),
-    radial-gradient(circle at 78% 24%, rgba(255, 255, 255, 0.05), transparent 0 18%),
-    linear-gradient(130deg, rgba(255, 255, 255, 0.04), transparent 30% 70%, rgba(255, 255, 255, 0.02));
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12), transparent 0 26%),
+    radial-gradient(circle at 78% 24%, rgba(255, 255, 255, 0.08), transparent 0 20%),
+    linear-gradient(130deg, rgba(255, 255, 255, 0.05), transparent 30% 70%, rgba(255, 255, 255, 0.03));
   mix-blend-mode: screen;
-  opacity: 0.42;
+  opacity: 0.54;
 }
 
 body::after {
@@ -84,12 +84,12 @@ body::after {
   overflow: hidden;
   border: 1px solid var(--line);
   background:
-    linear-gradient(160deg, rgba(13, 20, 35, 0.88), rgba(6, 10, 18, 0.8)),
+    linear-gradient(160deg, rgba(28, 42, 66, 0.78), rgba(14, 24, 38, 0.72)),
     var(--surface);
   box-shadow:
-    0 28px 80px -40px rgba(0, 0, 0, 0.92),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+    0 28px 80px -40px rgba(0, 0, 0, 0.78),
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(22px);
 }
 
@@ -99,8 +99,8 @@ body::after {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at top left, rgba(125, 211, 252, 0.12), transparent 0 34%),
-    radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.08), transparent 0 28%);
+    radial-gradient(circle at top left, rgba(125, 211, 252, 0.2), transparent 0 36%),
+    radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.12), transparent 0 30%);
 }
 
 .glass-panel::after {
@@ -117,11 +117,11 @@ body::after {
 .soft-card {
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.07), transparent 0 32%),
-    linear-gradient(155deg, rgba(17, 24, 39, 0.86), rgba(8, 12, 22, 0.82));
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.1), transparent 0 34%),
+    linear-gradient(155deg, rgba(29, 41, 62, 0.74), rgba(12, 19, 32, 0.72));
   box-shadow:
-    0 22px 60px -38px rgba(0, 0, 0, 0.9),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 22px 60px -38px rgba(0, 0, 0, 0.72),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .interactive-sheen {
