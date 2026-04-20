@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 type HeroLeadProps = {
   /** 顶栏小字 */
@@ -22,7 +22,17 @@ const INTERACTIVE_QUOTES = [
   "人工智能已经读懂了全世界的知识，而你要做的就是站在它的肩膀上，去看更远的风景。",
   "现在我们写的每一行代码，在将来都有可能改变世界。",
   "在这个时代，最强大的算力不是GPU，而是‘你+AI’的无限可能。",
-  "让人工智能让你的超级副驾驶，人生的赛道同样在你的掌握之中，但一次，我们可以开得更快、更远。",
+  "让人工智能成为你的超级副驾驶，人生的赛道同样在你的掌握之中；这一次，我们可以开得更快、更远。",
+  "人工智能给你的不是标准答案，而是通向更高维度的阶梯。",
+  "你的想象力是唯一的边界，而人工智能是打破边界的利刃。",
+  "之前我们依靠手动改变命运，现在我们用AI拓展人生的版图。",
+  "那些曾经遥不可及的梦想，加上AI的算力，就成就了触手可及的计划。",
+  "别把人工智能当作普通的工具，把它变成你人生‘开挂’的加速引擎。",
+  "让机器去‘卷’效率，我们借AI去追寻更高的意义。",
+  "成为AI时代的主导者，不需要你比它多，只需要你比它更敢想。",
+  "你的每一个绝妙灵感，现在都有人工智能这个不疲倦的‘超级执行者’。",
+  "AI时代没有怀才不遇，只要你会提问，世界就会给你最好的答案。",
+  "乘着AI的风，去那些曾经只敢在梦里想象的远方。",
 ];
 
 /**
@@ -62,17 +72,30 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline, tags 
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-start gap-3">
             <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-sky-300 shadow-[0_0_18px_rgba(125,211,252,0.9)]" />
-            <p className="text-sm font-medium leading-7 tracking-[0.01em] text-zinc-300 md:text-[15px]">
-              {currentQuote}
-            </p>
+            <div className="min-h-[5.25rem] md:min-h-[4.2rem]">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.p
+                  key={currentQuote}
+                  className="text-sm font-medium leading-7 tracking-[0.01em] text-zinc-300 md:text-[15px]"
+                  initial={reduce ? { opacity: 1 } : { opacity: 0, y: 8, filter: "blur(4px)" }}
+                  animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={reduce ? { opacity: 1 } : { opacity: 0, y: -8, filter: "blur(4px)" }}
+                  transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {currentQuote}
+                </motion.p>
+              </AnimatePresence>
+            </div>
           </div>
-          <button
+          <motion.button
             type="button"
             onClick={() => setCurrentQuote((prev) => pickNextQuote(quotePool, prev))}
             className="interactive-ring interactive-sheen shrink-0 rounded-full border border-white/15 bg-white/[0.05] px-3 py-1.5 text-xs font-semibold text-zinc-100 transition hover:border-sky-200/40 hover:bg-white/[0.1] hover:text-white"
+            whileTap={reduce ? undefined : { scale: 0.95 }}
+            whileHover={reduce ? undefined : { scale: 1.03 }}
           >
             换一句
-          </button>
+          </motion.button>
         </div>
       </motion.div>
       <motion.h1
