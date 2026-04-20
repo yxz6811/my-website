@@ -92,7 +92,7 @@ export const siteProfile: SiteProfile = {
     "后端开发",
     "路演与表达",
     "黑客松",
-    "AI 辅助编程",
+    "Vibe Coding",
     "自媒体",
   ],
   primaryLinks: [

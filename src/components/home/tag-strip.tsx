@@ -8,141 +8,114 @@ type TagStripProps = {
 };
 
 type TagGlyphProps = {
-  /** 标签序号，用于分配固定图案 */
-  index: number;
+  /** 标签文案 */
+  tag: string;
 };
 
-type TagDoodleProps = {
-  /** 标签序号，用于分配装饰笔画 */
-  index: number;
+type TagVisualMeta = {
+  /** 图标背景渐变 */
+  paletteClass: string;
+  /** 图标语义类型 */
+  iconType: "olympiad" | "backend" | "speech" | "hackathon" | "vibe" | "media";
 };
 
 /**
- * 图案外围的手绘感装饰线条，模拟参考图里的小图画细节。
+ * 根据标签文案返回语义化图标类型与配色。
  */
-function TagDoodle({ index }: TagDoodleProps) {
-  const id = index % 6;
-
-  if (id === 0) {
-    return (
-      <>
-        <span className="absolute -left-4 -top-2 h-[2px] w-4 rotate-[-18deg] rounded-full bg-white/45" />
-        <span className="absolute -right-3 top-1 h-[2px] w-3 rotate-[20deg] rounded-full bg-white/40" />
-      </>
-    );
+function getTagVisualMeta(tag: string, index: number): TagVisualMeta {
+  if (tag.includes("C++") || tag.includes("信奥")) {
+    return { iconType: "olympiad", paletteClass: "from-orange-500/90 to-rose-500/90" };
+  }
+  if (tag.includes("后端")) {
+    return { iconType: "backend", paletteClass: "from-pink-300/90 to-fuchsia-400/90" };
+  }
+  if (tag.includes("路演") || tag.includes("表达")) {
+    return { iconType: "speech", paletteClass: "from-violet-500/90 to-purple-500/90" };
+  }
+  if (tag.includes("黑客松")) {
+    return { iconType: "hackathon", paletteClass: "from-cyan-200/90 to-emerald-200/90" };
+  }
+  if (tag.toLowerCase().includes("vibe")) {
+    return { iconType: "vibe", paletteClass: "from-lime-200/90 to-lime-300/90" };
+  }
+  if (tag.includes("自媒体")) {
+    return { iconType: "media", paletteClass: "from-rose-900/80 to-red-900/80" };
   }
 
-  if (id === 1) {
-    return (
-      <>
-        <span className="absolute -left-2 -top-3 h-2 w-2 rounded-full border border-white/35" />
-        <span className="absolute -right-2 top-3 h-[2px] w-3 rounded-full bg-white/40" />
-      </>
-    );
-  }
-
-  if (id === 2) {
-    return (
-      <>
-        <span className="absolute -left-3 top-2 h-3 w-3 rotate-45 border border-white/35" />
-        <span className="absolute -right-2 -top-2 h-2 w-2 rounded-full bg-white/40" />
-      </>
-    );
-  }
-
-  if (id === 3) {
-    return (
-      <>
-        <span className="absolute -left-3 top-1 h-[2px] w-4 rounded-full bg-white/35" />
-        <span className="absolute -right-3 -top-1 h-4 w-[2px] rounded-full bg-white/30" />
-      </>
-    );
-  }
-
-  if (id === 4) {
-    return (
-      <>
-        <span className="absolute -left-2 -top-2 h-[2px] w-5 rotate-[28deg] rounded-full bg-white/40" />
-        <span className="absolute -right-2 -top-2 h-[2px] w-5 rotate-[-28deg] rounded-full bg-white/40" />
-      </>
-    );
-  }
-
-  return (
-    <>
-      <span className="absolute -left-2 -top-2 h-2 w-2 rounded-full bg-white/35" />
-      <span className="absolute -right-2 -top-2 h-2 w-2 rounded-full bg-white/35" />
-      <span className="absolute left-1/2 -top-4 h-[2px] w-4 -translate-x-1/2 rounded-full bg-white/35" />
-    </>
-  );
+  const fallback = [
+    "from-orange-500/90 to-rose-500/90",
+    "from-pink-300/90 to-fuchsia-400/90",
+    "from-violet-500/90 to-purple-500/90",
+    "from-cyan-200/90 to-emerald-200/90",
+    "from-lime-200/90 to-lime-300/90",
+    "from-rose-900/80 to-red-900/80",
+  ];
+  return { iconType: "vibe", paletteClass: fallback[index % fallback.length] };
 }
 
 /**
- * 标签图标：按序号渲染 6 组固定几何图案。
+ * 标签图标：按标签语义渲染更直观的符号。
  */
-function TagGlyph({ index }: TagGlyphProps) {
-  const id = index % 6;
+function TagGlyph({ tag }: TagGlyphProps) {
+  const meta = getTagVisualMeta(tag, 0);
+  const iconType = meta.iconType;
 
-  if (id === 0) {
+  if (iconType === "olympiad") {
+    return (
+      <span className="relative flex h-10 w-10 items-center justify-center">
+        <span className="absolute inset-1 rounded-md border-[3px] border-black" />
+        <span className="relative text-sm font-black text-black">C++</span>
+      </span>
+    );
+  }
+
+  if (iconType === "backend") {
     return (
       <span className="relative block h-10 w-10">
-        <span className="absolute left-1 top-1 h-8 w-8 rounded-[30%] border-[4px] border-black" />
-        <span className="absolute left-[8px] top-[4px] h-4 w-4 rounded-b-full bg-black" />
-        <span className="absolute left-[18px] top-[4px] h-4 w-4 rounded-b-full bg-black" />
+        <span className="absolute left-1/2 top-[6px] h-2 w-2 -translate-x-1/2 rounded-full bg-black" />
+        <span className="absolute left-1/2 top-[12px] h-6 w-7 -translate-x-1/2 rounded-md border-[3px] border-black" />
+        <span className="absolute left-1/2 top-[15px] h-[2px] w-5 -translate-x-1/2 bg-black" />
+        <span className="absolute left-1/2 top-[19px] h-[2px] w-5 -translate-x-1/2 bg-black" />
       </span>
     );
   }
 
-  if (id === 1) {
-    return (
-      <span className="relative block h-10 w-10 overflow-hidden rounded-[8%] bg-pink-100">
-        <span className="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black" />
-        <span className="absolute left-0 top-0 h-5 w-5 bg-pink-100" />
-        <span className="absolute right-0 top-0 h-5 w-5 bg-pink-100" />
-        <span className="absolute bottom-0 left-0 h-5 w-5 bg-pink-100" />
-        <span className="absolute bottom-0 right-0 h-5 w-5 bg-pink-100" />
-      </span>
-    );
-  }
-
-  if (id === 2) {
+  if (iconType === "speech") {
     return (
       <span className="relative block h-10 w-10">
-        <span className="absolute inset-0 rounded-[28%] bg-white" />
-        <span className="absolute left-1/2 top-1/2 h-5 w-[5px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500" />
-        <span className="absolute left-1/2 top-1/2 h-[5px] w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500" />
+        <span className="absolute left-1/2 top-[6px] h-6 w-6 -translate-x-1/2 rounded-full border-[3px] border-white bg-violet-500" />
+        <span className="absolute left-1/2 top-[24px] h-2 w-[3px] -translate-x-1/2 rounded-full bg-white" />
+        <span className="absolute left-1/2 top-[29px] h-[3px] w-4 -translate-x-1/2 rounded-full bg-white" />
       </span>
     );
   }
 
-  if (id === 3) {
-    return (
-      <span className="relative grid h-10 w-10 grid-cols-4 grid-rows-4 gap-[2px]">
-        {Array.from({ length: 16 }).map((_, i) => (
-          <span
-            key={i}
-            className={`rounded-sm ${i % 3 === 0 || i % 5 === 0 ? "bg-black" : "bg-black/25"}`}
-          />
-        ))}
-      </span>
-    );
-  }
-
-  if (id === 4) {
+  if (iconType === "hackathon") {
     return (
       <span className="relative block h-10 w-10">
-        <span className="absolute left-1/2 top-[4px] h-4 w-4 -translate-x-1/2 rounded-full bg-black" />
-        <span className="absolute left-[4px] top-[15px] h-4 w-4 rounded-full bg-black" />
-        <span className="absolute right-[4px] top-[15px] h-4 w-4 rounded-full bg-black" />
-        <span className="absolute left-1/2 top-[24px] h-4 w-4 -translate-x-1/2 rounded-full bg-black" />
+        <span className="absolute left-[7px] top-[4px] h-8 w-5 -skew-x-[16deg] rounded-sm bg-black" />
+        <span className="absolute left-[17px] top-[14px] h-3 w-3 rotate-45 bg-black" />
+      </span>
+    );
+  }
+
+  if (iconType === "vibe") {
+    return (
+      <span className="relative block h-10 w-10">
+        <span className="absolute left-[11px] top-[7px] h-2 w-2 rotate-45 bg-black" />
+        <span className="absolute left-[20px] top-[14px] h-2 w-2 rotate-45 bg-black" />
+        <span className="absolute left-[12px] top-[20px] h-2 w-2 rotate-45 bg-black" />
+        <span className="absolute left-[5px] top-[14px] h-2 w-2 rotate-45 bg-black" />
+        <span className="absolute left-[23px] top-[7px] h-[2px] w-4 rounded-full bg-black" />
       </span>
     );
   }
 
   return (
     <span className="relative block h-10 w-10">
-      <span className="absolute inset-1 rounded-full bg-white" />
-      <span className="absolute left-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-white/70" />
+      <span className="absolute left-1/2 top-[7px] h-7 w-7 -translate-x-1/2 rounded-lg bg-white/95" />
+      <span className="absolute left-[13px] top-[12px] h-3 w-4 rounded-sm bg-rose-900/80" />
+      <span className="absolute left-[18px] top-[17px] border-y-[4px] border-l-[6px] border-y-transparent border-l-rose-900/80" />
     </span>
   );
 }
@@ -152,14 +125,6 @@ function TagGlyph({ index }: TagGlyphProps) {
  */
 export function TagStrip({ tags }: TagStripProps) {
   const reduce = useReducedMotion();
-  const paletteClasses = [
-    "from-orange-500/90 to-rose-500/90",
-    "from-pink-300/90 to-fuchsia-400/90",
-    "from-violet-500/90 to-purple-500/90",
-    "from-cyan-200/90 to-emerald-200/90",
-    "from-lime-200/90 to-lime-300/90",
-    "from-rose-900/80 to-red-900/80",
-  ];
 
   return (
     <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
@@ -189,14 +154,26 @@ export function TagStrip({ tags }: TagStripProps) {
                 }
           }
         >
+          {/** 标签内容决定图标风格，保证图案和文字语义一致。 */}
+          {(() => {
+            const meta = getTagVisualMeta(tag, i);
+            return (
           <span
-            className={`relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-sm bg-gradient-to-br ${paletteClasses[i % paletteClasses.length]}`}
+                className={`relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-sm bg-gradient-to-br ${meta.paletteClass}`}
           >
-            <TagDoodle index={i} />
-            <TagGlyph index={i} />
+                <TagGlyph tag={tag} />
           </span>
+            );
+          })()}
           <span className="text-center text-lg tracking-wide text-zinc-100 [text-shadow:0_2px_10px_rgba(255,255,255,0.16)]">
-            {tag}
+            {tag.includes("/") ? (
+              <>
+                <span className="block">C++</span>
+                <span className="block">信奥</span>
+              </>
+            ) : (
+              tag
+            )}
           </span>
           <span className="pointer-events-none absolute inset-0 rounded-[999px] border border-white/0 transition-colors duration-300 group-hover:border-white/15" />
         </motion.article>
