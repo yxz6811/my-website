@@ -12,6 +12,71 @@ type TagGlyphProps = {
   index: number;
 };
 
+type TagDoodleProps = {
+  /** 标签序号，用于分配装饰笔画 */
+  index: number;
+};
+
+/**
+ * 图案外围的手绘感装饰线条，模拟参考图里的小图画细节。
+ */
+function TagDoodle({ index }: TagDoodleProps) {
+  const id = index % 6;
+
+  if (id === 0) {
+    return (
+      <>
+        <span className="absolute -left-4 -top-2 h-[2px] w-4 rotate-[-18deg] rounded-full bg-white/45" />
+        <span className="absolute -right-3 top-1 h-[2px] w-3 rotate-[20deg] rounded-full bg-white/40" />
+      </>
+    );
+  }
+
+  if (id === 1) {
+    return (
+      <>
+        <span className="absolute -left-2 -top-3 h-2 w-2 rounded-full border border-white/35" />
+        <span className="absolute -right-2 top-3 h-[2px] w-3 rounded-full bg-white/40" />
+      </>
+    );
+  }
+
+  if (id === 2) {
+    return (
+      <>
+        <span className="absolute -left-3 top-2 h-3 w-3 rotate-45 border border-white/35" />
+        <span className="absolute -right-2 -top-2 h-2 w-2 rounded-full bg-white/40" />
+      </>
+    );
+  }
+
+  if (id === 3) {
+    return (
+      <>
+        <span className="absolute -left-3 top-1 h-[2px] w-4 rounded-full bg-white/35" />
+        <span className="absolute -right-3 -top-1 h-4 w-[2px] rounded-full bg-white/30" />
+      </>
+    );
+  }
+
+  if (id === 4) {
+    return (
+      <>
+        <span className="absolute -left-2 -top-2 h-[2px] w-5 rotate-[28deg] rounded-full bg-white/40" />
+        <span className="absolute -right-2 -top-2 h-[2px] w-5 rotate-[-28deg] rounded-full bg-white/40" />
+      </>
+    );
+  }
+
+  return (
+    <>
+      <span className="absolute -left-2 -top-2 h-2 w-2 rounded-full bg-white/35" />
+      <span className="absolute -right-2 -top-2 h-2 w-2 rounded-full bg-white/35" />
+      <span className="absolute left-1/2 -top-4 h-[2px] w-4 -translate-x-1/2 rounded-full bg-white/35" />
+    </>
+  );
+}
+
 /**
  * 标签图标：按序号渲染 6 组固定几何图案。
  */
@@ -127,6 +192,7 @@ export function TagStrip({ tags }: TagStripProps) {
           <span
             className={`relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-sm bg-gradient-to-br ${paletteClasses[i % paletteClasses.length]}`}
           >
+            <TagDoodle index={i} />
             <TagGlyph index={i} />
           </span>
           <span className="text-center text-lg tracking-wide text-zinc-100 [text-shadow:0_2px_10px_rgba(255,255,255,0.16)]">
