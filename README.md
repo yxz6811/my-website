@@ -126,6 +126,30 @@ npm run build
 pm2 restart yangxizhe-site
 ```
 
+## GitHub Actions 自动部署（推荐）
+
+如果你希望每次推送 `main` 自动发布到 `yangxizhe.com`，可以使用仓库内置工作流：
+
+- 工作流文件：`.github/workflows/deploy-vps.yml`
+- 触发条件：push 到 `main`（也支持手动触发）
+
+你需要在 GitHub 仓库 `Settings -> Secrets and variables -> Actions` 添加以下 Secrets：
+
+- `VPS_HOST`：服务器 IP（例如 `193.134.211.194`）
+- `VPS_USER`：服务器登录用户（例如 `ubuntu`）
+- `VPS_PORT`：SSH 端口（通常 `22`）
+- `VPS_SSH_KEY`：用于登录服务器的私钥全文
+
+工作流执行命令：
+
+```bash
+cd /var/www/yangxizhe.com
+git pull --ff-only origin main
+npm ci
+npm run build
+pm2 restart yangxizhe-site
+```
+
 ## Dynadot DNS 配置
 
 在 Dynadot 的 DNS 管理里添加：
