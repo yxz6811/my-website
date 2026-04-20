@@ -2,7 +2,6 @@ import { siteProfile } from "@/content/site-profile";
 import { AboutMeSection } from "@/components/home/about-me-section";
 import { AmbientBackdrop } from "@/components/home/ambient-backdrop";
 import { FocusScrollSection } from "@/components/home/focus-scroll-section";
-import { ViewportReadingBand } from "@/components/home/viewport-reading-band";
 import { HeroLead } from "@/components/home/hero-lead";
 import { HeroPersonaColumn } from "@/components/home/hero-persona-column";
 import { MyAccountsSection } from "@/components/home/my-accounts-section";
@@ -26,7 +25,6 @@ export default function Home() {
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-transparent text-zinc-100">
       <AmbientBackdrop />
-      <ViewportReadingBand />
       <SiteHeader items={NAV_ITEMS} />
 
       <main className="relative z-10">
@@ -73,7 +71,6 @@ export default function Home() {
                   GitHub、邮箱、薯医与社交平台；卡片可直接打开新标签页。
                 </p>
               </div>
-              <p className="text-xs text-zinc-600">仅视口上下缘约 3cm 渐暗</p>
             </div>
             <LinkBento links={siteProfile.primaryLinks} />
           </FocusScrollSection>
