@@ -16,19 +16,19 @@ type LinkBentoProps = {
 };
 
 const variantRing: Record<SiteLink["variant"], string> = {
-  github: "hover:shadow-[0_0_0_1px_rgba(255,255,255,0.2)] hover:shadow-white/10",
-  email: "hover:shadow-[0_0_24px_-4px_rgba(34,211,238,0.45)]",
-  product: "hover:shadow-[0_0_28px_-4px_rgba(52,211,153,0.5)]",
-  douyin: "hover:shadow-[0_0_24px_-4px_rgba(244,114,182,0.45)]",
-  xiaohongshu: "hover:shadow-[0_0_24px_-4px_rgba(248,113,113,0.45)]",
+  github: "hover:shadow-[0_0_0_1px_rgba(255,255,255,0.16),0_26px_64px_-36px_rgba(255,255,255,0.14)]",
+  email: "hover:shadow-[0_26px_64px_-34px_rgba(34,211,238,0.34)]",
+  product: "hover:shadow-[0_28px_72px_-36px_rgba(52,211,153,0.34)]",
+  douyin: "hover:shadow-[0_26px_64px_-34px_rgba(244,114,182,0.32)]",
+  xiaohongshu: "hover:shadow-[0_26px_64px_-34px_rgba(248,113,113,0.28)]",
 };
 
 const variantAccent: Record<SiteLink["variant"], string> = {
-  github: "from-zinc-500/30 to-zinc-600/10",
-  email: "from-cyan-500/35 to-cyan-700/10",
-  product: "from-emerald-500/40 to-teal-700/10",
-  douyin: "from-fuchsia-500/35 to-pink-700/10",
-  xiaohongshu: "from-red-500/35 to-rose-900/10",
+  github: "from-zinc-400/24 to-zinc-700/8",
+  email: "from-cyan-400/32 to-sky-700/10",
+  product: "from-emerald-400/30 to-teal-700/12",
+  douyin: "from-fuchsia-400/28 to-pink-700/10",
+  xiaohongshu: "from-red-400/28 to-rose-900/12",
 };
 
 /** 极简线性图标，避免依赖图标包 */
@@ -134,7 +134,7 @@ function InteractiveLinkCard({
         onPointerMove={handlePointerMove}
         onPointerLeave={resetPointer}
         style={reduce ? undefined : { rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className={`group relative col-span-1 flex min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl border border-white/12 bg-gradient-to-br ${variantAccent[link.variant]} p-7 text-left md:col-span-2 md:row-span-2 md:p-8 ${variantRing[link.variant]}`}
+        className={`interactive-sheen interactive-ring group relative col-span-1 flex min-h-[240px] flex-col justify-between overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(145deg,rgba(10,20,26,0.98),rgba(8,16,24,0.9))] p-7 text-left shadow-[0_30px_70px_-42px_rgba(0,0,0,0.92),inset_0_1px_0_rgba(255,255,255,0.06)] md:col-span-2 md:row-span-2 md:p-8 ${variantRing[link.variant]}`}
         whileHover={reduce ? undefined : { y: -6, transition: { duration: 0.18 } }}
         whileTap={reduce ? undefined : { scale: 0.99 }}
       >
@@ -143,22 +143,33 @@ function InteractiveLinkCard({
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
           style={reduce ? undefined : { background: glow }}
         />
+        <div
+          className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${variantAccent[link.variant]} opacity-80`}
+          aria-hidden
+        />
         <div className="pointer-events-none absolute right-0 top-0 h-40 w-40 translate-x-10 -translate-y-10 rounded-full bg-white/5 blur-2xl transition group-hover:bg-white/10" />
+        <div className="pointer-events-none absolute bottom-5 right-5 flex items-center gap-1.5 opacity-0 transition duration-300 group-hover:opacity-100">
+          <span className="h-2 w-2 rounded-full bg-white/80 shadow-[0_0_14px_rgba(255,255,255,0.8)]" />
+          <span className="h-px w-12 bg-gradient-to-r from-white/45 to-transparent" />
+        </div>
+        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/55 to-transparent" />
         <div className="relative flex items-start justify-between gap-4">
           <div className="flex items-center gap-3 text-white">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-black/25 text-emerald-200 ring-1 ring-white/15">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-black/24 text-emerald-100 ring-1 ring-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
               <LinkGlyph variant="product" />
             </span>
             <div>
-              <p className="text-xs font-medium uppercase tracking-wider text-emerald-200/90">主力项目</p>
-              <p className="text-lg font-semibold">{link.label}</p>
+              <p className="text-[11px] font-medium uppercase tracking-[0.26em] text-emerald-100/80">主力项目</p>
+              <p className="mt-1 text-xl font-semibold">{link.label}</p>
             </div>
           </div>
           <span className="rounded-full bg-white/10 px-2.5 py-1 text-xs text-zinc-200 ring-1 ring-white/15 transition group-hover:bg-white/20">
             访问 →
           </span>
         </div>
-        <p className="relative mt-4 max-w-md text-sm leading-relaxed text-zinc-200/90">{link.blurb}</p>
+        <p className="relative mt-6 max-w-md text-sm leading-7 text-zinc-200/88 md:text-[15px]">
+          {link.blurb}
+        </p>
       </motion.a>
     );
   }
@@ -172,7 +183,7 @@ function InteractiveLinkCard({
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPointer}
       style={reduce ? undefined : { rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/12 bg-zinc-900/50 p-6 text-left backdrop-blur-sm transition-colors hover:bg-zinc-900/70 md:min-h-[140px] md:p-7 ${variantRing[link.variant]}`}
+      className={`interactive-sheen interactive-ring group relative flex flex-col justify-between overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(155deg,rgba(16,24,39,0.88),rgba(8,12,22,0.88))] p-6 text-left shadow-[0_24px_58px_-38px_rgba(0,0,0,0.88),inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-sm transition-colors hover:bg-[linear-gradient(155deg,rgba(18,27,44,0.94),rgba(8,13,24,0.92))] md:min-h-[160px] md:p-7 ${variantRing[link.variant]}`}
       whileHover={reduce ? undefined : { y: -4, transition: { duration: 0.18 } }}
       whileTap={reduce ? undefined : { scale: 0.99 }}
       transition={{ delay: index * 0.02 }}
@@ -183,11 +194,16 @@ function InteractiveLinkCard({
         style={reduce ? undefined : { background: glow }}
       />
       <div
-        className={`pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br opacity-40 blur-2xl ${variantAccent[link.variant]}`}
+        className={`pointer-events-none absolute inset-0 bg-gradient-to-br opacity-65 ${variantAccent[link.variant]}`}
       />
+      <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/45 to-transparent" />
+      <div className="pointer-events-none absolute bottom-5 right-5 flex items-center gap-1.5 opacity-0 transition duration-300 group-hover:opacity-100">
+        <span className="h-1.5 w-1.5 rounded-full bg-white/75 shadow-[0_0_12px_rgba(255,255,255,0.75)]" />
+        <span className="h-px w-8 bg-gradient-to-r from-white/35 to-transparent" />
+      </div>
       <div className="relative flex items-start justify-between gap-3">
         <div className="flex items-center gap-3 text-white">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-black/30 text-zinc-100 ring-1 ring-white/10">
+          <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-black/28 text-zinc-100 ring-1 ring-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition duration-300 group-hover:scale-[1.04] group-hover:ring-white/20">
             <LinkGlyph variant={link.variant} />
           </span>
           <p className="font-semibold">{link.label}</p>
@@ -199,7 +215,7 @@ function InteractiveLinkCard({
           {"\u2197"}
         </span>
       </div>
-      <p className="relative mt-3 text-sm leading-relaxed text-zinc-400 transition group-hover:text-zinc-300">
+      <p className="relative mt-4 text-sm leading-7 text-zinc-400 transition group-hover:text-zinc-300">
         {link.blurb}
       </p>
     </motion.a>

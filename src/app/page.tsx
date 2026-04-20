@@ -24,16 +24,16 @@ const NAV_ITEMS = [
  */
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-zinc-950 text-zinc-100">
+    <div className="relative min-h-screen overflow-x-hidden bg-transparent text-zinc-100">
       <AmbientBackdrop />
       <ViewportReadingBand />
       <SiteHeader items={NAV_ITEMS} />
 
       <main className="relative z-10">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-14 px-5 pb-24 pt-10 sm:px-8 sm:pt-14 md:gap-20">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-14 px-5 pb-24 pt-8 sm:px-8 sm:pt-10 md:gap-[4.5rem] lg:gap-20">
           <FocusScrollSection
             id="top"
-            panelClassName="!px-5 !py-16 sm:!px-8 md:!px-10 md:!py-20 lg:!py-24"
+            panelClassName="!px-5 !py-14 sm:!px-8 md:!px-10 md:!py-[4.5rem] lg:!py-20"
           >
             <div className="grid gap-12 md:grid-cols-2 md:items-center md:gap-14 lg:gap-16">
               <HeroLead
@@ -41,6 +41,7 @@ export default function Home() {
                 headlineLead={siteProfile.headlineLead}
                 headlineAccent={siteProfile.headlineAccent}
                 tagline={siteProfile.heroTagline}
+                tags={siteProfile.tags}
               />
               <HeroPersonaColumn
                 personaTitle={siteProfile.personaTitle}
@@ -51,22 +52,24 @@ export default function Home() {
             </div>
           </FocusScrollSection>
 
-          <FocusScrollSection id="about-me" panelClassName="!px-8 !py-10 md:!px-12 md:!py-14 lg:!px-14 lg:!py-16">
+          <FocusScrollSection id="about-me" panelClassName="!px-7 !py-8 md:!px-12 md:!py-12 lg:!px-14 lg:!py-14">
             <AboutMeSection profile={siteProfile} />
           </FocusScrollSection>
 
-          <FocusScrollSection id="my-accounts" panelClassName="!p-8 md:!p-12 lg:!p-14">
+          <FocusScrollSection id="my-accounts" panelClassName="!p-7 md:!p-10 lg:!p-12">
             <MyAccountsSection profile={siteProfile} />
           </FocusScrollSection>
 
           <FocusScrollSection
             id="links"
-            panelClassName="space-y-10 md:space-y-12 !p-8 md:!p-12 lg:!p-14"
+            panelClassName="space-y-10 !p-7 md:space-y-12 md:!p-10 lg:!p-12"
           >
             <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">链接与作品</h2>
-                <p className="mt-2 max-w-xl text-sm text-zinc-400">
+                <h2 className="text-3xl font-semibold tracking-[-0.04em] text-white md:text-[2.15rem]">
+                  链接与作品
+                </h2>
+                <p className="mt-3 max-w-xl text-sm leading-7 text-zinc-400">
                   GitHub、邮箱、薯医与社交平台；卡片可直接打开新标签页。
                 </p>
               </div>
@@ -75,11 +78,13 @@ export default function Home() {
             <LinkBento links={siteProfile.primaryLinks} />
           </FocusScrollSection>
 
-          <FocusScrollSection id="timeline" panelClassName="md:p-10" scrollReveal={false}>
+          <FocusScrollSection id="timeline" panelClassName="!p-7 md:!p-10" scrollReveal={false}>
             <ScrollReveal>
               <div>
-                <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">经历与活动</h2>
-                <p className="mt-2 max-w-2xl text-sm text-zinc-500">
+                <h2 className="text-3xl font-semibold tracking-[-0.04em] text-white md:text-[2.15rem]">
+                  经历与活动
+                </h2>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-500">
                   公开分享、竞赛与黑客松项目，按时间从早到晚排列。
                 </p>
               </div>
@@ -87,29 +92,29 @@ export default function Home() {
             <ExperienceTimeline items={siteProfile.experience} />
           </FocusScrollSection>
 
-          <FocusScrollSection id="skills" panelClassName="md:p-10">
-            <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">技能</h2>
-            <div className="mt-10 grid gap-10 md:grid-cols-2 md:gap-14">
-              <div className="border-t border-white/10 pt-8 md:border-t-0 md:border-r md:border-white/10 md:pr-10 md:pt-0">
-                <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300/90">
+          <FocusScrollSection id="skills" panelClassName="!p-7 md:!p-10">
+            <h2 className="text-3xl font-semibold tracking-[-0.04em] text-white md:text-[2.15rem]">技能</h2>
+            <div className="mt-10 grid gap-6 md:grid-cols-2 md:gap-8">
+              <div className="soft-card rounded-[1.75rem] p-6 md:p-7">
+                <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-300/90">
                   已熟练掌握
                 </h3>
                 <ul className="mt-6 space-y-4 text-sm leading-7 text-zinc-300 md:text-base">
                   {siteProfile.skills.mastered.map((s) => (
-                    <li key={s} className="flex gap-3 border-b border-white/5 pb-4 last:border-0 last:pb-0">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
+                    <li key={s} className="flex gap-3 border-b border-white/6 pb-4 last:border-0 last:pb-0">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.7)]" />
                       <span>{s}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="border-t border-white/10 pt-8 md:border-t-0 md:pt-0">
-                <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-300/90">
+              <div className="soft-card rounded-[1.75rem] p-6 md:p-7">
+                <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-violet-300/90">
                   正在加强
                 </h3>
                 <ul className="mt-6 space-y-4 text-sm leading-7 text-zinc-300 md:text-base">
                   {siteProfile.skills.learning.map((s) => (
-                    <li key={s} className="flex gap-3 border-b border-white/5 pb-4 last:border-0 last:pb-0">
+                    <li key={s} className="flex gap-3 border-b border-white/6 pb-4 last:border-0 last:pb-0">
                       <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-400 shadow-[0_0_8px_rgba(167,139,250,0.5)]" />
                       <span>{s}</span>
                     </li>
@@ -120,7 +125,7 @@ export default function Home() {
           </FocusScrollSection>
 
           <FocusScrollSection id="colophon" panel={false} className="scroll-mt-24">
-            <footer className="rounded-2xl border border-white/10 bg-zinc-900/20 px-6 py-10 text-center text-sm text-zinc-500 backdrop-blur-sm">
+            <footer className="glass-panel rounded-[1.75rem] px-6 py-8 text-center text-sm text-zinc-500">
               © {new Date().getFullYear()} 杨曦哲 · yangxizhe.com
             </footer>
           </FocusScrollSection>

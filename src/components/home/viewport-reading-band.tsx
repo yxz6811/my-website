@@ -4,8 +4,8 @@
  * `pointer-events: none` 不阻挡点击。
  */
 export function ViewportReadingBand() {
-  const dim = "rgba(9, 9, 11, 0.88)";
-  const clear = "rgba(9, 9, 11, 0)";
+  const dim = "rgba(4, 7, 14, 0.82)";
+  const clear = "rgba(4, 7, 14, 0)";
 
   return (
     <div

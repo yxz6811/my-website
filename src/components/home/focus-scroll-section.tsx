@@ -31,9 +31,9 @@ export function FocusScrollSection({
 
   const inner = panel ? (
     <div
-      className={`rounded-3xl border border-white/[0.08] bg-zinc-900/30 p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] backdrop-blur-md md:p-9 ${panelClassName}`}
+      className={`glass-panel rounded-[2rem] p-6 md:p-9 ${panelClassName}`}
     >
-      {content}
+      <div className="relative">{content}</div>
     </div>
   ) : (
     content

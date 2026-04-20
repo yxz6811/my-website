@@ -127,7 +127,7 @@ export function TagStrip({ tags }: TagStripProps) {
   const reduce = useReducedMotion();
 
   return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
       {tags.map((tag, i) => (
         <motion.article
           key={tag}
@@ -139,12 +139,12 @@ export function TagStrip({ tags }: TagStripProps) {
             reduce
               ? undefined
               : {
-                  y: [0, -5, 0],
+                  y: [0, -4, 0],
                 }
           }
-          whileHover={reduce ? undefined : { y: -8, scale: 1.03 }}
+          whileHover={reduce ? undefined : { y: -6, scale: 1.02 }}
           whileTap={reduce ? undefined : { scale: 0.97 }}
-          className="group relative flex aspect-[3/4] cursor-default flex-col items-center justify-center gap-4 overflow-hidden rounded-[999px] border border-white/10 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.06),transparent_45%),linear-gradient(160deg,rgba(22,22,25,0.9),rgba(7,7,9,0.95))] p-4 shadow-[inset_0_0_28px_rgba(255,255,255,0.03)]"
+          className="group relative flex min-h-[156px] cursor-default flex-col justify-between overflow-hidden rounded-[1.75rem] border border-white/10 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_34%),linear-gradient(155deg,rgba(18,25,40,0.9),rgba(8,12,22,0.88))] p-5 shadow-[0_22px_54px_-34px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.05)]"
           style={
             reduce
               ? undefined
@@ -154,18 +154,20 @@ export function TagStrip({ tags }: TagStripProps) {
                 }
           }
         >
-          {/** 标签内容决定图标风格，保证图案和文字语义一致。 */}
-          {(() => {
-            const meta = getTagVisualMeta(tag, i);
-            return (
-          <span
-                className={`relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-sm bg-gradient-to-br ${meta.paletteClass}`}
-          >
-                <TagGlyph tag={tag} />
-          </span>
-            );
-          })()}
-          <span className="text-center text-lg tracking-wide text-zinc-100 [text-shadow:0_2px_10px_rgba(255,255,255,0.16)]">
+          <div className="flex items-start justify-between gap-4">
+            {(() => {
+              const meta = getTagVisualMeta(tag, i);
+              return (
+                <span
+                  className={`relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-[1.25rem] bg-gradient-to-br ${meta.paletteClass} shadow-[inset_0_1px_0_rgba(255,255,255,0.22)]`}
+                >
+                  <TagGlyph tag={tag} />
+                </span>
+              );
+            })()}
+            <span className="mt-2 h-2.5 w-2.5 rounded-full bg-white/20" />
+          </div>
+          <span className="max-w-[13ch] text-left text-lg font-medium leading-7 tracking-[0.01em] text-zinc-100 [text-shadow:0_2px_10px_rgba(255,255,255,0.12)]">
             {tag.includes("/") ? (
               <>
                 <span className="block">C++</span>
@@ -175,7 +177,7 @@ export function TagStrip({ tags }: TagStripProps) {
               tag
             )}
           </span>
-          <span className="pointer-events-none absolute inset-0 rounded-[999px] border border-white/0 transition-colors duration-300 group-hover:border-white/15" />
+          <span className="pointer-events-none absolute inset-0 rounded-[1.75rem] border border-white/0 transition-colors duration-300 group-hover:border-white/16" />
         </motion.article>
       ))}
     </div>

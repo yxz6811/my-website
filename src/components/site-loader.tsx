@@ -72,7 +72,7 @@ export function SiteLoader() {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[300] flex flex-col items-center justify-center gap-8 bg-zinc-950 px-6"
+      className="fixed inset-0 z-[300] flex flex-col items-center justify-center gap-8 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.16),transparent_0_24%),linear-gradient(180deg,#07111f_0%,#03060d_100%)] px-6"
       initial={{ opacity: 1 }}
       animate={{ opacity: fadeOut ? 0 : 1 }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
@@ -82,11 +82,17 @@ export function SiteLoader() {
       aria-live="polite"
       aria-busy={!fadeOut}
     >
+      <div className="relative">
+        <div className="animate-pulse-ring absolute inset-[-16%] rounded-full border border-sky-200/15" aria-hidden />
+        <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] shadow-[0_24px_64px_-28px_rgba(0,0,0,0.88),inset_0_1px_0_rgba(255,255,255,0.08)]">
+          <span className="text-2xl font-semibold tracking-[-0.06em] text-white">Y</span>
+        </div>
+      </div>
       <div className="flex flex-col items-center gap-3">
         <p className="text-lg font-medium tracking-wide text-zinc-100">
           Loading<span className="inline-block w-[2.5ch] text-left">...</span>
         </p>
-        <p className="text-xs text-zinc-500">资源加载完成后自动进入主页</p>
+        <p className="text-xs tracking-[0.18em] text-zinc-500">YANGXIZHE.COM</p>
       </div>
 
       <div className="w-full max-w-[280px] space-y-3">

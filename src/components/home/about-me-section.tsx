@@ -14,19 +14,35 @@ const VIBE_CODING_QUOTE =
  */
 export function AboutMeSection({ profile }: AboutMeSectionProps) {
   return (
-    <div className="grid gap-14 md:grid-cols-2 md:gap-16 lg:gap-24">
-      <section className="flex h-full flex-col gap-9 py-3 md:gap-10 md:py-4">
-        <h2 className="mb-2 text-4xl font-semibold tracking-tight text-white md:mb-4 md:text-5xl lg:text-6xl">关于我</h2>
-        <p className="mt-5 max-w-[28ch] text-base leading-8 text-zinc-200/95 italic tracking-[0.012em] md:mt-7 md:max-w-[30ch] md:text-lg md:leading-9">
-          {profile.intro}
-        </p>
-        <p className="max-w-[30ch] text-base leading-8 text-zinc-200/90 md:text-lg md:leading-9">{VIBE_CODING_QUOTE}</p>
+    <div className="grid gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16">
+      <section className="flex h-full flex-col gap-7 md:gap-8">
+        <div>
+          <span className="block h-px w-14 bg-gradient-to-r from-sky-300/70 to-transparent" />
+          <h2 className="mt-6 text-4xl font-semibold tracking-[-0.04em] text-white md:text-5xl lg:text-6xl">
+            关于我
+          </h2>
+        </div>
+        <div className="soft-card rounded-[1.75rem] p-6 md:p-7">
+          <p className="text-base leading-8 text-zinc-200/95 md:text-lg md:leading-9">
+            {profile.intro}
+          </p>
+        </div>
+        <blockquote className="rounded-[1.75rem] border border-sky-200/10 bg-[linear-gradient(135deg,rgba(11,21,35,0.96),rgba(10,18,30,0.84))] p-6 shadow-[0_26px_70px_-40px_rgba(8,47,73,0.75)] md:p-7">
+          <span className="block h-px w-14 bg-gradient-to-r from-sky-200/70 to-transparent" />
+          <p className="mt-5 text-base leading-8 text-zinc-100/90 md:text-lg md:leading-9">
+            {VIBE_CODING_QUOTE}
+          </p>
+        </blockquote>
       </section>
 
       <section className="flex flex-col gap-7 md:gap-8">
-        <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">我会什么</h2>
-        <div className="rounded-2xl border border-white/10 bg-zinc-900/35 p-5 md:p-6">
-          <p className="mb-4 text-xs font-medium uppercase tracking-wider text-zinc-500">方向标签</p>
+        <div>
+          <span className="block h-px w-14 bg-gradient-to-r from-amber-200/70 to-transparent" />
+          <h2 className="mt-6 text-4xl font-semibold tracking-[-0.04em] text-white md:text-5xl lg:text-6xl">
+            我会什么
+          </h2>
+        </div>
+        <div className="soft-card rounded-[2rem] p-5 md:p-6">
           <TagStrip tags={profile.tags} />
         </div>
       </section>

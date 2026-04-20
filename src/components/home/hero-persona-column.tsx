@@ -21,13 +21,21 @@ export function HeroPersonaColumn({
   portraitAlt,
 }: HeroPersonaColumnProps) {
   return (
-    <div className="flex flex-col items-center gap-6 md:gap-8">
-      <OrbitalPortrait src={portraitSrc} alt={portraitAlt} />
-      <div className="flex w-full max-w-xl flex-col items-center gap-3 text-center md:max-w-2xl md:gap-4">
-        <p className="text-4xl font-semibold leading-[1.08] tracking-tight text-cyan-100 drop-shadow-[0_0_26px_rgba(207,250,254,0.38)] md:text-6xl md:leading-[1.06] md:drop-shadow-[0_0_34px_rgba(207,250,254,0.35)]">
-          {personaTitle}
-        </p>
-        <p className="text-2xl font-semibold tracking-tight text-white md:text-3xl">{personaSubtitle}</p>
+    <div className="relative flex flex-col items-center gap-6 md:gap-8">
+      <div className="glass-panel w-full max-w-[30rem] rounded-[2rem] px-6 py-8 md:px-8 md:py-10">
+        <div className="relative">
+          <div className="animate-float-soft absolute inset-x-10 top-6 h-24 rounded-full bg-sky-300/10 blur-[42px]" aria-hidden />
+          <OrbitalPortrait src={portraitSrc} alt={portraitAlt} />
+        </div>
+        <div className="mt-7 flex flex-col items-center gap-4 text-center">
+          <p className="w-full whitespace-nowrap text-center text-[clamp(1.85rem,4vw,3.5rem)] font-semibold leading-none tracking-[-0.055em] text-cyan-50 drop-shadow-[0_0_26px_rgba(186,230,253,0.16)]">
+            {personaTitle}
+          </p>
+          <p className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-sm font-medium text-zinc-200 md:text-base">
+            <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_14px_rgba(167,243,208,0.9)]" />
+            {personaSubtitle}
+          </p>
+        </div>
       </div>
     </div>
   );
