@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 type HeroLeadProps = {
@@ -15,11 +16,40 @@ type HeroLeadProps = {
   tags: string[];
 };
 
+const INTERACTIVE_QUOTES = [
+  "我们被称为 AI 原住民，是因为 AI 对我们来说，就像水和空气一样自然。",
+  "代码有报错的时候，人生也有；但只要还在运行，就总能跑通。",
+  "人工智能已经读懂了全世界的知识，而你要做的就是站在它的肩膀上，去看更远的风景。",
+  "现在我们写的每一行代码，在将来都有可能改变世界。",
+  "在这个时代，最强大的算力不是GPU，而是‘你+AI’的无限可能。",
+  "让人工智能让你的超级副驾驶，人生的赛道同样在你的掌握之中，但一次，我们可以开得更快、更远。",
+] as const;
+
+/**
+ * 从候选语句里随机取一条，并尽量避开当前这条。
+ */
+function pickNextQuote(quotes: readonly string[], current: string): string {
+  if (quotes.length <= 1) {
+    return current;
+  }
+
+  let next = current;
+  while (next === current) {
+    next = quotes[Math.floor(Math.random() * quotes.length)];
+  }
+  return next;
+}
+
 /**
  * 首屏标题与主行动按钮（滚动至外链区）。
  */
 export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline, tags }: HeroLeadProps) {
   const reduce = useReducedMotion();
+  const quotePool = useMemo(
+    () => (INTERACTIVE_QUOTES.includes(eyebrow) ? INTERACTIVE_QUOTES : [eyebrow, ...INTERACTIVE_QUOTES]),
+    [eyebrow],
+  );
+  const [currentQuote, setCurrentQuote] = useState(quotePool[0]);
 
   return (
     <div className="flex flex-col items-start">
@@ -29,11 +59,20 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline, tags 
         animate={reduce ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="flex items-start gap-3">
-          <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-sky-300 shadow-[0_0_18px_rgba(125,211,252,0.9)]" />
-          <p className="text-sm font-medium leading-7 tracking-[0.01em] text-zinc-300 md:text-[15px]">
-            {eyebrow}
-          </p>
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-start gap-3">
+            <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-sky-300 shadow-[0_0_18px_rgba(125,211,252,0.9)]" />
+            <p className="text-sm font-medium leading-7 tracking-[0.01em] text-zinc-300 md:text-[15px]">
+              {currentQuote}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setCurrentQuote((prev) => pickNextQuote(quotePool, prev))}
+            className="interactive-ring interactive-sheen shrink-0 rounded-full border border-white/15 bg-white/[0.05] px-3 py-1.5 text-xs font-semibold text-zinc-100 transition hover:border-sky-200/40 hover:bg-white/[0.1] hover:text-white"
+          >
+            换一句
+          </button>
         </div>
       </motion.div>
       <motion.h1
