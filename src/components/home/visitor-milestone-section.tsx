@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
-const COUNTER_NAMESPACE = "yangxizhe.com";
-const COUNTER_KEY = "site-visits";
+const COUNTER_NAMESPACE = "yxz-portfolio-official";
+const COUNTER_KEY = "page-visits-v1";
 const SESSION_KEY = "yxz-visit-counted";
 const HIT_API = `https://api.countapi.xyz/hit/${COUNTER_NAMESPACE}/${COUNTER_KEY}`;
 const GET_API = `https://api.countapi.xyz/get/${COUNTER_NAMESPACE}/${COUNTER_KEY}`;
@@ -116,16 +116,16 @@ export function VisitorMilestoneSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="text-xs uppercase tracking-[0.22em] text-zinc-400">累计访问</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-zinc-400">页面访问次数</p>
           <p className="mt-3 text-4xl font-semibold tracking-[-0.03em] text-white md:text-5xl">
             {totalCount === null ? "--" : formatCount(totalCount)}
           </p>
           <p className="mt-3 text-sm text-zinc-300">
             {visitSequence === null ? (
-              <>当前显示为实时累计访问量（按页面访问计数）。</>
+              <>当前显示为实时页面访问次数（含爬虫访问）。</>
             ) : (
               <>
-                你是这个页面的第{" "}
+                你是这个页面记录到的第{" "}
                 <span className="font-semibold text-sky-200">{formatCount(visitSequence)}</span> 次访问。
               </>
             )}
