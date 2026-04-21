@@ -3,18 +3,16 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
-const VISITOR_BASE = 128_000;
-const VISITOR_DAY_STEP = 173;
+const COUNTER_NAMESPACE = "yangxizhe.com";
+const COUNTER_KEY = "site-visits";
+const SESSION_KEY = "yxz-visit-counted";
+const HIT_API = `https://api.countapi.xyz/hit/${COUNTER_NAMESPACE}/${COUNTER_KEY}`;
+const GET_API = `https://api.countapi.xyz/get/${COUNTER_NAMESPACE}/${COUNTER_KEY}`;
 
 /**
- * 根据当前时间估算一个“网站到访总人数”基线值。
+ * 计数 API 返回体。
  */
-function estimateBaseVisitors(now: Date): number {
-  const start = Date.UTC(2026, 0, 1);
-  const dayIndex = Math.max(0, Math.floor((now.getTime() - start) / 86_400_000));
-  const minuteOfDay = now.getHours() * 60 + now.getMinutes();
-  return VISITOR_BASE + dayIndex * VISITOR_DAY_STEP + Math.floor(minuteOfDay / 3);
-}
+type CounterResponse = { value: number };
 
 /**
  * 格式化大数字，提升展示可读性。
@@ -29,50 +27,68 @@ function formatCount(value: number): string {
 export function VisitorMilestoneSection() {
   const reduce = useReducedMotion();
   const [totalCount, setTotalCount] = useState<number | null>(null);
-  const [todayRank, setTodayRank] = useState<number | null>(null);
+  const [visitSequence, setVisitSequence] = useState<number | null>(null);
+  const [isEstimatedFallback, setIsEstimatedFallback] = useState(false);
 
   useEffect(() => {
-    const now = new Date();
-    const base = estimateBaseVisitors(now);
-    const minuteOfDay = now.getHours() * 60 + now.getMinutes();
-    const estimatedTodayRank = 16 + Math.floor(minuteOfDay / 10);
+    /**
+     * 更新展示值：保留数字滚动观感，但数据源为真实计数。
+     */
+    const animateTo = (target: number) => {
+      if (reduce) {
+        setTotalCount(target);
+        return;
+      }
 
-    const boostKey = "yxz-visitor-boost";
-    const sessionKey = "yxz-visitor-session-hit";
-    const existingBoost = window.localStorage.getItem(boostKey);
-    const boost = existingBoost ? Number(existingBoost) : 20 + Math.floor(Math.random() * 66);
+      const start = Math.max(target - 72, 0);
+      const duration = 950;
+      const beginAt = performance.now();
 
-    if (!existingBoost) {
-      window.localStorage.setItem(boostKey, String(boost));
-    }
+      const animate = (ts: number) => {
+        const progress = Math.min(1, (ts - beginAt) / duration);
+        const eased = 1 - (1 - progress) ** 3;
+        setTotalCount(Math.floor(start + (target - start) * eased));
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
 
-    const sessionBonus = window.sessionStorage.getItem(sessionKey) ? 0 : 1;
-    if (!window.sessionStorage.getItem(sessionKey)) {
-      window.sessionStorage.setItem(sessionKey, "1");
-    }
+      requestAnimationFrame(animate);
+    };
 
-    const target = base + boost + sessionBonus;
-    setTodayRank(estimatedTodayRank);
+    /**
+     * 拉取真实访问计数：同一会话首次进入递增，后续仅查询。
+     */
+    const fetchRealCount = async () => {
+      try {
+        const shouldIncrement = !window.sessionStorage.getItem(SESSION_KEY);
+        const endpoint = shouldIncrement ? HIT_API : GET_API;
+        const res = await fetch(endpoint, { cache: "no-store" });
+        if (!res.ok) {
+          throw new Error(`Counter API failed: ${res.status}`);
+        }
 
-    if (reduce) {
-      setTotalCount(target);
-      return;
-    }
+        const data = (await res.json()) as CounterResponse;
+        if (typeof data.value !== "number" || Number.isNaN(data.value)) {
+          throw new Error("Invalid counter response");
+        }
 
-    const start = Math.max(target - 72, 0);
-    const duration = 950;
-    const beginAt = performance.now();
+        if (shouldIncrement) {
+          window.sessionStorage.setItem(SESSION_KEY, "1");
+          setVisitSequence(data.value);
+        }
 
-    const animate = (ts: number) => {
-      const progress = Math.min(1, (ts - beginAt) / duration);
-      const eased = 1 - (1 - progress) ** 3;
-      setTotalCount(Math.floor(start + (target - start) * eased));
-      if (progress < 1) {
-        requestAnimationFrame(animate);
+        animateTo(data.value);
+        setIsEstimatedFallback(false);
+      } catch {
+        const fallback = Math.max(1, Math.floor(Date.now() / 1000000));
+        animateTo(fallback);
+        setVisitSequence(null);
+        setIsEstimatedFallback(true);
       }
     };
 
-    requestAnimationFrame(animate);
+    fetchRealCount();
   }, [reduce]);
 
   return (
@@ -100,15 +116,21 @@ export function VisitorMilestoneSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="text-xs uppercase tracking-[0.22em] text-zinc-400">估算总访客</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-zinc-400">累计访问</p>
           <p className="mt-3 text-4xl font-semibold tracking-[-0.03em] text-white md:text-5xl">
             {totalCount === null ? "--" : formatCount(totalCount)}
           </p>
           <p className="mt-3 text-sm text-zinc-300">
-            你大约是今天第{" "}
-            <span className="font-semibold text-sky-200">{todayRank === null ? "--" : formatCount(todayRank)}</span>{" "}
-            位访客。
+            {visitSequence === null ? (
+              <>当前显示为实时累计访问量（按页面访问计数）。</>
+            ) : (
+              <>
+                你是这个页面的第{" "}
+                <span className="font-semibold text-sky-200">{formatCount(visitSequence)}</span> 次访问。
+              </>
+            )}
           </p>
+          {isEstimatedFallback ? <p className="mt-2 text-xs text-zinc-500">计数服务暂不可用，已切换备用显示。</p> : null}
         </motion.div>
       </div>
     </section>
