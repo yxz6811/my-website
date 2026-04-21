@@ -6,9 +6,10 @@ import { motion, useReducedMotion } from "framer-motion";
 const COUNTER_NAMESPACE = "yxz-portfolio-official";
 const COUNTER_KEY = "page-visits-v1";
 const SESSION_KEY = "yxz-visit-counted";
-const HIT_API = `https://api.countapi.xyz/hit/${COUNTER_NAMESPACE}/${COUNTER_KEY}`;
-const GET_API = `https://api.countapi.xyz/get/${COUNTER_NAMESPACE}/${COUNTER_KEY}`;
-const DISPLAY_START = 100;
+// countapi.xyz was permanently shut down in 2023; abacus.jasoncameron.dev is a
+// drop-in replacement that returns the same `{ value: number }` response shape.
+const HIT_API = `https://abacus.jasoncameron.dev/hit/${COUNTER_NAMESPACE}/${COUNTER_KEY}`;
+const GET_API = `https://abacus.jasoncameron.dev/get/${COUNTER_NAMESPACE}/${COUNTER_KEY}`;
 
 /**
  * 计数 API 返回体。
@@ -40,7 +41,10 @@ export function VisitorMilestoneSection() {
         return;
       }
 
-      const start = Math.max(target - 72, 0);
+      // Keep the "roll up" feel for larger targets, but avoid jumping from 0
+      // to a tiny number (1–5) which looked abrupt on a fresh counter.
+      const runway = target <= 20 ? Math.min(target, 5) : 72;
+      const start = Math.max(target - runway, 0);
       const duration = 950;
       const beginAt = performance.now();
 
@@ -75,10 +79,13 @@ export function VisitorMilestoneSection() {
 
         if (shouldIncrement) {
           window.sessionStorage.setItem(SESSION_KEY, "1");
-          setVisitSequence(DISPLAY_START + Math.max(0, data.value - 1));
         }
 
-        animateTo(DISPLAY_START + Math.max(0, data.value - 1));
+        // Always surface the current sequence — previously this only ran on
+        // the HIT branch, so a same-session refresh left the copy stuck on
+        // "实时计数加载中" forever even after totalCount animated in.
+        setVisitSequence(data.value);
+        animateTo(data.value);
       } catch {
         setTotalCount(null);
         setVisitSequence(null);
