@@ -29,7 +29,6 @@ export function VisitorMilestoneSection() {
   const reduce = useReducedMotion();
   const [totalCount, setTotalCount] = useState<number | null>(null);
   const [visitSequence, setVisitSequence] = useState<number | null>(null);
-  const [isEstimatedFallback, setIsEstimatedFallback] = useState(false);
 
   useEffect(() => {
     /**
@@ -80,12 +79,10 @@ export function VisitorMilestoneSection() {
         }
 
         animateTo(DISPLAY_START + Math.max(0, data.value - 1));
-        setIsEstimatedFallback(false);
       } catch {
         const fallback = DISPLAY_START;
         animateTo(fallback);
         setVisitSequence(null);
-        setIsEstimatedFallback(true);
       }
     };
 
@@ -131,7 +128,6 @@ export function VisitorMilestoneSection() {
               </>
             )}
           </p>
-          {isEstimatedFallback ? <p className="mt-2 text-xs text-zinc-500">计数服务暂不可用，已切换备用显示。</p> : null}
         </motion.div>
       </div>
     </section>
