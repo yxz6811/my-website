@@ -80,8 +80,7 @@ export function VisitorMilestoneSection() {
 
         animateTo(DISPLAY_START + Math.max(0, data.value - 1));
       } catch {
-        const fallback = DISPLAY_START;
-        animateTo(fallback);
+        setTotalCount(null);
         setVisitSequence(null);
       }
     };
@@ -120,7 +119,7 @@ export function VisitorMilestoneSection() {
           </p>
           <p className="mt-3 text-sm leading-7 text-zinc-300">
             {visitSequence === null ? (
-              <>当前显示为实时页面访问次数。</>
+              <>实时计数加载中。</>
             ) : (
               <>
                 你是这个页面记录到的第{" "}
