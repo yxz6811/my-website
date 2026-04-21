@@ -9,8 +9,10 @@ import { ExperienceTimeline } from "@/components/home/experience-timeline";
 import { LinkBento } from "@/components/home/link-bento";
 import { ScrollReveal } from "@/components/home/scroll-reveal";
 import { SiteHeader } from "@/components/home/site-header";
+import { VisitorMilestoneSection } from "@/components/home/visitor-milestone-section";
 
 const NAV_ITEMS = [
+  { href: "#visitor", label: "到访" },
   { href: "#about-me", label: "关于" },
   { href: "#my-accounts", label: "账号" },
   { href: "#links", label: "链接" },
@@ -48,6 +50,10 @@ export default function Home() {
                 portraitAlt="杨曦哲在活动上演讲与分享"
               />
             </div>
+          </FocusScrollSection>
+
+          <FocusScrollSection id="visitor" panelClassName="!p-0">
+            <VisitorMilestoneSection />
           </FocusScrollSection>
 
           <FocusScrollSection id="about-me" panelClassName="!px-7 !py-8 md:!px-12 md:!py-12 lg:!px-14 lg:!py-14">
