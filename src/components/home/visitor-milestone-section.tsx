@@ -8,6 +8,7 @@ const COUNTER_KEY = "page-visits-v1";
 const SESSION_KEY = "yxz-visit-counted";
 const HIT_API = `https://api.countapi.xyz/hit/${COUNTER_NAMESPACE}/${COUNTER_KEY}`;
 const GET_API = `https://api.countapi.xyz/get/${COUNTER_NAMESPACE}/${COUNTER_KEY}`;
+const DISPLAY_START = 100;
 
 /**
  * 计数 API 返回体。
@@ -75,13 +76,13 @@ export function VisitorMilestoneSection() {
 
         if (shouldIncrement) {
           window.sessionStorage.setItem(SESSION_KEY, "1");
-          setVisitSequence(data.value);
+          setVisitSequence(DISPLAY_START + Math.max(0, data.value - 1));
         }
 
-        animateTo(data.value);
+        animateTo(DISPLAY_START + Math.max(0, data.value - 1));
         setIsEstimatedFallback(false);
       } catch {
-        const fallback = Math.max(1, Math.floor(Date.now() / 1000000));
+        const fallback = DISPLAY_START;
         animateTo(fallback);
         setVisitSequence(null);
         setIsEstimatedFallback(true);
