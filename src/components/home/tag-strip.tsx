@@ -127,7 +127,7 @@ export function TagStrip({ tags }: TagStripProps) {
   const reduce = useReducedMotion();
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
       {tags.map((tag, i) => (
         <motion.article
           key={tag}
