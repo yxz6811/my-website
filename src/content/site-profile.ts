@@ -91,7 +91,7 @@ export const siteProfile: SiteProfile = {
     "C++ / 信奥",
     "后端开发",
     "路演与表达",
-    "黑客松",
+    "前端UI设计",
     "Vibe Coding",
     "自媒体",
   ],
