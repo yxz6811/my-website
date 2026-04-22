@@ -30,10 +30,10 @@ export default function Home() {
       <SiteHeader items={NAV_ITEMS} />
 
       <main className="relative z-10">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-14 px-5 pb-24 pt-8 sm:px-8 sm:pt-10 md:gap-[4.5rem] lg:gap-20">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 pb-20 pt-6 sm:px-8 sm:pt-10 md:gap-[4.5rem] lg:gap-20">
           <FocusScrollSection
             id="top"
-            panelClassName="!px-5 !py-14 sm:!px-8 md:!px-10 md:!py-[4.5rem] lg:!py-20"
+            panelClassName="!px-4 !py-10 sm:!px-8 md:!px-10 md:!py-[4.5rem] lg:!py-20"
           >
             <div className="grid gap-12 md:grid-cols-2 md:items-center md:gap-14 lg:gap-16">
               <HeroLead
@@ -56,17 +56,17 @@ export default function Home() {
             <VisitorMilestoneSection />
           </FocusScrollSection>
 
-          <FocusScrollSection id="about-me" panelClassName="!px-7 !py-8 md:!px-12 md:!py-12 lg:!px-14 lg:!py-14">
+          <FocusScrollSection id="about-me" panelClassName="!px-4 !py-6 md:!px-12 md:!py-12 lg:!px-14 lg:!py-14">
             <AboutMeSection profile={siteProfile} />
           </FocusScrollSection>
 
-          <FocusScrollSection id="my-accounts" panelClassName="!p-7 md:!p-10 lg:!p-12">
+          <FocusScrollSection id="my-accounts" panelClassName="!p-4 md:!p-10 lg:!p-12">
             <MyAccountsSection profile={siteProfile} />
           </FocusScrollSection>
 
           <FocusScrollSection
             id="links"
-            panelClassName="space-y-10 !p-7 md:space-y-12 md:!p-10 lg:!p-12"
+            panelClassName="space-y-8 !p-4 md:space-y-12 md:!p-10 lg:!p-12"
           >
             <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
               <div>
@@ -81,7 +81,7 @@ export default function Home() {
             <LinkBento links={siteProfile.primaryLinks} />
           </FocusScrollSection>
 
-          <FocusScrollSection id="timeline" panelClassName="!p-7 md:!p-10" scrollReveal={false}>
+          <FocusScrollSection id="timeline" panelClassName="!p-4 md:!p-10" scrollReveal={false}>
             <ScrollReveal>
               <div>
                 <h2 className="text-3xl font-semibold tracking-[-0.04em] text-white md:text-[2.15rem]">
@@ -95,7 +95,7 @@ export default function Home() {
             <ExperienceTimeline items={siteProfile.experience} />
           </FocusScrollSection>
 
-          <FocusScrollSection id="skills" panelClassName="!p-7 md:!p-10">
+          <FocusScrollSection id="skills" panelClassName="!p-4 md:!p-10">
             <h2 className="text-3xl font-semibold tracking-[-0.04em] text-white md:text-[2.15rem]">技能</h2>
             <div className="mt-10 grid gap-6 md:grid-cols-2 md:gap-8">
               <div className="soft-card rounded-[1.75rem] p-6 md:p-7">

@@ -134,7 +134,7 @@ function InteractiveLinkCard({
         onPointerMove={handlePointerMove}
         onPointerLeave={resetPointer}
         style={reduce ? undefined : { rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className={`interactive-sheen interactive-ring group relative col-span-1 flex min-h-[240px] flex-col justify-between overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(145deg,rgba(10,20,26,0.98),rgba(8,16,24,0.9))] p-7 text-left shadow-[0_30px_70px_-42px_rgba(0,0,0,0.92),inset_0_1px_0_rgba(255,255,255,0.06)] md:col-span-2 md:row-span-2 md:p-8 ${variantRing[link.variant]}`}
+        className={`interactive-sheen interactive-ring group relative col-span-1 flex min-h-[206px] flex-col justify-between overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(145deg,rgba(10,20,26,0.98),rgba(8,16,24,0.9))] p-5 text-left shadow-[0_30px_70px_-42px_rgba(0,0,0,0.92),inset_0_1px_0_rgba(255,255,255,0.06)] md:col-span-2 md:row-span-2 md:min-h-[240px] md:p-8 ${variantRing[link.variant]}`}
         whileHover={reduce ? undefined : { y: -6, transition: { duration: 0.18 } }}
         whileTap={reduce ? undefined : { scale: 0.99 }}
       >
@@ -160,7 +160,7 @@ function InteractiveLinkCard({
             </span>
             <div>
               <p className="text-[11px] font-medium uppercase tracking-[0.26em] text-emerald-100/80">主力项目</p>
-              <p className="mt-1 text-xl font-semibold">{link.label}</p>
+              <p className="mt-1 text-lg font-semibold md:text-xl">{link.label}</p>
             </div>
           </div>
           <span className="rounded-full bg-white/10 px-2.5 py-1 text-xs text-zinc-200 ring-1 ring-white/15 transition group-hover:bg-white/20">
@@ -183,7 +183,7 @@ function InteractiveLinkCard({
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPointer}
       style={reduce ? undefined : { rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className={`interactive-sheen interactive-ring group relative flex flex-col justify-between overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(155deg,rgba(16,24,39,0.88),rgba(8,12,22,0.88))] p-6 text-left shadow-[0_24px_58px_-38px_rgba(0,0,0,0.88),inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-sm transition-colors hover:bg-[linear-gradient(155deg,rgba(18,27,44,0.94),rgba(8,13,24,0.92))] md:min-h-[160px] md:p-7 ${variantRing[link.variant]}`}
+        className={`interactive-sheen interactive-ring group relative flex flex-col justify-between overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(155deg,rgba(16,24,39,0.88),rgba(8,12,22,0.88))] p-4 text-left shadow-[0_24px_58px_-38px_rgba(0,0,0,0.88),inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-sm transition-colors hover:bg-[linear-gradient(155deg,rgba(18,27,44,0.94),rgba(8,13,24,0.92))] md:min-h-[160px] md:p-7 ${variantRing[link.variant]}`}
       whileHover={reduce ? undefined : { y: -4, transition: { duration: 0.18 } }}
       whileTap={reduce ? undefined : { scale: 0.99 }}
       transition={{ delay: index * 0.02 }}
@@ -230,7 +230,7 @@ export function LinkBento({ links }: LinkBentoProps) {
   const rest = links.filter((l) => l.variant !== "product");
 
   return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-4 md:grid-rows-2 md:gap-6">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:grid-rows-2 md:gap-6">
       {product && (
         <InteractiveLinkCard link={product} featured />
       )}

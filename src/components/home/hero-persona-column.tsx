@@ -21,14 +21,14 @@ export function HeroPersonaColumn({
   portraitAlt,
 }: HeroPersonaColumnProps) {
   return (
-    <div className="relative flex flex-col items-center gap-6 md:gap-8">
-      <div className="glass-panel w-full max-w-[30rem] rounded-[2rem] px-6 py-8 md:px-8 md:py-10">
+    <div className="relative flex flex-col items-center gap-5 md:gap-8">
+      <div className="glass-panel w-full max-w-[30rem] rounded-[2rem] px-4 py-6 md:px-8 md:py-10">
         <div className="relative">
           <div className="animate-float-soft absolute inset-x-10 top-6 h-24 rounded-full bg-sky-300/10 blur-[42px]" aria-hidden />
           <OrbitalPortrait src={portraitSrc} alt={portraitAlt} />
         </div>
-        <div className="mt-7 flex flex-col items-center gap-4 text-center">
-          <p className="w-full whitespace-nowrap text-center text-[clamp(1.85rem,4vw,3.5rem)] font-semibold leading-none tracking-[-0.055em] text-cyan-50 drop-shadow-[0_0_26px_rgba(186,230,253,0.16)]">
+        <div className="mt-6 flex flex-col items-center gap-3 text-center">
+          <p className="w-full text-center text-[clamp(1.45rem,8vw,3.5rem)] font-semibold leading-none tracking-[-0.05em] text-cyan-50 drop-shadow-[0_0_26px_rgba(186,230,253,0.16)]">
             {personaTitle}
           </p>
           <p className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-sm font-medium text-zinc-200 md:text-base">

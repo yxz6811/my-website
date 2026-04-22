@@ -96,14 +96,14 @@ export function VisitorMilestoneSection() {
   }, [reduce]);
 
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(145deg,rgba(18,31,49,0.9),rgba(8,15,26,0.85))] p-7 md:p-10">
+    <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(145deg,rgba(18,31,49,0.9),rgba(8,15,26,0.85))] p-4 md:p-10">
       <div className="pointer-events-none absolute -right-14 -top-16 h-52 w-52 rounded-full bg-cyan-300/18 blur-3xl" aria-hidden />
       <div className="pointer-events-none absolute -bottom-16 -left-12 h-48 w-48 rounded-full bg-violet-300/15 blur-3xl" aria-hidden />
 
-      <div className="relative grid gap-7 md:grid-cols-[1.08fr_0.92fr] md:items-center md:gap-8">
+      <div className="relative grid gap-5 md:grid-cols-[1.08fr_0.92fr] md:items-center md:gap-8">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.26em] text-sky-200/80">Visitor Milestone</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-white md:text-[2.1rem]">
+          <h2 className="mt-3 text-[1.8rem] font-semibold tracking-[-0.04em] text-white md:text-[2.1rem]">
             你正在点亮
             <span className="text-hero-accent ml-2">yangxizhe.com</span>
             的到访里程碑
@@ -114,7 +114,7 @@ export function VisitorMilestoneSection() {
         </div>
 
         <motion.div
-          className="rounded-[1.5rem] border border-white/12 bg-white/[0.03] p-6 md:p-7"
+          className="rounded-[1.5rem] border border-white/12 bg-white/[0.03] p-4 md:p-7"
           initial={reduce ? false : { opacity: 0, y: 14 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true }}

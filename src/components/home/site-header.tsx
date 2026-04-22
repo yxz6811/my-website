@@ -45,7 +45,7 @@ export function SiteHeader({ items }: SiteHeaderProps) {
   }, [items]);
 
   return (
-    <header className="sticky top-0 z-30 px-4 pt-4 sm:px-6">
+    <header className="sticky top-0 z-30 px-3 pt-3 sm:px-6">
       <div
         className={`mx-auto max-w-6xl rounded-[1.75rem] border transition-[background-color,box-shadow,transform,backdrop-filter] duration-300 ${
           scrolled
@@ -53,7 +53,7 @@ export function SiteHeader({ items }: SiteHeaderProps) {
             : "border-white/8 bg-slate-950/46 shadow-[0_10px_34px_-26px_rgba(0,0,0,0.78)] backdrop-blur-xl"
         }`}
       >
-        <div className="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+        <div className="flex flex-col gap-3 px-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
           <a href="#top" className="group flex items-center gap-3">
             <span className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/12 bg-white/[0.05] text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
               Y
@@ -65,7 +65,10 @@ export function SiteHeader({ items }: SiteHeaderProps) {
               </span>
             </span>
           </a>
-          <nav className="flex flex-wrap gap-1.5 sm:justify-end" aria-label="页面内导航">
+          <nav
+            className="-mx-1 flex snap-x snap-mandatory gap-1.5 overflow-x-auto px-1 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 sm:justify-end"
+            aria-label="页面内导航"
+          >
           {items.map((item) => {
             const id = item.href.replace("#", "");
             const isActive = active === id;
@@ -73,7 +76,7 @@ export function SiteHeader({ items }: SiteHeaderProps) {
               <a
                 key={item.href}
                 href={item.href}
-                className={`rounded-full px-3.5 py-2 text-xs font-medium transition sm:text-sm ${
+                className={`shrink-0 snap-start rounded-full px-3 py-1.5 text-xs font-medium transition sm:px-3.5 sm:py-2 sm:text-sm ${
                   isActive
                     ? "bg-gradient-to-r from-white/18 to-sky-300/10 text-white ring-1 ring-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
                     : "text-zinc-400 hover:bg-white/8 hover:text-zinc-100"

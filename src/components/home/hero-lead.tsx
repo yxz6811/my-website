@@ -64,15 +64,15 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline, tags 
   return (
     <div className="flex flex-col items-start">
       <motion.div
-        className="soft-card relative max-w-xl rounded-[1.75rem] px-5 py-4 md:px-6"
+        className="soft-card relative max-w-xl rounded-[1.75rem] px-4 py-3.5 md:px-6"
         initial={reduce ? false : { opacity: 0, y: 12 }}
         animate={reduce ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
           <div className="flex items-start gap-3">
             <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-sky-300 shadow-[0_0_18px_rgba(125,211,252,0.9)]" />
-            <div className="min-h-[5.25rem] md:min-h-[4.2rem]">
+            <div className="min-h-[4.2rem] md:min-h-[4.2rem]">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.p
                   key={currentQuote}
@@ -90,7 +90,7 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline, tags 
           <motion.button
             type="button"
             onClick={() => setCurrentQuote((prev) => pickNextQuote(quotePool, prev))}
-            className="interactive-ring interactive-sheen shrink-0 rounded-full border border-white/15 bg-white/[0.05] px-3 py-1.5 text-xs font-semibold text-zinc-100 transition hover:border-sky-200/40 hover:bg-white/[0.1] hover:text-white"
+            className="interactive-ring interactive-sheen shrink-0 rounded-full border border-white/15 bg-white/[0.05] px-3 py-1.5 text-xs font-semibold text-zinc-100 transition hover:border-sky-200/40 hover:bg-white/[0.1] hover:text-white sm:self-auto"
             whileTap={reduce ? undefined : { scale: 0.95 }}
             whileHover={reduce ? undefined : { scale: 1.03 }}
           >
@@ -99,7 +99,7 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline, tags 
         </div>
       </motion.div>
       <motion.h1
-        className="mt-8 max-w-[10ch] text-5xl font-semibold leading-[0.98] tracking-[-0.04em] text-white md:mt-10 md:text-7xl lg:text-[5.4rem]"
+        className="mt-7 max-w-[10ch] text-4xl font-semibold leading-[0.98] tracking-[-0.04em] text-white md:mt-10 md:text-7xl lg:text-[5.4rem]"
         initial={reduce ? false : { opacity: 0, y: 20 }}
         animate={reduce ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.55, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
@@ -110,14 +110,14 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline, tags 
         </span>
       </motion.h1>
       <motion.div
-        className="mt-8 flex flex-wrap gap-3"
+        className="mt-7 flex w-full flex-col gap-2.5 sm:mt-8 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-3"
         initial={reduce ? false : { opacity: 0 }}
         animate={reduce ? undefined : { opacity: 1 }}
         transition={{ delay: 0.35, duration: 0.45 }}
       >
         <motion.a
           href="#links"
-          className="interactive-ring interactive-sheen group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-950 shadow-[0_18px_40px_-20px_rgba(186,230,253,0.55)] transition hover:bg-sky-50"
+          className="interactive-ring interactive-sheen group inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-950 shadow-[0_18px_40px_-20px_rgba(186,230,253,0.55)] transition hover:bg-sky-50 sm:w-auto"
           whileHover={reduce ? undefined : { scale: 1.03 }}
           whileTap={reduce ? undefined : { scale: 0.98 }}
         >
@@ -132,7 +132,7 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline, tags 
         </motion.a>
         <motion.a
           href="#timeline"
-          className="interactive-ring interactive-sheen group inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-zinc-100 backdrop-blur-sm transition hover:border-white/30 hover:bg-white/[0.08]"
+          className="interactive-ring interactive-sheen group inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-zinc-100 backdrop-blur-sm transition hover:border-white/30 hover:bg-white/[0.08] sm:w-auto"
           whileHover={reduce ? undefined : { scale: 1.03 }}
           whileTap={reduce ? undefined : { scale: 0.98 }}
         >
@@ -147,7 +147,7 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline, tags 
         </motion.a>
       </motion.div>
       <motion.p
-        className="mt-8 max-w-lg border-l border-white/10 pl-4 text-sm leading-7 text-zinc-400 md:mt-10 md:text-base lg:mt-12"
+        className="mt-7 max-w-lg border-l border-white/10 pl-4 text-sm leading-7 text-zinc-400 md:mt-10 md:text-base lg:mt-12"
         initial={reduce ? false : { opacity: 0 }}
         animate={reduce ? undefined : { opacity: 1 }}
         transition={{ delay: 0.45, duration: 0.5 }}
@@ -155,7 +155,7 @@ export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline, tags 
         {tagline}
       </motion.p>
       <motion.ul
-        className="mt-8 flex flex-wrap gap-2.5 md:mt-10"
+        className="mt-7 flex flex-wrap gap-2 md:mt-10"
         initial={reduce ? false : { opacity: 0, y: 8 }}
         animate={reduce ? undefined : { opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.45 }}
