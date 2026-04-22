@@ -167,12 +167,19 @@ export function TagStrip({ tags }: TagStripProps) {
             })()}
             <span className="mt-2 h-2.5 w-2.5 rounded-full bg-white/20" />
           </div>
-          <span className="max-w-[13ch] text-left text-lg font-medium leading-7 tracking-[0.01em] text-zinc-100 [text-shadow:0_2px_10px_rgba(255,255,255,0.12)]">
+          <span className="text-left text-base font-medium leading-6 tracking-[0.01em] text-zinc-100 [text-shadow:0_2px_10px_rgba(255,255,255,0.12)]">
             {tag.includes("/") ? (
               <>
                 <span className="block">C++</span>
                 <span className="block">信奥</span>
               </>
+            ) : tag.toLowerCase().includes("vibe coding") ? (
+              <span className="block text-center">
+                <span className="block">Vibe</span>
+                <span className="mt-0.5 block">Coding</span>
+              </span>
+            ) : tag === "路演与表达" || tag === "前端UI设计" ? (
+              <span className="block whitespace-nowrap">{tag}</span>
             ) : (
               tag
             )}
