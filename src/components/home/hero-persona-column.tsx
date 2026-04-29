@@ -28,7 +28,7 @@ export function HeroPersonaColumn({
           <OrbitalPortrait src={portraitSrc} alt={portraitAlt} />
         </div>
         <div className="mt-6 flex flex-col items-center gap-3 text-center">
-          <p className="w-full text-center text-[clamp(1.45rem,8vw,3.5rem)] font-semibold leading-none tracking-[-0.05em] text-cyan-50 drop-shadow-[0_0_26px_rgba(186,230,253,0.16)]">
+          <p className="w-full text-center text-[clamp(1.35rem,7.2vw,3.2rem)] font-semibold leading-none tracking-[-0.05em] text-cyan-50 drop-shadow-[0_0_26px_rgba(186,230,253,0.16)]">
             {personaTitle}
           </p>
           <p className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-sm font-medium text-zinc-200 md:text-base">
