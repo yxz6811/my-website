@@ -7,12 +7,14 @@ import { HeroPersonaColumn } from "@/components/home/hero-persona-column";
 import { MyAccountsSection } from "@/components/home/my-accounts-section";
 import { ExperienceTimeline } from "@/components/home/experience-timeline";
 import { LinkBento } from "@/components/home/link-bento";
+import { MessageBoardSection } from "@/components/home/message-board-section";
 import { ScrollReveal } from "@/components/home/scroll-reveal";
 import { SiteHeader } from "@/components/home/site-header";
 import { VisitorMilestoneSection } from "@/components/home/visitor-milestone-section";
 
 const NAV_ITEMS = [
   { href: "#visitor", label: "到访" },
+  { href: "#message-board", label: "留言" },
   { href: "#about-me", label: "关于" },
   { href: "#my-accounts", label: "账号" },
   { href: "#links", label: "链接" },
@@ -54,6 +56,10 @@ export default function Home() {
 
           <FocusScrollSection id="visitor" panelClassName="!p-0">
             <VisitorMilestoneSection />
+          </FocusScrollSection>
+
+          <FocusScrollSection id="message-board" panelClassName="!p-0">
+            <MessageBoardSection />
           </FocusScrollSection>
 
           <FocusScrollSection id="about-me" panelClassName="!px-4 !py-6 md:!px-12 md:!py-12 lg:!px-14 lg:!py-14">
