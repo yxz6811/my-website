@@ -209,7 +209,7 @@ export function VisitorMilestoneSection() {
               value={form.name}
               onChange={(event) => handleFieldChange("name", event.target.value)}
               maxLength={40}
-              placeholder="例如：小杨"
+              placeholder="例如：yxz"
               required
             />
           </label>
