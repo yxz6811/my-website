@@ -110,7 +110,7 @@ export const siteProfile: SiteProfile = {
     },
     {
       label: "薯医项目",
-      href: "https://yangtongxue.top/",
+      href: "https://noterx.muran.tech/",
       blurb: "多模态笔记评估与评论区预估，线上可体验。",
       variant: "product",
     },
