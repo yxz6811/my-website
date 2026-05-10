@@ -129,8 +129,9 @@ function InteractiveLinkCard({
     return (
       <motion.a
         href={link.href}
-        target="_blank"
-        rel="noopener noreferrer"
+        {...(link.href.startsWith("http")
+          ? { target: "_blank" as const, rel: "noopener noreferrer" }
+          : {})}
         onPointerMove={handlePointerMove}
         onPointerLeave={resetPointer}
         style={reduce ? undefined : { rotateX, rotateY, transformStyle: "preserve-3d" }}

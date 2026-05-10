@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 const COUNTER_NAMESPACE = "yxz-portfolio-official";
@@ -30,6 +30,16 @@ export function VisitorMilestoneSection() {
   const reduce = useReducedMotion();
   const [totalCount, setTotalCount] = useState<number | null>(null);
   const [visitSequence, setVisitSequence] = useState<number | null>(null);
+  const rafRef = useRef(0);
+  const mountedRef = useRef(true);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     /**
@@ -49,15 +59,17 @@ export function VisitorMilestoneSection() {
       const beginAt = performance.now();
 
       const animate = (ts: number) => {
+        if (!mountedRef.current) return;
         const progress = Math.min(1, (ts - beginAt) / duration);
         const eased = 1 - (1 - progress) ** 3;
         setTotalCount(Math.floor(start + (target - start) * eased));
         if (progress < 1) {
-          requestAnimationFrame(animate);
+          rafRef.current = requestAnimationFrame(animate);
         }
       };
 
-      requestAnimationFrame(animate);
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(animate);
     };
 
     /**
@@ -81,19 +93,19 @@ export function VisitorMilestoneSection() {
           window.sessionStorage.setItem(SESSION_KEY, "1");
         }
 
-        // Always surface the current sequence — previously this only ran on
-        // the HIT branch, so a same-session refresh left the copy stuck on
-        // "实时计数加载中" forever even after totalCount animated in.
         setVisitSequence(data.value);
         animateTo(data.value);
-      } catch {
+      } catch (err) {
+        console.error("访问计数获取失败:", err);
         setTotalCount(null);
         setVisitSequence(null);
       }
     };
 
     fetchRealCount();
-  }, [reduce]);
+    // Only run on mount — reduce changes are handled inside animateTo via the
+    // closure over the latest reduce value, and we cancel any running RAF.
+  }, []);
 
   return (
     <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(145deg,rgba(18,31,49,0.9),rgba(8,15,26,0.85))] p-4 md:p-10">

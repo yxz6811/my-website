@@ -58,6 +58,8 @@ function getTagVisualMeta(tag: string, index: number): TagVisualMeta {
  */
 function TagGlyph({ tag }: TagGlyphProps) {
   const meta = getTagVisualMeta(tag, 0);
+  // TagGlyph 不持有 index，fallback 颜色由外层调用方通过 getTagVisualMeta(tag, i) 决定
+  void meta;
   const iconType = meta.iconType;
 
   if (iconType === "olympiad") {
@@ -130,11 +132,22 @@ export function TagStrip({ tags }: TagStripProps) {
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
       {tags.map((tag, i) => (
         <motion.article
-          key={tag}
+          key={`${tag}-${i}`}
           initial={reduce ? false : { opacity: 0, y: 16, scale: 0.95 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.06 * i, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          transition={{
+            delay: 0.06 * i,
+            duration: 0.45,
+            ease: [0.22, 1, 0.36, 1],
+            y: {
+              duration: 4.2 + (i % 3) * 0.8,
+              delay: i * 0.15,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut",
+            },
+          }}
           animate={
             reduce
               ? undefined
@@ -145,14 +158,6 @@ export function TagStrip({ tags }: TagStripProps) {
           whileHover={reduce ? undefined : { y: -6, scale: 1.02 }}
           whileTap={reduce ? undefined : { scale: 0.97 }}
           className="group relative flex min-h-[156px] cursor-default flex-col justify-between overflow-hidden rounded-[1.75rem] border border-white/10 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_34%),linear-gradient(155deg,rgba(18,25,40,0.9),rgba(8,12,22,0.88))] p-5 shadow-[0_22px_54px_-34px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.05)]"
-          style={
-            reduce
-              ? undefined
-              : {
-                  animationDuration: `${4.2 + (i % 3) * 0.8}s`,
-                  animationDelay: `${i * 0.15}s`,
-                }
-          }
         >
           <div className="flex items-start justify-between gap-4">
             {(() => {
