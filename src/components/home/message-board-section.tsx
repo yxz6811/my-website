@@ -7,6 +7,10 @@ type MessageForm = {
   name: string;
   project: string;
   idea: string;
+  /**
+   * 蜜罐：自动化脚本常会填写「网站」类字段；真人请勿填写，保持为空。
+   */
+  website: string;
 };
 
 /**
@@ -19,6 +23,7 @@ export function MessageBoardSection() {
     name: "",
     project: "",
     idea: "",
+    website: "",
   });
 
   /**
@@ -56,7 +61,7 @@ export function MessageBoardSection() {
 
       setSubmitStatus("success");
       setFeedback("留言已送达，感谢你的分享！");
-      setForm({ name: "", project: "", idea: "" });
+      setForm({ name: "", project: "", idea: "", website: "" });
     } catch (error) {
       setSubmitStatus("error");
       setFeedback(error instanceof Error ? error.message : "发送失败，请稍后再试。");
@@ -78,6 +83,21 @@ export function MessageBoardSection() {
         </p>
 
         <form className="mt-5 grid gap-3 md:grid-cols-2" onSubmit={handleSubmit}>
+          {/* 蜜罐字段：对真人隐藏；勿改用 display:none，部分脚本会跳过 */}
+          <label
+            className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+            aria-hidden="true"
+          >
+            <span>网站</span>
+            <input
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              value={form.website}
+              onChange={(event) => handleFieldChange("website", event.target.value)}
+            />
+          </label>
+
           <label className="flex flex-col gap-2">
             <span className="text-sm text-zinc-200">你的昵称</span>
             <input

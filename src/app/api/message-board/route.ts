@@ -1,9 +1,20 @@
 import nodemailer from "nodemailer";
 
+import {
+  checkAndRecordAttempt,
+  getClientIp,
+  precheckSuccessSend,
+  recordSuccessfulSend,
+} from "@/lib/message-board-guard";
+
 type MessagePayload = {
   name?: string;
   project?: string;
   idea?: string;
+  /**
+   * 蜜罐字段：正常用户应保持为空；服务端若发现非空则不发信并返回假成功，用于干扰自动化脚本。
+   */
+  website?: string;
 };
 
 /**
@@ -48,13 +59,47 @@ function buildHtml(payload: { name: string; project: string; idea: string }): st
  */
 export async function POST(req: Request) {
   try {
-    const body = (await req.json()) as MessagePayload;
+    let body: MessagePayload;
+    try {
+      body = (await req.json()) as MessagePayload;
+    } catch {
+      return Response.json({ message: "请求格式不正确。" }, { status: 400 });
+    }
+
+    /** 蜜罐命中：假装成功，避免向站长邮箱发信，也不暴露拦截逻辑 */
+    if (trimTo(body.website ?? "", 80)) {
+      return Response.json({ ok: true });
+    }
+
+    const clientIp = getClientIp(req);
+    const attempt = checkAndRecordAttempt(clientIp);
+    if (!attempt.ok) {
+      return Response.json(
+        { message: attempt.message },
+        {
+          status: 429,
+          headers: { "Retry-After": String(attempt.retryAfterSec) },
+        },
+      );
+    }
+
     const name = trimTo(body.name ?? "", 40);
     const project = trimTo(body.project ?? "", 80);
     const idea = trimTo(body.idea ?? "", 1200);
 
     if (!name || !idea) {
       return Response.json({ message: "请填写昵称和创意想法。" }, { status: 400 });
+    }
+
+    const sendOk = precheckSuccessSend(clientIp);
+    if (!sendOk.ok) {
+      return Response.json(
+        { message: sendOk.message },
+        {
+          status: 429,
+          headers: { "Retry-After": String(sendOk.retryAfterSec) },
+        },
+      );
     }
 
     const user = process.env.QQ_SMTP_USER;
@@ -82,6 +127,8 @@ export async function POST(req: Request) {
       text: `昵称：${name}\n项目：${project || "（未填写）"}\n\n创意想法：\n${idea}`,
       html: buildHtml({ name, project, idea }),
     });
+
+    recordSuccessfulSend(clientIp);
 
     return Response.json({ ok: true });
   } catch {
