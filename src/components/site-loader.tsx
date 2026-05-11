@@ -11,6 +11,7 @@ export function SiteLoader() {
   const [visible, setVisible] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const progressRef = useRef(0);
+  const timeoutRef = useRef(0);
 
   useEffect(() => {
     const start = performance.now();
@@ -39,7 +40,7 @@ export function SiteLoader() {
       const elapsed = performance.now() - start;
       const minShow = 800;
       const rest = Math.max(0, minShow - elapsed);
-      window.setTimeout(() => setFadeOut(true), rest + 100);
+      timeoutRef.current = window.setTimeout(() => setFadeOut(true), rest + 100);
     };
 
     raf = requestAnimationFrame(loop);
@@ -51,18 +52,18 @@ export function SiteLoader() {
     return () => {
       loadDone = true;
       cancelAnimationFrame(raf);
+      clearTimeout(timeoutRef.current);
       window.removeEventListener("load", finish);
     };
   }, []);
 
   useEffect(() => {
+    const prev = document.body.style.overflow;
     if (visible) {
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = prev;
     };
   }, [visible]);
 

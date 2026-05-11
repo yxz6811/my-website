@@ -56,7 +56,11 @@ function pickNextQuote(quotes: readonly string[], current: string): string {
 export function HeroLead({ eyebrow, headlineLead, headlineAccent, tagline, tags }: HeroLeadProps) {
   const reduce = useReducedMotion();
   const quotePool = useMemo(
-    () => (INTERACTIVE_QUOTES.includes(eyebrow) ? INTERACTIVE_QUOTES : [eyebrow, ...INTERACTIVE_QUOTES]),
+    () => {
+      // 排除 eyebrow 文本，避免"换一句"时切回已显示的顶栏文字
+      const filtered = INTERACTIVE_QUOTES.filter((q) => q !== eyebrow);
+      return filtered.length > 0 ? filtered : INTERACTIVE_QUOTES;
+    },
     [eyebrow],
   );
   const [currentQuote, setCurrentQuote] = useState(quotePool[0]);
