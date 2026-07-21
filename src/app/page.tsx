@@ -5,7 +5,7 @@ import { FocusScrollSection } from "@/components/home/focus-scroll-section";
 import { HeroLead } from "@/components/home/hero-lead";
 import { HeroPersonaColumn } from "@/components/home/hero-persona-column";
 import { MyAccountsSection } from "@/components/home/my-accounts-section";
-import { ExperienceTimeline } from "@/components/home/experience-timeline";
+import { ExperienceSection } from "@/components/home/experience-section";
 import { LinkBento } from "@/components/home/link-bento";
 import { MessageBoardSection } from "@/components/home/message-board-section";
 import { ScrollReveal } from "@/components/home/scroll-reveal";
@@ -94,11 +94,14 @@ export default function Home() {
                   经历与活动
                 </h2>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-500">
-                  公开分享、竞赛与黑客松项目，按时间从早到晚排列。
+                  先看高光叙事，展开可浏览其余经历。
                 </p>
               </div>
             </ScrollReveal>
-            <ExperienceTimeline items={siteProfile.experience} />
+            <ExperienceSection
+              highlights={siteProfile.experienceHighlights}
+              more={siteProfile.experienceMore}
+            />
           </FocusScrollSection>
 
           <FocusScrollSection id="skills" panelClassName="!p-4 md:!p-10">

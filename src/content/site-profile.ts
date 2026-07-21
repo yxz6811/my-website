@@ -18,16 +18,36 @@ export type SiteLink = {
   variant: SiteLinkVariant;
 };
 
-/** 单段职业 / 活动 / 项目经历（时间线） */
-export type ExperienceItem = {
-  /** 时间段，例如「2025」或「2026.01 — 2026.03」 */
+/** 高光叙事卡内的单条经历（短结构：标题 + 场合 + 可选一句） */
+export type ExperienceHighlightEntry = {
+  /** 主标题：结果或身份 */
+  headline: string;
+  /** 场合与邀请方 */
+  context: string;
+  /** 可选补充；没有则不渲染 */
+  note?: string;
+};
+
+/** 高光分组：按故事线合并多条经历 */
+export type ExperienceHighlightGroup = {
+  /** 分组标题，如「官方舞台」 */
+  title: string;
+  /** 一行总述 */
+  summary: string;
+  /** 组内条目（顺序即展示顺序） */
+  items: ExperienceHighlightEntry[];
+};
+
+/** 「更多经历」时间轴条目（轻量，避免 bullet 墙） */
+export type ExperienceMoreItem = {
+  /** 时间段，例如「2025」 */
   period: string;
-  /** 角色或身份 */
-  role: string;
-  /** 活动 / 机构 / 项目名称 */
-  org: string;
-  /** 要点列表 */
-  bullets: string[];
+  /** 主标题 */
+  headline: string;
+  /** 场合一行 */
+  context: string;
+  /** 可选补充 */
+  note?: string;
 };
 
 /** 技能分栏 */
@@ -60,8 +80,10 @@ export type SiteProfile = {
   tags: string[];
   /** 主要外链 */
   primaryLinks: SiteLink[];
-  /** 时间线：建议时间正序（早 → 晚），页面自上而下 */
-  experience: ExperienceItem[];
+  /** 经历高光：按叙事分组，默认展开 */
+  experienceHighlights: ExperienceHighlightGroup[];
+  /** 更多经历：折叠区时间轴 */
+  experienceMore: ExperienceMoreItem[];
   /** 技能分栏 */
   skills: SkillGroups;
 };
@@ -120,71 +142,76 @@ export const siteProfile: SiteProfile = {
       variant: "xiaohongshu",
     },
   ],
-  /** 经历按时间正序排列（早 → 晚，页面上自上而下） */
-  experience: [
+  /**
+   * 经历高光：三条叙事线。
+   * 官方舞台里乌镇偏后（第一次大舞台）；行业现场里 WAIC 单独成组偏后。
+   */
+  experienceHighlights: [
     {
-      period: "2025",
-      role: "主讲嘉宾",
-      org: "乌镇健康大会 · AI for Young 论坛",
-      bullets: ["分享 AI 编程与 AI 辅助学习主题内容。"],
-    },
-    {
-      period: "2025",
-      role: "杭州路演区 KOL",
-      org: "AI Agent 大会",
-      bullets: ["担任现场 KOL，为参会者介绍与交流 Agent 相关实践。"],
-    },
-    {
-      period: "2025",
-      role: "信息学奥林匹克联赛",
-      org: "CSP-J / CSP-S",
-      bullets: ["普及组二等奖。", "提高组二等奖。"],
-    },
-    {
-      period: "2026",
-      role: "Moonshot48 中学生黑客松",
-      org: "探月学校",
-      bullets: [
-        "小组第一名；主要负责技术实现。",
-        "项目利用 AI 视觉辅助视障群体完成化妆相关步骤。",
+      title: "官方舞台",
+      summary: "受品牌与平台邀请的公开演讲。",
+      items: [
+        {
+          headline: "网络视听创作者大会嘉宾",
+          context: "上海 · 小红书官方邀请",
+          note: "《凌晨6点，我和AI一起看了上海的日出》",
+        },
+        {
+          headline: "苹果返校季嘉宾",
+          context: "广州未来社 · 苹果官方邀请",
+          note: "《不写代码，写灵感：13岁AI原住民的mac创造之旅》",
+        },
+        {
+          headline: "乌镇健康大会主讲",
+          context: "AI for Young 论坛 · 第一次登上大舞台演讲",
+          note: "AI 编程与 AI 辅助学习",
+        },
       ],
     },
     {
-      period: "2026",
-      role: "HackMIT China",
-      org: "医疗健康赛道",
-      bullets: [
-        "获最佳路演奖与赛道二等奖。",
-        "项目「智能餐盒」：软硬件结合，关注儿童不在家长身边时的进食与挑食问题。",
+      title: "黑客松与作品",
+      summary: "组队做出可演示的产品，并拿到奖项。",
+      items: [
+        {
+          headline: "AI 原住民特别单元奖",
+          context: "小红书黑客松巅峰赛 · 薯医",
+          note: "多模态笔记评估与评论区预估",
+        },
+        {
+          headline: "最佳路演奖 · 赛道二等奖",
+          context: "HackMIT China · 智能餐盒",
+        },
+        {
+          headline: "小组第一 · 技术实现",
+          context: "Moonshot48 · 探月学校",
+          note: "AI 视觉辅助视障化妆",
+        },
       ],
     },
     {
-      period: "2026",
-      role: "小红书黑客松巅峰赛",
-      org: "薯医 · Page One 小组",
-      bullets: [
-        "全场年龄最小的参赛组之一，获 AI 原住民特别单元奖。",
-        "项目「薯医」：用多模态 AI 评估笔记质量、预估评论区并给出优化建议。",
-        "使用约 800 条真实笔记与 2400 条评论数据做微调，提升识别准确度、减轻模型幻觉。",
+      title: "行业现场",
+      summary: "走进一线大会与平台现场。",
+      items: [
+        {
+          headline: "小红书特邀科技博主",
+          context: "WAIC 世界人工智能大会",
+          note: "参观大会并小红书展台打卡",
+        },
       ],
     },
+  ],
+  /** 更多经历：默认折叠，Agent KOL 与 CSP 放此处 */
+  experienceMore: [
     {
-      period: "2026",
-      role: "网络视听创作者大会演讲",
-      org: "上海网络视听创作者大会 · 受小红书官方邀请",
-      bullets: ["作为嘉宾分享《凌晨6点，我和AI一起看了上海的日出》。"],
+      period: "2025",
+      headline: "杭州路演区 KOL",
+      context: "AI Agent 大会",
     },
     {
-      period: "2026",
-      role: "苹果返校季演讲",
-      org: "苹果返校季 · 广州未来社 · 受苹果官方邀请",
-      bullets: ["作为嘉宾分享《不写代码，写灵感：13岁AI原住民的mac创造之旅》。"],
-    },
-    {
-      period: "2026",
-      role: "参加 WAIC 世界人工智能大会",
-      org: "受小红书官方邀请 · 特邀科技博主",
-      bullets: ["参观 WAIC 世界人工智能大会，并前往小红书展台打卡。"],
+      period: "2025",
+      headline: "信息学奥林匹克联赛",
+      context: "CSP-J / CSP-S",
+      note: "普及组、提高组二等奖",
     },
   ],
   skills: {
