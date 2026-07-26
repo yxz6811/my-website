@@ -26,6 +26,8 @@ export type ExperienceHighlightEntry = {
   context: string;
   /** 可选补充；没有则不渲染 */
   note?: string;
+  /** 可选视频链接；有值时在条目右侧展示入口 */
+  videoHref?: string;
 };
 
 /** 高光分组：按故事线合并多条经历 */
@@ -155,16 +157,22 @@ export const siteProfile: SiteProfile = {
           headline: "网络视听创作者大会嘉宾",
           context: "上海 · 小红书官方邀请",
           note: "《凌晨6点，我和AI一起看了上海的日出》",
+          videoHref:
+            "https://www.xiaohongshu.com/explore/6a19711e0000000035033ef8?xsec_token=ABaBLX0qkDmjEOdIMv-ENu--N2JYf-PUtseP1kzpHNAU0=&xsec_source=pc_search&source=web_explore_feed",
         },
         {
           headline: "苹果返校季嘉宾",
           context: "广州未来社 · 苹果官方邀请",
           note: "《不写代码，写灵感：13岁AI原住民的mac创造之旅》",
+          videoHref:
+            "https://www.xiaohongshu.com/explore/6a5a1c4d000000000101eee8?xsec_token=ABvbUwIBPd9mFmA0Ept08ybi1Wdo4EZzhNg6nBeUzig8w=&xsec_source=pc_search&source=web_explore_feed",
         },
         {
           headline: "乌镇健康大会主讲",
           context: "AI for Young 论坛 · 第一次登上大舞台演讲",
           note: "AI 编程与 AI 辅助学习",
+          videoHref:
+            "https://www.xiaohongshu.com/explore/67fb3d99000000001200fa23?xsec_token=ABaHjKIKgcnZKn7BuKI887WX1Zw7vX8UXpm3RI3HtkvJk=&xsec_source=pc_search",
         },
       ],
     },

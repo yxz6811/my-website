@@ -58,7 +58,20 @@ export function ExperienceSection({ highlights, more }: ExperienceSectionProps) 
             <ul className="mt-5 divide-y divide-white/8">
               {group.items.map((item) => (
                 <li key={`${group.title}-${item.headline}`} className="py-4 first:pt-0 last:pb-0">
-                  <p className="text-base font-semibold text-white md:text-lg">{item.headline}</p>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+                    <p className="text-base font-semibold text-white md:text-lg">{item.headline}</p>
+                    {item.videoHref ? (
+                      <a
+                        href={item.videoHref}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`观看${item.headline}的视频（在新标签页打开）`}
+                        className="inline-flex w-fit shrink-0 items-center rounded-full border border-sky-200/20 bg-sky-300/8 px-3.5 py-1.5 text-sm font-medium text-sky-100 transition hover:border-sky-200/40 hover:bg-sky-300/15 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-200"
+                      >
+                        看看视频↗
+                      </a>
+                    ) : null}
+                  </div>
                   <p className="mt-1 text-sm text-zinc-500">{item.context}</p>
                   {item.note ? (
                     <p className="mt-1.5 text-sm leading-6 text-zinc-400">{item.note}</p>

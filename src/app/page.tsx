@@ -58,6 +58,23 @@ export default function Home() {
             <VisitorMilestoneSection />
           </FocusScrollSection>
 
+          <FocusScrollSection id="timeline" panelClassName="!p-4 md:!p-10" scrollReveal={false}>
+            <ScrollReveal>
+              <div>
+                <h2 className="text-3xl font-semibold tracking-[-0.04em] text-white md:text-[2.15rem]">
+                  经历与活动
+                </h2>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-500">
+                  先看高光叙事，展开可浏览其余经历。
+                </p>
+              </div>
+            </ScrollReveal>
+            <ExperienceSection
+              highlights={siteProfile.experienceHighlights}
+              more={siteProfile.experienceMore}
+            />
+          </FocusScrollSection>
+
           <FocusScrollSection id="message-board" panelClassName="!p-0">
             <MessageBoardSection />
           </FocusScrollSection>
@@ -85,23 +102,6 @@ export default function Home() {
               </div>
             </div>
             <LinkBento links={siteProfile.primaryLinks} />
-          </FocusScrollSection>
-
-          <FocusScrollSection id="timeline" panelClassName="!p-4 md:!p-10" scrollReveal={false}>
-            <ScrollReveal>
-              <div>
-                <h2 className="text-3xl font-semibold tracking-[-0.04em] text-white md:text-[2.15rem]">
-                  经历与活动
-                </h2>
-                <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-500">
-                  先看高光叙事，展开可浏览其余经历。
-                </p>
-              </div>
-            </ScrollReveal>
-            <ExperienceSection
-              highlights={siteProfile.experienceHighlights}
-              more={siteProfile.experienceMore}
-            />
           </FocusScrollSection>
 
           <FocusScrollSection id="skills" panelClassName="!p-4 md:!p-10">
