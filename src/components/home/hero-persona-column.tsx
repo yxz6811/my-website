@@ -12,7 +12,7 @@ type HeroPersonaColumnProps = {
 };
 
 /**
- * 首屏右侧：环形头像 + 账号昵称（淡冰青单色，与左侧强调名同色）+ 说明行（白字）。
+ * 首屏右侧：头像 + 账号昵称（杂志式冷静排版）。
  */
 export function HeroPersonaColumn({
   personaTitle,
@@ -21,20 +21,14 @@ export function HeroPersonaColumn({
   portraitAlt,
 }: HeroPersonaColumnProps) {
   return (
-    <div className="relative flex flex-col items-center gap-5 md:gap-8">
-      <div className="glass-panel w-full max-w-[30rem] rounded-[2rem] px-4 py-6 md:px-8 md:py-10">
-        <div className="relative">
-          <div className="animate-float-soft absolute inset-x-10 top-6 h-24 rounded-full bg-sky-300/10 blur-[42px]" aria-hidden />
-          <OrbitalPortrait src={portraitSrc} alt={portraitAlt} />
-        </div>
-        <div className="mt-6 flex flex-col items-center gap-3 text-center">
-          <p className="w-full text-center text-[clamp(1.35rem,7.2vw,3.2rem)] font-semibold leading-none tracking-[-0.05em] text-cyan-50 drop-shadow-[0_0_26px_rgba(186,230,253,0.16)]">
+    <div className="relative flex flex-col items-center gap-5 md:gap-7">
+      <div className="surface-panel w-full max-w-[30rem] rounded-2xl px-4 py-6 md:px-8 md:py-9">
+        <OrbitalPortrait src={portraitSrc} alt={portraitAlt} />
+        <div className="mt-6 flex flex-col items-center gap-2.5 text-center">
+          <p className="w-full text-center text-[clamp(1.35rem,6.5vw,2.75rem)] font-semibold leading-none tracking-[-0.04em] text-white">
             {personaTitle}
           </p>
-          <p className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-sm font-medium text-zinc-200 md:text-base">
-            <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_14px_rgba(167,243,208,0.9)]" />
-            {personaSubtitle}
-          </p>
+          <p className="text-sm font-medium text-zinc-400 md:text-base">{personaSubtitle}</p>
         </div>
       </div>
     </div>

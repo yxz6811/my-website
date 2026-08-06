@@ -108,41 +108,37 @@ export function VisitorMilestoneSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(145deg,rgba(18,31,49,0.9),rgba(8,15,26,0.85))] p-4 md:p-10">
-      <div className="pointer-events-none absolute -right-14 -top-16 h-52 w-52 rounded-full bg-cyan-300/18 blur-3xl" aria-hidden />
-      <div className="pointer-events-none absolute -bottom-16 -left-12 h-48 w-48 rounded-full bg-violet-300/15 blur-3xl" aria-hidden />
-
+    <section className="surface-panel relative overflow-hidden rounded-2xl p-4 md:p-9">
       <div className="relative grid gap-5 md:grid-cols-[1.08fr_0.92fr] md:items-center md:gap-8">
         <div>
-          <p className="text-xs font-medium uppercase tracking-[0.26em] text-sky-200/80">Visitor Milestone</p>
-          <h2 className="mt-3 text-[1.8rem] font-semibold tracking-[-0.04em] text-white md:text-[2.1rem]">
-            你正在点亮
-            <span className="text-hero-accent ml-2">yangxizhe.com</span>
-            的到访里程碑
+          <p className="text-xs font-medium tracking-[0.2em] text-zinc-500">VISITORS</p>
+          <h2 className="mt-2 text-[1.8rem] font-semibold tracking-[-0.04em] text-white md:text-[2.1rem]">
+            到访里程碑
           </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-300 md:text-base">
-            你不是一次普通访问，而是这段技术旅程的共同见证者。每次点击、每次停留，都在让这个站点变得更完整。
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-400 md:text-base">
+            每一次打开，都记一笔。谢谢你来到 yangxizhe.com。
           </p>
         </div>
 
         <motion.div
-          className="rounded-[1.5rem] border border-white/12 bg-white/[0.03] p-4 md:p-7"
-          initial={reduce ? false : { opacity: 0, y: 14 }}
+          className="rounded-xl border border-white/10 bg-black/20 p-4 md:p-6"
+          initial={reduce ? false : { opacity: 0, y: 10 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="text-xs uppercase tracking-[0.22em] text-zinc-400">页面访问次数</p>
+          <p className="text-xs tracking-[0.18em] text-zinc-500">页面访问次数</p>
           <p className="mt-3 text-4xl font-semibold tracking-[-0.03em] text-white md:text-5xl">
             {totalCount === null ? "--" : formatCount(totalCount)}
           </p>
-          <p className="mt-3 text-sm leading-7 text-zinc-300">
+          <p className="mt-3 text-sm leading-7 text-zinc-400">
             {visitSequence === null ? (
               <>实时计数加载中。</>
             ) : (
               <>
-                你是这个页面记录到的第{" "}
-                <span className="font-semibold text-sky-200">{formatCount(visitSequence)}</span> 次访问。
+                你是第{" "}
+                <span className="font-semibold text-[var(--accent)]">{formatCount(visitSequence)}</span>{" "}
+                次访问。
               </>
             )}
           </p>

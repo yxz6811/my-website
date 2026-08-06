@@ -157,7 +157,7 @@ export function TagStrip({ tags }: TagStripProps) {
           }
           whileHover={reduce ? undefined : { y: -6, scale: 1.02 }}
           whileTap={reduce ? undefined : { scale: 0.97 }}
-          className="group relative flex min-h-[156px] cursor-default flex-col justify-between overflow-hidden rounded-[1.75rem] border border-white/10 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_34%),linear-gradient(155deg,rgba(18,25,40,0.9),rgba(8,12,22,0.88))] p-5 shadow-[0_22px_54px_-34px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.05)]"
+          className="group relative flex min-h-[140px] cursor-default flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-white/18 md:p-5"
         >
           <div className="flex items-start justify-between gap-4">
             {(() => {
@@ -172,7 +172,7 @@ export function TagStrip({ tags }: TagStripProps) {
             })()}
             <span className="mt-2 h-2.5 w-2.5 rounded-full bg-white/20" />
           </div>
-          <span className="text-left text-base font-medium leading-6 tracking-[0.01em] text-zinc-100 [text-shadow:0_2px_10px_rgba(255,255,255,0.12)]">
+          <span className="text-left text-base font-medium leading-6 tracking-[0.01em] text-zinc-100">
             {tag.includes("/") ? (
               <>
                 <span className="block">C++</span>
@@ -189,7 +189,7 @@ export function TagStrip({ tags }: TagStripProps) {
               tag
             )}
           </span>
-          <span className="pointer-events-none absolute inset-0 rounded-[1.75rem] border border-white/0 transition-colors duration-300 group-hover:border-white/16" />
+          <span className="pointer-events-none absolute inset-0 rounded-xl border border-white/0 transition-colors duration-300 group-hover:border-white/12" />
         </motion.article>
       ))}
     </div>

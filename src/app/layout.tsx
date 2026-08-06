@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Space_Grotesk } from "next/font/google";
 import { SiteLoader } from "@/components/site-loader";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const display = Space_Grotesk({
+  variable: "--font-display",
   subsets: ["latin"],
 });
 
@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "杨曦哲 | 个人网站",
+  title: "杨曦哲 | 用 AI 解决真实痛点",
   description:
-    "杨曦哲的个人网站：编程、人工智能、黑客松与自媒体。GitHub yxz6811，联系邮箱 3978401510@qq.com。",
+    "杨曦哲的个人网站：用 AI 与工程解决真实痛点的超级个体；黑客松产品、演讲与自媒体「喜欢编程的杨同学」。",
   icons: {
     icon: "/profile-presentation.jpg?v=3",
     shortcut: "/profile-presentation.jpg?v=3",
@@ -32,9 +32,9 @@ export default function RootLayout({
   return (
     <html
       lang="zh-CN"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${display.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-full flex-col">
         <SiteLoader />
         {children}
       </body>

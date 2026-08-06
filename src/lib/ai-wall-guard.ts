@@ -1,38 +1,30 @@
 /**
- * 留言板接口防护：按客户端 IP 限制请求频率，减轻恶意刷信与 SMTP 滥用。
+ * AI 墙接口防护：按 IP 限制调用频率，控制费用与滥用。
  *
- * 说明：依赖进程内 Map，在单机/常驻 Node 进程中有效；Serverless 多实例下为「每实例各自计数」，
- * 仍能削弱轰炸强度。若需全局一致限流，可后续接入 Redis（如 Upstash）。
+ * 进程内 Map；单机 PM2 有效。多实例可后续换 Redis。
  */
 
-/** 统计尝试次数的时间窗（例如滚动 10 分钟内最多若干次 POST） */
 const ATTEMPT_WINDOW_MS = 10 * 60 * 1000;
-/** 时间窗内允许的最大尝试次数（含校验失败，减轻畸形请求轰炸） */
-const MAX_ATTEMPTS_PER_WINDOW = 18;
-/** 成功发信计数的时间窗（1 小时） */
+const MAX_ATTEMPTS_PER_WINDOW = 12;
 const SUCCESS_WINDOW_MS = 60 * 60 * 1000;
-/** 每 IP 每小时最多成功送达邮件数 */
-const MAX_SUCCESS_PER_WINDOW = 6;
-/** 两次成功发信之间的最短间隔（秒） */
-const MIN_SECONDS_BETWEEN_SUCCESS = 40;
+const MAX_SUCCESS_PER_WINDOW = 4;
+const MIN_SECONDS_BETWEEN_SUCCESS = 25;
 
 type IpStats = {
-  /** 每次「有效 POST」（已过蜜罐且 JSON 合法）的时间戳 */
   attempts: number[];
-  /** 每次成功调用 SMTP 的时间戳 */
   successes: number[];
 };
 
 const globalStore = globalThis as typeof globalThis & {
-  __messageBoardGuardStore?: Map<string, IpStats>;
+  __aiWallGuardStore?: Map<string, IpStats>;
 };
 
 const store: Map<string, IpStats> =
-  globalStore.__messageBoardGuardStore ?? new Map<string, IpStats>();
-globalStore.__messageBoardGuardStore = store;
+  globalStore.__aiWallGuardStore ?? new Map<string, IpStats>();
+globalStore.__aiWallGuardStore = store;
 
 /**
- * 从请求头解析客户端 IP（兼容常见反向代理与 CDN）。
+ * 从请求头解析客户端 IP。
  */
 export function getClientIp(req: Request): string {
   const cf = req.headers.get("cf-connecting-ip");
@@ -51,7 +43,7 @@ export function getClientIp(req: Request): string {
 }
 
 /**
- * 修剪时间戳数组，只保留窗口内的记录。
+ * 修剪时间戳数组。
  */
 function pruneTimestamps(timestamps: number[], windowMs: number, now: number): number[] {
   const cutoff = now - windowMs;
@@ -72,7 +64,7 @@ export type AttemptResult =
   | { ok: false; retryAfterSec: number; message: string };
 
 /**
- * 记录一次合法 POST 尝试；超过频率则拒绝。
+ * 记录一次合法 POST 尝试。
  */
 export function checkAndRecordAttempt(ip: string): AttemptResult {
   const now = Date.now();
@@ -99,9 +91,9 @@ export type SuccessPrecheckResult =
   | { ok: false; retryAfterSec: number; message: string };
 
 /**
- * 在准备发信前检查：小时额度与两次成功之间的最短间隔。
+ * 生成卡片前检查额度与间隔。
  */
-export function precheckSuccessSend(ip: string): SuccessPrecheckResult {
+export function precheckSuccess(ip: string): SuccessPrecheckResult {
   const now = Date.now();
   const rec = getOrCreateStats(ip);
   rec.successes = pruneTimestamps(rec.successes, SUCCESS_WINDOW_MS, now);
@@ -115,7 +107,7 @@ export function precheckSuccessSend(ip: string): SuccessPrecheckResult {
     return {
       ok: false,
       retryAfterSec,
-      message: "本小时留言次数已达上限，请稍后再试。",
+      message: "本小时互动次数已达上限，请稍后再试。",
     };
   }
 
@@ -128,7 +120,7 @@ export function precheckSuccessSend(ip: string): SuccessPrecheckResult {
       return {
         ok: false,
         retryAfterSec,
-        message: "发送间隔太短，请稍后再试。",
+        message: "生成间隔太短，请稍后再试。",
       };
     }
   }
@@ -137,9 +129,9 @@ export function precheckSuccessSend(ip: string): SuccessPrecheckResult {
 }
 
 /**
- * SMTP 发送成功后记录时间戳。
+ * 生成成功后记录。
  */
-export function recordSuccessfulSend(ip: string): void {
+export function recordSuccessfulGeneration(ip: string): void {
   const now = Date.now();
   const rec = getOrCreateStats(ip);
   rec.successes = pruneTimestamps(rec.successes, SUCCESS_WINDOW_MS, now);

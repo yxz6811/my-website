@@ -66,7 +66,7 @@ export type SiteProfile = {
   eyebrow: string;
   /** 主标题第一行 */
   headlineLead: string;
-  /** 主标题第二行（渐变强调） */
+  /** 主标题第二行（强调） */
   headlineAccent: string;
   /** 首屏主按钮下方标语 */
   heroTagline: string;
@@ -94,21 +94,22 @@ export type SiteProfile = {
  * 杨曦哲个人站点文案（事实来自作者草稿，表述已统一为书面语）。
  */
 export const siteProfile: SiteProfile = {
-  eyebrow: "我们被称为 AI 原住民，是因为 AI 对我们来说，就像水和空气一样自然。",
+  eyebrow: "用 AI 解决真实痛点的超级个体",
   headlineLead: "你好，我是",
   headlineAccent: "杨曦哲",
-  heroTagline: "年龄只是变量，热爱才是常量",
+  heroTagline:
+    "把编程、产品与内容做成闭环：先找真实问题，再用 AI 与工程把它做成可演示、可传播的东西。",
   personaTitle: "喜欢编程的杨同学",
-  personaSubtitle: "我的账号",
+  personaSubtitle: "创作者 · 演讲者 · 建造者",
   intro:
-    "我来自浙江杭州，是一名13岁的初中生。编程与人工智能是我最大的热爱，在课余时间，我喜欢走出书房，去黑客松和各种线下的技术聚会中感受真实的氛围。比起单纯的理论，我更在意如何将知识落到实处——用技术作为工具，把想法迅速地打造成触手可及的产品",
+    "我来自浙江杭州，是一名 13 岁的初中生。编程与人工智能是我最大的热爱。课余时间，我会走出书房，去黑客松和技术聚会里把想法变成可演示的产品——比如薯医（多模态笔记评估）、智能餐盒、AI 视觉辅助视障化妆。比起空谈概念，我更在意：技术有没有真正帮到人。",
   mediaLine:
     "自媒体账号「喜欢编程的杨同学」，全网粉丝 40 万+；视频号、小红书、抖音单平台粉丝均在 10 万以上，内容侧重 AI 辅助学习、AI 编程与黑客松实录。",
   tags: [
+    "AI 落地",
+    "黑客松产品",
+    "路演与演讲",
     "C++ / 信奥",
-    "后端开发",
-    "路演与表达",
-    "前端UI设计",
     "Vibe Coding",
     "自媒体",
   ],
@@ -237,3 +238,32 @@ export const siteProfile: SiteProfile = {
     ],
   },
 };
+
+/**
+ * 供 AI 夸夸/吐槽墙使用的站长画像摘要（与页面展示同源，避免幻觉）。
+ */
+export function buildAiWallContext(): string {
+  const p = siteProfile;
+  const highlights = p.experienceHighlights
+    .flatMap((g) =>
+      g.items.map((item) => `- [${g.title}] ${item.headline}（${item.context}）${item.note ? `：${item.note}` : ""}`),
+    )
+    .join("\n");
+  const more = p.experienceMore
+    .map((item) => `- ${item.period} ${item.headline}（${item.context}）${item.note ? `：${item.note}` : ""}`)
+    .join("\n");
+
+  return [
+    `姓名：杨曦哲`,
+    `自媒体：${p.personaTitle}`,
+    `定位：${p.eyebrow}`,
+    `简介：${p.intro}`,
+    `自媒体：${p.mediaLine}`,
+    `标签：${p.tags.join("、")}`,
+    `代表作品链接：薯医 ${p.primaryLinks.find((l) => l.variant === "product")?.href ?? ""}`,
+    `经历高光：\n${highlights}`,
+    `更多经历：\n${more}`,
+    `技能（已掌握）：${p.skills.mastered.join("；")}`,
+    `技能（在学）：${p.skills.learning.join("；")}`,
+  ].join("\n");
+}

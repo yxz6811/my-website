@@ -17,7 +17,7 @@ type FocusScrollSectionProps = {
 };
 
 /**
- * 页面大区块：玻璃面板 + 锚点 id；可选滚动淡入。亮度由 `ViewportReadingBand` 控制。
+ * 页面大区块：克制表面面板 + 锚点 id；可选滚动淡入。
  */
 export function FocusScrollSection({
   id,
@@ -30,9 +30,7 @@ export function FocusScrollSection({
   const content = scrollReveal ? <ScrollReveal>{children}</ScrollReveal> : children;
 
   const inner = panel ? (
-    <div
-      className={`glass-panel rounded-[2rem] p-6 md:p-9 ${panelClassName}`}
-    >
+    <div className={`surface-panel rounded-2xl p-6 md:p-9 ${panelClassName}`}>
       <div className="relative">{content}</div>
     </div>
   ) : (

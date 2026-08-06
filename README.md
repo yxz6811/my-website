@@ -37,6 +37,21 @@ npm run start
 
 项目启用了 `output: "standalone"`，适合部署到 VPS。
 
+## AI 夸夸/吐槽墙
+
+首页底部的互动墙需要配置 OpenAI 兼容 API（见 `.env.example`）：
+
+| 变量 | 说明 |
+|------|------|
+| `AI_API_KEY` | 必填 |
+| `AI_BASE_URL` | 默认 `https://api.openai.com/v1`；DeepSeek 可用 `https://api.deepseek.com/v1` |
+| `AI_MODEL` | 默认 `gpt-4o-mini` |
+| `AI_WALL_DATA_PATH` | 可选；卡片 JSON 路径，默认 `data/ai-wall.json` |
+
+生产环境请保证该路径可写（PM2 用户对 `data/` 有写权限）。
+
+上墙流程：访客提交 → AI 审输入 → 生成卡片 → AI 再审全文 → 通过后写入 `ai-wall.json`。违规返回 422，不上墙。
+
 ## 推送到 GitHub（首次）
 
 在 GitHub 新建空仓库（不要勾选添加 README），然后在**你电脑上的项目目录**执行（把 URL 换成你的）：
