@@ -32,7 +32,7 @@ export async function GET() {
 }
 
 /**
- * 生成数字卡片：先审访客输入 → 生成 → 再审卡片全文 → 通过后上墙。
+ * 上墙：先审访客原话；通过后写入原话。AI 回复仅为附注，失败不影响原话上墙。
  */
 export async function POST(req: Request) {
   const contentType = req.headers.get("content-type") ?? "";
@@ -104,26 +104,17 @@ export async function POST(req: Request) {
   }
 
   try {
-    /** 第一关：审核访客提交，违规则不调用生成 */
+    /** 关卡：只审访客原话；未通过则不上墙 */
     await moderateAiWallContent({
       visitorName,
       visitorMessage,
       mode,
     });
 
-    const generated = await generateAiWallReply({
+    const { title, reply } = await generateOptionalReply({
       visitorName,
       visitorMessage,
       mode,
-    });
-
-    /** 第二关：审核即将上墙的卡片全文 */
-    await moderateAiWallContent({
-      visitorName,
-      visitorMessage,
-      mode,
-      title: generated.title,
-      reply: generated.reply,
     });
 
     const card: AiWallCard = {
@@ -132,8 +123,8 @@ export async function POST(req: Request) {
       visitorName,
       visitorMessage,
       mode,
-      title: generated.title,
-      reply: generated.reply,
+      title,
+      reply,
     };
 
     await prependAiWallCard(card);
@@ -154,6 +145,35 @@ export async function POST(req: Request) {
       },
       { status: 500 },
     );
+  }
+}
+
+const FALLBACK_TITLE = "原话";
+const FALLBACK_REPLY = "";
+
+/**
+ * 尽力生成附注回复；失败或回复未过审时返回空回复，不阻断原话上墙。
+ */
+async function generateOptionalReply(input: {
+  visitorName: string;
+  visitorMessage: string;
+  mode: AiWallMode;
+}): Promise<{ title: string; reply: string }> {
+  try {
+    const generated = await generateAiWallReply(input);
+    await moderateAiWallContent({
+      ...input,
+      title: generated.title,
+      reply: generated.reply,
+    });
+    return generated;
+  } catch (err) {
+    if (err instanceof AiWallRejectedError || err instanceof AiWallConfigError) {
+      console.error("AI 墙附注回复未采用:", err.message);
+    } else {
+      console.error("AI 墙附注回复生成失败:", err);
+    }
+    return { title: FALLBACK_TITLE, reply: FALLBACK_REPLY };
   }
 }
 

@@ -44,9 +44,9 @@ export async function moderateAiWallContent(input: ModerateInput): Promise<void>
   if (hasGenerated) {
     userParts.push(`卡片标题：${input.title}`);
     userParts.push(`AI 回复：${input.reply}`);
-    userParts.push("请综合审核访客原话与即将上墙的卡片全文。");
+    userParts.push("请只审核这段 AI 回复是否可公开展示；访客原话已通过审核。");
   } else {
-    userParts.push("请审核访客提交内容（尚未生成卡片）。");
+    userParts.push("请只审核访客提交的昵称与原话是否可公开展示。");
   }
 
   const raw = await chatCompletion({

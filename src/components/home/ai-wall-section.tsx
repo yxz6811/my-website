@@ -16,7 +16,7 @@ type FormState = {
 };
 
 /**
- * AI 夸夸/吐槽墙：输入一句话 → 生成数字卡片贴墙。
+ * AI 夸夸/吐槽墙：审核通过后展示访客原话，机器人回复为附注。
  */
 export function AiWallSection() {
   const reduce = useReducedMotion();
@@ -85,7 +85,7 @@ export function AiWallSection() {
         setCards((prev) => [data.card!, ...prev.filter((c) => c.id !== data.card!.id)]);
       }
       setSubmitStatus("success");
-      setFeedback("卡片已贴上墙。");
+      setFeedback("已贴上墙。");
       setForm((prev) => ({ ...prev, message: "", website: "" }));
     } catch (error) {
       setSubmitStatus("error");
@@ -94,7 +94,7 @@ export function AiWallSection() {
   };
 
   return (
-    <section className="relative overflow-hidden rounded-2xl border border-white/10 bg-[rgba(12,16,24,0.92)] p-4 md:p-9">
+    <section className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[rgba(12,16,24,0.92)] p-4 md:p-9">
       <div className="relative">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
@@ -103,11 +103,11 @@ export function AiWallSection() {
               AI 夸夸 / 吐槽墙
             </h2>
             <p className="mt-2 max-w-2xl text-sm leading-7 text-zinc-400">
-              丢下一句话，机器人会根据本站内容回应并生成数字卡片。上墙前会自动安全审核：通过才展示，夸夸真诚具体，吐槽善意调侃。
+              丢下一句话。通过安全审核后，墙上展示的是你的原话；机器人会在旁边夸夸或吐槽。
             </p>
           </div>
           {!configured ? (
-            <p className="rounded-md border border-amber-200/20 bg-amber-200/5 px-3 py-2 text-xs text-amber-100/90">
+            <p className="rounded-2xl border border-amber-200/20 bg-amber-200/5 px-3 py-2 text-xs text-amber-100/90">
               站长尚未配置 AI_API_KEY，生成暂不可用。
             </p>
           ) : null}
@@ -132,7 +132,7 @@ export function AiWallSection() {
             <label className="flex flex-col gap-2">
               <span className="text-sm text-zinc-300">昵称</span>
               <input
-                className="rounded-md border border-white/12 bg-black/25 px-3 py-2.5 text-sm text-white outline-none transition focus:border-[var(--accent)]/45"
+                className="rounded-2xl border border-white/12 bg-black/25 px-3 py-2.5 text-sm text-white outline-none transition focus:border-[var(--accent)]/45"
                 value={form.name}
                 onChange={(event) => setForm((prev) => ({ ...prev, name: event.target.value }))}
                 maxLength={24}
@@ -143,7 +143,7 @@ export function AiWallSection() {
             <label className="flex flex-col gap-2">
               <span className="text-sm text-zinc-300">一句话</span>
               <input
-                className="rounded-md border border-white/12 bg-black/25 px-3 py-2.5 text-sm text-white outline-none transition focus:border-[var(--accent)]/45"
+                className="rounded-2xl border border-white/12 bg-black/25 px-3 py-2.5 text-sm text-white outline-none transition focus:border-[var(--accent)]/45"
                 value={form.message}
                 onChange={(event) => setForm((prev) => ({ ...prev, message: event.target.value }))}
                 maxLength={200}
@@ -155,13 +155,13 @@ export function AiWallSection() {
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
             <div
-              className="inline-flex rounded-md border border-white/12 p-1"
+              className="inline-flex rounded-full border border-white/12 p-1"
               role="group"
               aria-label="互动模式"
             >
               <button
                 type="button"
-                className={`cursor-pointer rounded px-3 py-2 text-sm font-medium transition ${
+                className={`cursor-pointer rounded-full px-3.5 py-2 text-sm font-medium transition ${
                   form.mode === "praise"
                     ? "bg-white text-zinc-950"
                     : "text-zinc-400 hover:text-zinc-200"
@@ -172,7 +172,7 @@ export function AiWallSection() {
               </button>
               <button
                 type="button"
-                className={`cursor-pointer rounded px-3 py-2 text-sm font-medium transition ${
+                className={`cursor-pointer rounded-full px-3.5 py-2 text-sm font-medium transition ${
                   form.mode === "roast"
                     ? "bg-white text-zinc-950"
                     : "text-zinc-400 hover:text-zinc-200"
@@ -185,9 +185,9 @@ export function AiWallSection() {
             <button
               type="submit"
               disabled={submitStatus === "submitting" || !configured}
-              className="inline-flex cursor-pointer items-center justify-center rounded-md border border-white/14 bg-white/[0.06] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/[0.1] disabled:cursor-not-allowed disabled:opacity-55"
+              className="inline-flex cursor-pointer items-center justify-center rounded-full border border-white/14 bg-white/[0.06] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/[0.1] disabled:cursor-not-allowed disabled:opacity-55"
             >
-              {submitStatus === "submitting" ? "审核并生成中…" : "生成卡片"}
+              {submitStatus === "submitting" ? "审核中…" : "贴上墙"}
             </button>
           </div>
 
@@ -206,8 +206,8 @@ export function AiWallSection() {
           {loadingList ? (
             <p className="text-sm text-zinc-500">加载卡片墙…</p>
           ) : cards.length === 0 ? (
-            <p className="rounded-md border border-dashed border-white/12 px-4 py-8 text-center text-sm text-zinc-500">
-              墙上还空着——来做第一张卡片。
+            <p className="rounded-2xl border border-dashed border-white/12 px-4 py-8 text-center text-sm text-zinc-500">
+              墙上还空着——通过审核的原话会贴在这里。
             </p>
           ) : (
             <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -220,11 +220,11 @@ export function AiWallSection() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={reduce ? undefined : { opacity: 0 }}
                     transition={{ duration: 0.28 }}
-                    className="surface-panel flex flex-col rounded-xl p-4"
+                    className="surface-panel flex flex-col rounded-[1.5rem] p-5"
                   >
                     <div className="flex items-center justify-between gap-2">
                       <span
-                        className={`rounded px-2 py-0.5 text-[11px] font-medium tracking-wide ${
+                        className={`rounded-full px-2.5 py-1 text-[11px] font-medium tracking-wide ${
                           card.mode === "praise"
                             ? "bg-[var(--accent-dim)] text-[var(--accent)]"
                             : "bg-white/8 text-zinc-300"
@@ -236,15 +236,20 @@ export function AiWallSection() {
                         {formatCardTime(card.createdAt)}
                       </time>
                     </div>
-                    <h3 className="mt-3 text-base font-semibold tracking-tight text-white">
-                      {card.title}
-                    </h3>
-                    <p className="mt-2 flex-1 text-sm leading-6 text-zinc-300">{card.reply}</p>
-                    <p className="mt-4 border-t border-white/8 pt-3 text-xs leading-5 text-zinc-500">
-                      <span className="text-zinc-400">{card.visitorName}</span>
-                      {" · "}
-                      「{card.visitorMessage}」
+                    <p className="mt-3 text-base font-medium leading-7 tracking-tight text-white">
+                      {card.visitorMessage}
                     </p>
+                    <p className="mt-3 text-xs leading-5 text-zinc-500">
+                      {card.visitorName}
+                    </p>
+                    {card.reply ? (
+                      <p className="mt-4 border-t border-white/8 pt-3 text-sm leading-6 text-zinc-400">
+                        <span className="mr-2 text-[11px] tracking-wide text-zinc-600">
+                          {card.mode === "praise" ? "机器人夸夸" : "机器人吐槽"}
+                        </span>
+                        {card.reply}
+                      </p>
+                    ) : null}
                   </motion.li>
                 ))}
               </AnimatePresence>

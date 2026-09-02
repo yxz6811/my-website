@@ -43,14 +43,14 @@ npm run start
 
 | 变量 | 说明 |
 |------|------|
-| `AI_API_KEY` | 必填 |
-| `AI_BASE_URL` | 默认 `https://api.openai.com/v1`；DeepSeek 可用 `https://api.deepseek.com/v1` |
-| `AI_MODEL` | 默认 `gpt-4o-mini` |
+| `AI_API_KEY` | 必填（智谱开放平台 API Key） |
+| `AI_BASE_URL` | 默认 `https://open.bigmodel.cn/api/paas/v4` |
+| `AI_MODEL` | 默认 `GLM-4-Flash-250414`（免费） |
 | `AI_WALL_DATA_PATH` | 可选；卡片 JSON 路径，默认 `data/ai-wall.json` |
 
 生产环境请保证该路径可写（PM2 用户对 `data/` 有写权限）。
 
-上墙流程：访客提交 → AI 审输入 → 生成卡片 → AI 再审全文 → 通过后写入 `ai-wall.json`。违规返回 422，不上墙。
+上墙流程：访客提交 → AI 审原话 → 通过后写入原话；AI 回复仅作附注（失败不影响上墙）。违规返回 422，不上墙。
 
 ## 推送到 GitHub（首次）
 

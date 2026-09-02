@@ -26,11 +26,10 @@ export function getAiClientConfig(): { apiKey: string; baseUrl: string; model: s
       "服务器未配置 AI_API_KEY，请联系站长完成配置后再试。",
     );
   }
-  const baseUrl = (process.env.AI_BASE_URL?.trim() || "https://api.openai.com/v1").replace(
-    /\/$/,
-    "",
-  );
-  const model = process.env.AI_MODEL?.trim() || "gpt-4o-mini";
+  const baseUrl = (
+    process.env.AI_BASE_URL?.trim() || "https://open.bigmodel.cn/api/paas/v4"
+  ).replace(/\/$/, "");
+  const model = process.env.AI_MODEL?.trim() || "GLM-4-Flash-250414";
   return { apiKey, baseUrl, model };
 }
 
