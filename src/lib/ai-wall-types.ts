@@ -23,9 +23,29 @@ export type AiWallCard = {
   reply: string;
 };
 
+/** 审核拒绝记录，供站长核对误判 */
+export type AiWallRejection = {
+  /** 稳定唯一 id */
+  id: string;
+  /** ISO 时间 */
+  createdAt: string;
+  /** 访客昵称 */
+  visitorName: string;
+  /** 被拒绝的原话 */
+  visitorMessage: string;
+  /** 夸夸 / 吐槽 */
+  mode: AiWallMode;
+  /** 给访客看的拒绝原因 */
+  reason: string;
+  /** 规则拦截或模型审核 */
+  source: "heuristic" | "llm";
+};
+
 /** 单次请求体上限 */
 export const AI_WALL_MAX_BODY_SIZE = 16 * 1024;
 /** 墙上最多保留卡片数（超出丢弃最旧） */
 export const AI_WALL_MAX_CARDS = 80;
+/** 拒绝日志最多保留条数（超出丢弃最旧） */
+export const AI_WALL_MAX_REJECTIONS = 400;
 /** 列表接口最多返回条数 */
 export const AI_WALL_LIST_LIMIT = 36;

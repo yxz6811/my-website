@@ -12,7 +12,7 @@ import {
   generateAiWallReply,
 } from "@/lib/ai-wall-generate";
 import { moderateAiWallContent } from "@/lib/ai-wall-moderate";
-import { prependAiWallCard, readAiWallCards } from "@/lib/ai-wall-store";
+import { prependAiWallCard, prependAiWallRejection, readAiWallCards } from "@/lib/ai-wall-store";
 import {
   AI_WALL_LIST_LIMIT,
   AI_WALL_MAX_BODY_SIZE,
@@ -136,6 +136,13 @@ export async function POST(req: Request) {
       return Response.json({ message: err.message }, { status: 503 });
     }
     if (err instanceof AiWallRejectedError) {
+      await recordRejectedSubmission({
+        visitorName,
+        visitorMessage,
+        mode,
+        reason: err.reason,
+        source: err.source,
+      });
       return Response.json({ message: err.reason }, { status: 422 });
     }
     console.error("AI 墙生成失败:", err);
@@ -150,6 +157,31 @@ export async function POST(req: Request) {
 
 const FALLBACK_TITLE = "原话";
 const FALLBACK_REPLY = "";
+
+/**
+ * 把被拒原话写入日志，失败只记控制台，不影响给访客的拒绝响应。
+ */
+async function recordRejectedSubmission(input: {
+  visitorName: string;
+  visitorMessage: string;
+  mode: AiWallMode;
+  reason: string;
+  source: "heuristic" | "llm";
+}): Promise<void> {
+  try {
+    await prependAiWallRejection({
+      id: randomUUID(),
+      createdAt: new Date().toISOString(),
+      visitorName: input.visitorName,
+      visitorMessage: input.visitorMessage,
+      mode: input.mode,
+      reason: input.reason,
+      source: input.source,
+    });
+  } catch (err) {
+    console.error("记录 AI 墙拒绝原文失败:", err);
+  }
+}
 
 /**
  * 尽力生成附注回复；失败或回复未过审时返回空回复，不阻断原话上墙。

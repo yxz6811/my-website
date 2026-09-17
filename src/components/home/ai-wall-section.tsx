@@ -103,7 +103,7 @@ export function AiWallSection() {
               AI 夸夸 / 吐槽墙
             </h2>
             <p className="mt-2 max-w-2xl text-sm leading-7 text-zinc-400">
-              丢下一句话。通过安全审核后，墙上展示的是你的原话；机器人会在旁边夸夸或吐槽。
+              丢下一句话。通过安全审核后，墙上展示的是你的原话；无意义或违规内容会被拒绝。机器人会在旁边夸夸或吐槽。
             </p>
           </div>
           {!configured ? (

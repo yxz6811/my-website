@@ -1,6 +1,5 @@
 import { siteProfile } from "@/content/site-profile";
 import { AboutMeSection } from "@/components/home/about-me-section";
-import { AiWallSection } from "@/components/home/ai-wall-section";
 import { AmbientBackdrop } from "@/components/home/ambient-backdrop";
 import { FocusScrollSection } from "@/components/home/focus-scroll-section";
 import { HeroLead } from "@/components/home/hero-lead";
@@ -18,11 +17,10 @@ const NAV_ITEMS = [
   { href: "#links", label: "链接" },
   { href: "#skills", label: "技能" },
   { href: "#visitor", label: "到访" },
-  { href: "#ai-wall", label: "AI 墙" },
 ] as const;
 
 /**
- * 首页信息架构：先人设与叙事 → 作品链接 → 互动区靠后。
+ * 首页信息架构：先人设与叙事 → 作品链接 → 到访。AI 夸夸/吐槽墙暂不展示。
  */
 export default function Home() {
   return (
@@ -130,10 +128,6 @@ export default function Home() {
 
           <FocusScrollSection id="visitor" panelClassName="!p-0">
             <VisitorMilestoneSection />
-          </FocusScrollSection>
-
-          <FocusScrollSection id="ai-wall" panelClassName="!p-0">
-            <AiWallSection />
           </FocusScrollSection>
 
           <FocusScrollSection id="colophon" panel={false} className="scroll-mt-24">

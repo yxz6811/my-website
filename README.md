@@ -47,10 +47,11 @@ npm run start
 | `AI_BASE_URL` | 默认 `https://open.bigmodel.cn/api/paas/v4` |
 | `AI_MODEL` | 默认 `GLM-4-Flash-250414`（免费） |
 | `AI_WALL_DATA_PATH` | 可选；卡片 JSON 路径，默认 `data/ai-wall.json` |
+| `AI_WALL_REJECTIONS_PATH` | 可选；拒绝日志路径，默认 `data/ai-wall-rejections.json` |
 
 生产环境请保证该路径可写（PM2 用户对 `data/` 有写权限）。
 
-上墙流程：访客提交 → AI 审原话 → 通过后写入原话；AI 回复仅作附注（失败不影响上墙）。违规返回 422，不上墙。
+上墙流程：访客提交 → 规则拦无意义碎片 → AI 审原话 → 通过后写入原话；AI 回复仅作附注（失败不影响上墙）。违规或无意义返回 422，不上墙，原文记入拒绝日志供站长核对误判。
 
 ## 推送到 GitHub（首次）
 

@@ -14,10 +14,13 @@ export class AiWallConfigError extends Error {
 export class AiWallRejectedError extends Error {
   /** 可展示给访客的原因（已脱敏、简短） */
   readonly reason: string;
+  /** 规则拦截或模型审核 */
+  readonly source: "heuristic" | "llm";
 
-  constructor(reason: string) {
+  constructor(reason: string, source: "heuristic" | "llm" = "llm") {
     super(reason);
     this.name = "AiWallRejectedError";
     this.reason = reason;
+    this.source = source;
   }
 }

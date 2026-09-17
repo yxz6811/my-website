@@ -36,6 +36,7 @@ yarn-error.log*
 
 # AI 墙持久化数据（运行时写入）
 /data/ai-wall.json
+/data/ai-wall-rejections.json
 
 # vercel
 .vercel
