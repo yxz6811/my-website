@@ -178,6 +178,14 @@ export function TagStrip({ tags }: TagStripProps) {
                 <span className="block">C++</span>
                 <span className="block">信奥</span>
               </>
+            ) : tag.includes("全栈") ? (
+              <>
+                <span className="sm:hidden">
+                  <span className="block">全栈技术</span>
+                  <span className="block">（偏后端）</span>
+                </span>
+                <span className="hidden sm:block">全栈技术（偏后端）</span>
+              </>
             ) : tag.toLowerCase().includes("vibe coding") ? (
               <span className="block text-center">
                 <span className="block">Vibe</span>

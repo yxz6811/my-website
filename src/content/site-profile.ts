@@ -106,7 +106,7 @@ export const siteProfile: SiteProfile = {
   mediaLine:
     "自媒体账号「喜欢编程的杨同学」，全网粉丝 50 万+；视频号、小红书、抖音单平台粉丝均在 10 万以上，内容侧重 AI 辅助学习、AI 编程与黑客松实录。",
   tags: [
-    "AI 落地",
+    "全栈技术（偏后端）",
     "黑客松产品",
     "路演与演讲",
     "C++ / 信奥",
@@ -148,6 +148,7 @@ export const siteProfile: SiteProfile = {
   /**
    * 经历高光：三条叙事线。
    * 官方舞台里乌镇偏后（第一次大舞台）；行业现场里 WAIC 单独成组偏后。
+   * 黑客松组里，回响·48H 放在本组最后。
    */
   experienceHighlights: [
     {
@@ -191,9 +192,13 @@ export const siteProfile: SiteProfile = {
           context: "HackMIT China · 智能餐盒",
         },
         {
-          headline: "我们小组拿了全场第一",
+          headline: "小组全场第一",
           context: "Moonshot48 · 探月学校",
           note: "AI 视觉辅助视障化妆",
+        },
+        {
+          headline: "教育赛道第二名",
+          context: "回响·48H · 学军中学",
         },
       ],
     },
