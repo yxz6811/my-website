@@ -148,7 +148,7 @@ export const siteProfile: SiteProfile = {
   /**
    * 经历高光：三条叙事线。
    * 官方舞台里乌镇偏后（第一次大舞台）；行业现场里 WAIC 单独成组偏后。
-   * 黑客松组里，回响·48H 放在本组最后。
+   * 黑客松组里，回响·48H 是最后一条奖项；AdventureX 写参与，放在本组末尾。
    */
   experienceHighlights: [
     {
@@ -180,7 +180,7 @@ export const siteProfile: SiteProfile = {
     },
     {
       title: "黑客松与作品",
-      summary: "组队做出可演示的产品，并拿到奖项。",
+      summary: "组队做出可演示的产品，其中多场拿到奖项。",
       items: [
         {
           headline: "AI 原住民特别单元奖",
@@ -199,6 +199,11 @@ export const siteProfile: SiteProfile = {
         {
           headline: "教育赛道第二名",
           context: "回响·48H · 学军中学",
+        },
+        {
+          headline: "五天里做出可演示的作品",
+          context: "AdventureX 2026 · OvO",
+          note: "游戏陪玩 Agent 的语音模块",
         },
       ],
     },
