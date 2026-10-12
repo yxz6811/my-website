@@ -201,9 +201,9 @@ export const siteProfile: SiteProfile = {
           context: "回响·48H · 学军中学",
         },
         {
-          headline: "五天里做出可演示的作品",
+          headline: "游戏陪玩 Agent 的语音模块",
           context: "AdventureX 2026 · OvO",
-          note: "游戏陪玩 Agent 的语音模块",
+          note: "五天里做出可演示的作品",
         },
       ],
     },
