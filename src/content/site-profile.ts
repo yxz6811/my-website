@@ -202,7 +202,7 @@ export const siteProfile: SiteProfile = {
         },
         {
           headline: "游戏陪玩 Agent 的语音模块",
-          context: "AdventureX 2026 · OvO",
+          context: "AdventureX 2026 · 杭州",
           note: "五天里做出可演示的作品",
         },
       ],
